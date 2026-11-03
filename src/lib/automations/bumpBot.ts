@@ -22,7 +22,16 @@ export class BumpBotEngine {
     sessionDurationMinutes: number;
   }): BumpExecutionPlan {
     const { config, availableWallets, sessionDurationMinutes } = params;
+    if (!Number.isFinite(config.bumpIntervalSeconds) || config.bumpIntervalSeconds < 1) {
+      throw new Error("Bump interval must be at least 1 second");
+    }
+    if (!Number.isFinite(sessionDurationMinutes) || sessionDurationMinutes <= 0) {
+      throw new Error("Bump session duration must be positive");
+    }
     const totalSlots = Math.floor((sessionDurationMinutes * 60) / config.bumpIntervalSeconds);
+    if (!Number.isFinite(totalSlots) || totalSlots < 1 || totalSlots > 2_000) {
+      throw new Error("Bump session would schedule no buys or more than 2000");
+    }
     const scheduledBuys: BumpExecutionPlan["scheduledBuys"] = [];
 
     let totalBudget = 0;

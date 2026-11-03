@@ -728,11 +728,18 @@ export const useLaunchStore = create<LaunchStore>((set, get) => ({
       return { running: false, plannedBumps: 0, totalBudgetSol: 0, error: message };
     }
 
-    const plan = BumpBotEngine.planBumpSession({
-      config: nextMarketMaker,
-      availableWallets,
-      sessionDurationMinutes: 10,
-    });
+    let plan;
+    try {
+      plan = BumpBotEngine.planBumpSession({
+        config: nextMarketMaker,
+        availableWallets,
+        sessionDurationMinutes: 10,
+      });
+    } catch (error) {
+      const message = toMessage(error);
+      set({ lastActionMessage: message });
+      return { running: false, plannedBumps: 0, totalBudgetSol: 0, error: message };
+    }
 
     const runSlice = async (wallet: SubWallet, buyAmountSol: number) => {
       const payer = toPublicKey(wallet.publicKey);
@@ -801,10 +808,28 @@ export const useLaunchStore = create<LaunchStore>((set, get) => ({
       lastActionMessage: `Bump bot armed for ${plan.scheduledBuys.length} slices (${plan.totalBudgetSol} SOL)`,
     });
 
+    const stopBot = (message: string) => {
+      clearBumpTimer();
+      const lastError = get().activeAutomations.bumpBot.lastError;
+      set({
+        activeAutomations: {
+          ...get().activeAutomations,
+          bumpBot: {
+            ...get().activeAutomations.bumpBot,
+            running: false,
+          },
+        },
+        lastActionMessage: lastError ?? message,
+      });
+    };
+
     const tick = async () => {
-      const slice = plan.scheduledBuys[bumpCursor % plan.scheduledBuys.length];
+      if (bumpCursor >= plan.scheduledBuys.length) {
+        stopBot(`Bump bot finished ${plan.scheduledBuys.length} planned slices`);
+        return;
+      }
+      const slice = plan.scheduledBuys[bumpCursor];
       bumpCursor += 1;
-      if (!slice) return;
       try {
         await runSlice(slice.wallet, slice.buyAmountSol);
       } catch (error) {
@@ -817,12 +842,17 @@ export const useLaunchStore = create<LaunchStore>((set, get) => ({
           lastActionMessage: message,
         });
       }
+      if (bumpCursor >= plan.scheduledBuys.length) {
+        stopBot(`Bump bot finished ${plan.scheduledBuys.length} planned slices`);
+      }
     };
 
     await tick();
-    bumpTimer = setInterval(() => {
-      void tick();
-    }, Math.max(1, nextMarketMaker.bumpIntervalSeconds) * 1000);
+    if (bumpCursor < plan.scheduledBuys.length) {
+      bumpTimer = setInterval(() => {
+        void tick();
+      }, nextMarketMaker.bumpIntervalSeconds * 1000);
+    }
 
     return {
       running: true,
