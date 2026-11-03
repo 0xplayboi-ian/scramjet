@@ -546,7 +546,9 @@ export const useLaunchStore = create<LaunchStore>((set, get) => ({
     });
     void withSolanaRpc((connection) => connection.getSlot("confirmed"))
       .then((slot) => set({ currentSlot: slot }))
-      .catch(() => undefined);
+      .catch(() => {
+        set({ lastActionMessage: "RPC unavailable" });
+      });
   },
 
   refreshWalletBalances: async (tokenMint) => {
@@ -574,7 +576,7 @@ export const useLaunchStore = create<LaunchStore>((set, get) => ({
       try {
         masterBalanceSol = await getSolBalance(connectedWallet);
       } catch {
-        // Retain balance gracefully without dumping raw transport errors
+        set({ lastActionMessage: "RPC unavailable" });
       }
     }
 
