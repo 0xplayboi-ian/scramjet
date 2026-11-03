@@ -41,6 +41,28 @@ export class TurnkeyManager {
     }
   }
 
+  /** True only when an API client and organization id were provided. */
+  public isConfigured(): boolean {
+    return this.client !== null && this.organizationId.length > 0;
+  }
+
+  /**
+   * Rejects the local PublicKey.unique() fallback (ids sw-*) so callers cannot
+   * report those addresses as Turnkey enclave wallets.
+   */
+  public assertEnclaveWallets(wallets: Pick<SubWallet, "id">[]): void {
+    if (!this.isConfigured()) {
+      throw new Error(
+        "Turnkey is not configured. Refusing to treat local placeholders as enclave wallets."
+      );
+    }
+    if (wallets.some((wallet) => wallet.id.startsWith("sw-"))) {
+      throw new Error(
+        "Turnkey returned local placeholder wallets. Refusing to treat them as enclave wallets."
+      );
+    }
+  }
+
   /**
    * Generates N non-custodial Solana sub-wallets inside a Turnkey secure enclave.
    * Private keys are derived inside AWS Nitro Enclaves and never exposed to the client.

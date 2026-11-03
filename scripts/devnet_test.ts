@@ -75,10 +75,16 @@ async function runDevnetTests() {
 
   // 5. Turnkey Sub-Wallet Enclave Generation:
   console.log(`[5] Turnkey Sub-Wallet Enclave Generation:`);
+  if (!turnkeyManager.isConfigured()) {
+    throw new Error(
+      "Turnkey is not configured. Refusing to mark enclave keygen as PASS."
+    );
+  }
   const subWallets = await turnkeyManager.createSubWallets({
     count: 6,
     walletNamePrefix: "scram-devnet-test",
   });
+  turnkeyManager.assertEnclaveWallets(subWallets);
   console.log(`    Sub-Wallets Derived: ${subWallets.length} accounts`);
   subWallets.forEach((sw, i) => {
     console.log(`      Wallet #${i + 1} [${sw.role}]: ${sw.publicKey} (allocated: ${sw.allocatedBuySol} SOL)`);
