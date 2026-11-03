@@ -53,7 +53,7 @@ export class JitoClient {
    */
   public async sendBundle(encodedTransactions: string[]): Promise<{
     bundleId: string;
-    engineResults: { url: string; status: "SENT" | "FAILED"; error?: string }[];
+    engineResults: { url: string; status: "SENT" | "FAILED"; error?: string; bundleId?: string }[];
   }> {
     if (encodedTransactions.length === 0 || encodedTransactions.length > 5) {
       throw new Error("Jito bundles must contain between 1 and 5 transactions.");
@@ -72,25 +72,32 @@ export class JitoClient {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-            signal: AbortSignal.timeout(8000),
+          signal: AbortSignal.timeout(8000),
         });
 
         if (!response.ok) {
           return { url, status: "FAILED" as const, error: `HTTP ${response.status}` };
         }
         const data = await response.json();
-        return { url, status: "SENT" as const, bundleId: data.result };
+        const bundleId = typeof data?.result === "string" ? data.result : "";
+        if (!bundleId) {
+          return { url, status: "FAILED" as const, error: "Jito returned no bundle id" };
+        }
+        return { url, status: "SENT" as const, bundleId };
       } catch (err: any) {
         return { url, status: "FAILED" as const, error: err.message };
       }
     });
 
     const results = await Promise.all(dispatches);
-    const successfulResult = results.find((r) => r.status === "SENT" && (r as any).bundleId);
-    const bundleId = (successfulResult as any)?.bundleId || "simulated-bundle-" + Date.now();
+    const accepted = results.find((result) => result.status === "SENT" && result.bundleId);
+    if (!accepted?.bundleId) {
+      const detail = results.map((result) => result.error || result.status).join("; ");
+      throw new Error(`Jito rejected the bundle (${detail})`);
+    }
 
     return {
-      bundleId,
+      bundleId: accepted.bundleId,
       engineResults: results,
     };
   }
@@ -100,7 +107,9 @@ export class JitoClient {
    */
   public async getTipFloor(): Promise<TipFloorEstimate> {
     try {
-      const response = await fetch("https://bundles.jito.wtf/api/v1/bundles/tip_floor");
+      const response = await fetch("https://bundles.jito.wtf/api/v1/bundles/tip_floor", {
+        signal: AbortSignal.timeout(8000),
+      });
       if (response.ok) {
         const json = await response.json();
         const first = Array.isArray(json) ? json[0] : json;
