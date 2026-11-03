@@ -34,6 +34,42 @@ const PRESETS = [
   { id: "red", color: "#E24B4B" },
 ];
 
+function hexChannels(hex: string): [number, number, number] | null {
+  const raw = hex.trim().replace("#", "");
+  const full = raw.length === 3 ? raw.split("").map((part) => part + part).join("") : raw;
+  if (!/^[0-9a-fA-F]{6}$/.test(full)) return null;
+  return [
+    parseInt(full.slice(0, 2), 16),
+    parseInt(full.slice(2, 4), 16),
+    parseInt(full.slice(4, 6), 16),
+  ];
+}
+
+function relativeLuminance(hex: string): number {
+  const channels = hexChannels(hex);
+  if (!channels) return 0;
+  const [r, g, b] = channels.map((channel) => {
+    const value = channel / 255;
+    return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+/** WCAG contrast ratio. 1 means the two colors are the same. */
+export function colorContrast(foreground: string, background: string): number {
+  const lighter = Math.max(relativeLuminance(foreground), relativeLuminance(background));
+  const darker = Math.min(relativeLuminance(foreground), relativeLuminance(background));
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function separatedTextColor(background: string): string {
+  return PRESETS.reduce(
+    (best, preset) =>
+      colorContrast(preset.color, background) > colorContrast(best, background) ? preset.color : best,
+    "#F4F4F5"
+  );
+}
+
 const RAMPS: Record<AsciiStyle, string> = {
   blocks: " ░▒▓█",
   classic: " .:-=+*#%@",
@@ -381,6 +417,24 @@ export function AsciiLogoModal({
                 Background
               </label>
             </div>
+            {colorContrast(textColor, background) < 2.2 && (
+              <div
+                data-testid="ascii-contrast"
+                className="flex items-center justify-between gap-3 rounded-lg border border-[#E2B340]/40 bg-[#1A160C] px-2.5 py-2"
+              >
+                <span className="text-[11px] text-[#E2B340]">
+                  Text and background are too close to read.
+                </span>
+                <button
+                  type="button"
+                  data-testid="ascii-separate"
+                  onClick={() => onTextColor(separatedTextColor(background))}
+                  className="shrink-0 h-7 px-2 rounded-md bg-[#E2B340] text-[10px] font-semibold text-black"
+                >
+                  Separate colors
+                </button>
+              </div>
+            )}
           </div>
 
           <label className="block space-y-1">

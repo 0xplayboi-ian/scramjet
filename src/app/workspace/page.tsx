@@ -68,6 +68,11 @@ export default function WorkspacePage() {
     void refreshWalletBalances();
   }, [refreshWalletBalances, startSlotFeed]);
 
+  useEffect(() => {
+    const mint = new URLSearchParams(window.location.search).get("mint")?.trim();
+    if (mint) setTokenMint(mint);
+  }, []);
+
   const formatTokens = (amount: number) => {
     if (amount >= 1_000_000) return `${(amount / 1_000_000).toFixed(1)}M`;
     if (amount >= 1_000) return `${(amount / 1_000).toFixed(1)}K`;
