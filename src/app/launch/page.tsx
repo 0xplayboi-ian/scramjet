@@ -15,6 +15,10 @@ import { DEFAULT_PLATFORM_FEE_VAULT } from "../../lib/constants";
 import { LaunchOrchestrator, LaunchOrchestrationResult } from "../../lib/pipeline/launchOrchestrator";
 import { getSolanaConnection } from "../../lib/solana/connection";
 import { PublicKey } from "@solana/web3.js";
+import {
+  AsciiLogoModal,
+  AsciiStyle,
+} from "../../components/launch/AsciiLogoModal";
 
 export default function LaunchPage() {
   const [activeTab, setActiveTab] = useState<"chain" | "token" | "settings">("chain");
@@ -26,6 +30,14 @@ export default function LaunchPage() {
   const [tokenSymbol, setTokenSymbol] = useState("");
   const [tokenDescription, setTokenDescription] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [asciiOpen, setAsciiOpen] = useState(false);
+  const [asciiText, setAsciiText] = useState("");
+  const [asciiStyle, setAsciiStyle] = useState<AsciiStyle>("classic");
+  const [asciiTextColor, setAsciiTextColor] = useState("#3DDC84");
+  const [asciiBackground, setAsciiBackground] = useState("#07080C");
+  const [asciiDetail, setAsciiDetail] = useState(40);
+  const [asciiGlow, setAsciiGlow] = useState(true);
+  const [asciiTexture, setAsciiTexture] = useState(false);
   const [website, setWebsite] = useState("");
   const [twitter, setTwitter] = useState("");
   const [telegram, setTelegram] = useState("");
@@ -941,7 +953,16 @@ export default function LaunchPage() {
               {/* Image Upload Dropzone + Preview Box */}
               <div className="space-y-1.5">
                 <div className="flex justify-between items-center text-[11px] font-mono text-[#8E9AA8]">
-                  <span>Image*</span>
+                  <div className="flex items-center gap-2">
+                    <span>Image*</span>
+                    <button
+                      type="button"
+                      onClick={() => setAsciiOpen(true)}
+                      className="h-7 px-2.5 rounded-md border border-[#2A2D3A] bg-[#0E0F14] text-[10px] font-mono tracking-wide text-[#F8FAFC] hover:border-[#3B82F6]"
+                    >
+                      ASCII
+                    </button>
+                  </div>
                   <span>PREVIEW</span>
                 </div>
 
@@ -972,6 +993,30 @@ export default function LaunchPage() {
                   </div>
                 </div>
               </div>
+
+              <AsciiLogoModal
+                open={asciiOpen}
+                initialText={tokenSymbol || tokenName}
+                text={asciiText}
+                style={asciiStyle}
+                textColor={asciiTextColor}
+                background={asciiBackground}
+                detail={asciiDetail}
+                glow={asciiGlow}
+                texture={asciiTexture}
+                onText={setAsciiText}
+                onStyle={setAsciiStyle}
+                onTextColor={setAsciiTextColor}
+                onBackground={setAsciiBackground}
+                onDetail={setAsciiDetail}
+                onGlow={setAsciiGlow}
+                onTexture={setAsciiTexture}
+                onCancel={() => setAsciiOpen(false)}
+                onUse={(dataUrl) => {
+                  setImagePreview(dataUrl);
+                  setAsciiOpen(false);
+                }}
+              />
 
               {/* Social Links Row */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
