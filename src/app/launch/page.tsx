@@ -14,6 +14,7 @@ import { useLaunchStore } from "../../lib/stores/useLaunchStore";
 import { DEFAULT_PLATFORM_FEE_VAULT } from "../../lib/constants";
 import { LaunchOrchestrator, LaunchOrchestrationResult } from "../../lib/pipeline/launchOrchestrator";
 import { getSolanaConnection } from "../../lib/solana/connection";
+import { requireTokenImageUrl } from "../../lib/launch/tokenImage";
 import { PublicKey } from "@solana/web3.js";
 
 export default function LaunchPage() {
@@ -26,6 +27,7 @@ export default function LaunchPage() {
   const [tokenSymbol, setTokenSymbol] = useState("");
   const [tokenDescription, setTokenDescription] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [tokenImageUrl, setTokenImageUrl] = useState("");
   const [website, setWebsite] = useState("");
   const [twitter, setTwitter] = useState("");
   const [telegram, setTelegram] = useState("");
@@ -92,6 +94,7 @@ export default function LaunchPage() {
       setDispatchStep("1/4 Generating sub-wallets via Turnkey enclave...");
 
       const connection = getSolanaConnection();
+      const imageUrl = requireTokenImageUrl(tokenImageUrl);
       if (!connectedWallet) {
         throw new Error("Please connect your Solana wallet first before dispatching a launch bundle.");
       }
@@ -106,7 +109,7 @@ export default function LaunchPage() {
           tokenName: tokenName.trim() || "SCRAMJET",
           tokenSymbol: tokenSymbol.trim() || "SCRAM",
           tokenDescription: tokenDescription.trim() || "Hypersonic Solana Launch",
-          imageUrl: imagePreview || "https://scramjet.tools/logo.png",
+          imageUrl,
           network: "SOLANA",
           launchpad,
           launchMode: "BLOCK_0",
@@ -956,7 +959,7 @@ export default function LaunchPage() {
                       Drag &amp; Drop or <span className="text-[#3B82F6] hover:underline font-medium">Choose file</span> to upload
                     </div>
                     <div className="text-[10px] text-[#565B6D] mt-0.5 font-mono">
-                      .jpg, .png, or .gif (Max 2 MB)
+                      Preview only. This file is not written on chain.
                     </div>
                   </label>
 
@@ -971,6 +974,17 @@ export default function LaunchPage() {
                     )}
                   </div>
                 </div>
+                <input
+                  type="url"
+                  inputMode="url"
+                  placeholder="https://example.com/token.png"
+                  value={tokenImageUrl}
+                  onChange={(e) => setTokenImageUrl(e.target.value)}
+                  className="w-full h-10 bg-[#0E0F14] border border-[#1A1C25] focus:border-[#FF3E00] rounded-lg px-3 text-xs text-[#F8FAFC] outline-none"
+                />
+                <p className="text-[10px] text-[#717686] font-mono">
+                  Paste a durable https image URL. Local previews and scramjet.tools links are rejected.
+                </p>
               </div>
 
               {/* Social Links Row */}
