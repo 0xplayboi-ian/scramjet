@@ -1,0 +1,45 @@
+Look at my cell "SCRAMJET Flight Deck" (.empryo/morphs/scramjet.json) and improve it: tighter copy, a status chip if it has none, a useful key chord, and a guard if it touches anything risky. Show me the diff before writing.
+
+---
+
+i dodnt see the sign in screen
+
+---
+
+Paid 0 SOL launch fee to REDACTED! Atomically triggered Token deploy + dev buy + 24 sub-wallet Block-0 bundle on PUMP_FUN! its not working
+
+---
+
+ok change it to say beta on the site adn make sure everything works
+
+---
+
+add these changes, and i want a set and forget easy launch setting, where users can just give funds and and there will be a configuration that other tokens have had success with, and it will automatically make wallets with the users budget etc and these are the other changes Making launches easier
+
+Launch templates and presets so creators can reuse their last setup or start from a tested one.
+Dry run / cost estimator that shows total SOL needed, fees, rent, and expected sub-wallet costs before anything is signed.
+Scheduled launches so creators can set a time and walk away.
+Bulk CSV import for sub-wallet funding amounts and recipient addresses.
+
+Post-launch tools
+
+Notifications for launch success or failure, rent reclaimed, and creator fees available to claim.
+Creator analytics covering holders, volume, and fee earnings, using only on-chain data.
+Batch actions for claiming fees or closing empty accounts across many tokens at once.
+
+Team and safety
+
+Multi-user roles (owner, operator, viewer) for teams that launch together.
+Sub-wallet export and recovery so users can always get their keys and funds back, even if they leave the platform.
+Spending limits per session or per launch, to cap losses from a mistake.
+
+Developer and power-user features
+
+Public API and SDK so other tools can launch through SCRAMJET.
+Webhooks for launch status, which integrators and Discord bots can use.
+Mobile-friendly status view for checking a launch from a phone, with the full builder on desktop.
+
+Honesty as a feature
+
+Bundle disclosure on token pages: an option to add a label showing when a launch used bundled wallets and how much supply they hold. This is the opposite of hiding supply, and a credible answer to the way bundlers get criticized. It also keeps you from being the platform people warn about.
+Public changelog and roadmap with dates, so users can see what shipped and what’s coming.
