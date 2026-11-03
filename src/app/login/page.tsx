@@ -15,25 +15,24 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [referralCode, setReferralCode] = useState("");
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const handleMigrateLicenseKey = async () => {
     setIsMigrating(true);
+    setAuthError(null);
     try {
-      if (typeof window !== "undefined" && (window.phantom?.solana || window.solana)) {
-        const provider = window.phantom?.solana || window.solana;
-        const resp = await provider.connect();
-        const pk = new PublicKey(resp.publicKey.toString());
-        await setConnectedWallet(pk);
-      } else {
-        // Ephemeral user session key (never impersonate the protocol vault)
-        const userSessionKey = PublicKey.unique();
-        await setConnectedWallet(userSessionKey);
+      const provider =
+        typeof window !== "undefined" ? window.phantom?.solana || window.solana : undefined;
+      if (!provider?.connect) {
+        setAuthError("No Solana wallet found. Install a wallet and try again.");
+        return;
       }
+      const resp = await provider.connect();
+      const pk = new PublicKey(resp.publicKey.toString());
+      await setConnectedWallet(pk);
       router.push("/launch");
     } catch {
-      const userSessionKey = PublicKey.unique();
-      await setConnectedWallet(userSessionKey);
-      router.push("/launch");
+      setAuthError("Wallet connection was rejected.");
     } finally {
       setIsMigrating(false);
     }
@@ -41,17 +40,12 @@ export default function LoginPage() {
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    const userSessionKey = PublicKey.unique();
-    void setConnectedWallet(userSessionKey);
-    router.push("/launch");
+    setAuthError("Email sign-in is not enabled. Connect a wallet.");
   };
 
   const handleSignupSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const userSessionKey = PublicKey.unique();
-    void setConnectedWallet(userSessionKey);
-    router.push("/launch");
+    setAuthError("Account creation is not enabled. Connect a wallet.");
   };
 
   return (
@@ -62,6 +56,12 @@ export default function LoginPage() {
         <div className="mb-6">
           <ScramjetLogo size={42} />
         </div>
+
+        {authError && (
+          <p className="mb-4 text-[12px] leading-relaxed text-[#FF2A55]" role="alert">
+            {authError}
+          </p>
+        )}
 
         {view === "login" && (
           <div className="w-full">
