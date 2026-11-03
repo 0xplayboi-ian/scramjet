@@ -897,6 +897,23 @@ export const useLaunchStore = create<LaunchStore>((set, get) => ({
             errors.push(`${wallet.id}: token balance is zero`);
             continue;
           }
+          let minSolOutput: bigint;
+          try {
+            const curveAccount = await withSolanaRpc((connection) =>
+              connection.getAccountInfo(bondingCurve, "confirmed")
+            );
+            if (!curveAccount) {
+              throw new Error("Bonding curve account is missing");
+            }
+            minSolOutput = PumpFunAdapter.minSolOutFromCurveAccount(
+              curveAccount.data,
+              tokenAmount,
+              tradeConfig.slippagePercent
+            );
+          } catch (error) {
+            errors.push(`${wallet.id}: ${toMessage(error)}`);
+            continue;
+          }
           instructions.push(
             buildPumpSellInstruction({
               payer,
@@ -905,7 +922,7 @@ export const useLaunchStore = create<LaunchStore>((set, get) => ({
               associatedBondingCurve: curveAta,
               associatedUserToken: userAta,
               tokenAmount,
-              minSolOutput: 0n,
+              minSolOutput,
             })
           );
         }

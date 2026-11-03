@@ -38,6 +38,41 @@ export class PumpFunAdapter {
   }
 
   /**
+   * Minimum SOL out for a sell, from the curve's virtual reserves.
+   * Layout: 8-byte discriminator, virtual token u64, virtual SOL u64.
+   * Slippage is capped at 50% so a sell cannot set a zero floor.
+   */
+  public static minSolOutFromCurveAccount(
+    data: Uint8Array,
+    tokenAmount: bigint,
+    slippagePercent: number
+  ): bigint {
+    if (data.byteLength < 24) {
+      throw new Error("Bonding curve account is too small to quote a sell");
+    }
+    const view = Buffer.from(data.buffer, data.byteOffset, data.byteLength);
+    const virtualTokenReserves = view.readBigUInt64LE(8);
+    const virtualSolReserves = view.readBigUInt64LE(16);
+    if (tokenAmount <= 0n) {
+      throw new Error("Sell token amount must be positive");
+    }
+    if (virtualTokenReserves <= 0n || virtualSolReserves <= 0n) {
+      throw new Error("Bonding curve reserves are empty");
+    }
+    const slippage = Math.min(
+      50,
+      Math.max(0, Math.round(Number.isFinite(slippagePercent) ? slippagePercent : 0))
+    );
+    const solOut =
+      (virtualSolReserves * tokenAmount) / (virtualTokenReserves + tokenAmount);
+    const minOut = (solOut * BigInt(100 - slippage)) / 100n;
+    if (minOut <= 0n) {
+      throw new Error("Quoted minimum SOL output is zero; refusing the sell");
+    }
+    return minOut;
+  }
+
+  /**
    * Constructs token creation instruction for Pump.fun
    */
   public static createTokenInstruction(params: {
