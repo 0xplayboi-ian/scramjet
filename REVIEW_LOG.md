@@ -18,7 +18,7 @@ Commit `6f66bd7` (and its ancestors) still contain a live-format Helius RPC API 
 - Stack: Next.js 15 App Router, Solana web3.js, Turnkey, Jito, Zustand. No server session.
 - Passes: security, adversarial abuse, correctness, site and frontend, ops and reliability, code health
 - New findings: 1 CRITICAL, 8 HIGH, 7 MEDIUM, 3 LOW
-- Fixed on branches, not merged: SJ-002 through SJ-011, SJ-013, SJ-015, SJ-016, SJ-018, SJ-019
+- Fixed on branches, not merged: SJ-002 through SJ-011, SJ-013, SJ-015, SJ-016, SJ-018, SJ-019, SJ-020
 - Still open: SJ-001 (credential rotation; I did not rotate or rewrite history), SJ-012 (marketplace copy is a product call), SJ-014 (dependency bump not applied), SJ-017 (no real social URLs to point at)
 
 HEAD `143c58c` already dropped in-tree keys, the email exemption list, the launch-page fee-vault payer, and added `X-Frame-Options`, `nosniff`, `Referrer-Policy`, and HSTS. Those are not re-opened below.
@@ -157,6 +157,13 @@ HEAD `143c58c` already dropped in-tree keys, the email exemption list, the launc
 - **Problem:** Any trimmed string longer than 20 characters is added to the process-wide `EXEMPT_WALLETS` set. No caller today. On the server, one call would waive fees for the rest of the process lifetime.
 - **Proof:** The function is `EXEMPT_WALLETS.add(clean)` when `clean.length > 20`. Grep shows the definition only.
 - **Fix:** Branch `review/2026-11-03-drop-fee-exemption-api`. The function is deleted. Proof: the module export is absent, `EXEMPT_WALLETS.size` is 1, the fee vault is still exempt, and a fresh pubkey is not.
+
+## SJ-020 — LOW — FIXED
+
+- **Location:** `src/components/layout/AppShell.tsx` header price pill and footer market strip
+- **Problem:** Every app page showed `SOL $92.31`, a market strip of `$92.31`, `$697`, and `$2,266`, and `All Services Live · 396ms`. Nothing in the process reads a SOL price or measures latency.
+- **Proof:** Those strings are literals in `AppShell.tsx` on `main`. They were visible on `http://127.0.0.1:3001/launch` during the SJ-015 browser check. After the patch, the launch HTML no longer contains them. The header still has Connect Wallet. The home marketing footer is a different component and did not contain this strip.
+- **Fix:** Branch `review/2026-11-03-no-fake-price-ticker`. The price pill, the market strip, and the 396ms claim are removed.
 
 ---
 
