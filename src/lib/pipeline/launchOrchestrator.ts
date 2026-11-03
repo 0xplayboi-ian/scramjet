@@ -20,6 +20,14 @@ export interface LaunchOrchestrationResult {
   blockEngineResults: { url: string; status: "SENT" | "FAILED"; error?: string }[];
 }
 
+/** Block-0 holder cohorts stay inside this range. Larger counts are rejected, not clamped. */
+export function requireHolderCount(count: number): number {
+  if (!Number.isInteger(count) || count < 1 || count > 32) {
+    throw new Error("Holder count must be an integer from 1 to 32.");
+  }
+  return count;
+}
+
 export class LaunchOrchestrator {
   /**
    * Executes full end-to-end launch pipeline:
@@ -37,8 +45,9 @@ export class LaunchOrchestrator {
     const { config, connection, masterPayer } = params;
 
     // 1. Generate non-custodial sub-wallets
+    const holderCount = requireHolderCount(config.block0Config.holderCount);
     const subWallets = await turnkeyManager.createSubWallets({
-      count: config.block0Config.holderCount || 20,
+      count: holderCount,
       walletNamePrefix: `${config.tokenSymbol}-cohort`,
     });
 

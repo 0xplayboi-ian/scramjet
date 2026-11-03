@@ -12,7 +12,7 @@ import {
 import { calculateUpfrontLaunchFee, isExemptFromFees } from "../../lib/feeRouter";
 import { useLaunchStore } from "../../lib/stores/useLaunchStore";
 import { DEFAULT_PLATFORM_FEE_VAULT } from "../../lib/constants";
-import { LaunchOrchestrator, LaunchOrchestrationResult } from "../../lib/pipeline/launchOrchestrator";
+import { LaunchOrchestrator, LaunchOrchestrationResult, requireHolderCount } from "../../lib/pipeline/launchOrchestrator";
 import { getSolanaConnection } from "../../lib/solana/connection";
 import { PublicKey } from "@solana/web3.js";
 
@@ -92,6 +92,7 @@ export default function LaunchPage() {
       setDispatchStep("1/4 Generating sub-wallets via Turnkey enclave...");
 
       const connection = getSolanaConnection();
+      requireHolderCount(holderCount);
       if (!connectedWallet) {
         throw new Error("Please connect your Solana wallet first before dispatching a launch bundle.");
       }
@@ -1164,11 +1165,18 @@ export default function LaunchPage() {
               {/* Jito Tip & Sub-Wallet Count */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[11px] font-mono text-[#8E9AA8] block mb-1">Holder Wallet Count</label>
+                  <label className="text-[11px] font-mono text-[#8E9AA8] block mb-1">Holder Wallet Count (1–32)</label>
                   <input
                     type="number"
+                    min={1}
+                    max={32}
+                    step={1}
                     value={holderCount}
-                    onChange={(e) => setHolderCount(Number(e.target.value))}
+                    onChange={(e) => {
+                      const next = Number(e.target.value);
+                      if (!Number.isInteger(next) || next < 1 || next > 32) return;
+                      setHolderCount(next);
+                    }}
                     className="w-full h-10 bg-[#08090C] border border-[#1A1C25] rounded px-3 text-xs font-mono text-[#F8FAFC]"
                   />
                 </div>
