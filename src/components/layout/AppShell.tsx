@@ -359,10 +359,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 bg-[#0D1117] px-2.5 py-1 rounded border border-[#1C2533] text-[11px] font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#31E3AC] animate-pulse" />
-                <span className="text-[#8E9AA8]">SOL $92.31</span>
-              </div>
               <WalletButton />
             </div>
           </div>
@@ -375,18 +371,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* 1:1 Proxima Bottom Floating Status Bar */}
       <footer className="h-[32px] px-4 border-t border-[#1C202B] bg-[#07080B] text-[11px] text-[#636879] flex items-center justify-between font-mono z-50 select-none">
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5 text-[#31E3AC]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#31E3AC] animate-pulse" />
-            <span>SCRAMJET MAINNET BETA · All Services Live · 396ms</span>
-          </span>
+          <span className="text-[#8E9AA8]">SCRAMJET</span>
           <span className="text-[#8E9AA8] hover:text-[#F8FAFC] cursor-pointer">Help</span>
-        </div>
-
-        <div className="hidden md:flex items-center gap-4">
-          <span className="text-[#8E9AA8]">Market Overview</span>
-          <span className="text-[#F8FAFC] font-semibold">$92.31 ↗</span>
-          <span className="text-[#F8FAFC] font-semibold">$697 ↗</span>
-          <span className="text-[#FF2A55] font-semibold">$2,266 ↘</span>
         </div>
 
         <div className="flex items-center gap-4">
