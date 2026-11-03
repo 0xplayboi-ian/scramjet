@@ -265,7 +265,7 @@ export default function DocsPage() {
                 <pre className="text-[#8E9AA8] text-[11px]">
 {`NEXT_PUBLIC_SOLANA_RPC_URL="https://mainnet.helius-rpc.com/?api-key=YOUR_KEY"
 NEXT_PUBLIC_SOLANA_WS_URL="wss://mainnet.helius-rpc.com/?api-key=YOUR_KEY"
-TURNKEY_ORGANIZATION_ID="5e495c5b-3486-4bbc-b84f-4286c6ab3a4a"
+TURNKEY_ORGANIZATION_ID="your-turnkey-org-id"
 NEXT_PUBLIC_SCRAMJET_FEE_VAULT="CcwpTCpWMtKGo1fqnZuH4Psdj6yugbmSrAPaeTdEy6Qq"`}
                 </pre>
               </div>
