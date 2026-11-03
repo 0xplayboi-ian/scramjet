@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { PublicKey } from "@solana/web3.js";
 import { useLaunchStore } from "../../lib/stores/useLaunchStore";
-import { getSolBalance } from "../../lib/solana/connection";
 
 declare global {
   interface Window {
@@ -17,34 +16,23 @@ export function WalletButton() {
   const masterBalanceSol = useLaunchStore((state) => state.masterBalanceSol);
   const setConnectedWallet = useLaunchStore((state) => state.setConnectedWallet);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [hasPhantom, setHasPhantom] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasPhantom(Boolean(window.solana?.isPhantom || window.phantom?.solana));
-    }
-  }, []);
+  const [connectError, setConnectError] = useState<string | null>(null);
 
   const connectWallet = async () => {
+    setConnectError(null);
+    setIsConnecting(true);
     try {
-      setIsConnecting(true);
       const provider = window.phantom?.solana || window.solana;
-
-      if (!provider) {
-        // Fallback demo connection with the user's configured vault address
-        const demoPubkey = new PublicKey("CcwpTCpWMtKGo1fqnZuH4Psdj6yugbmSrAPaeTdEy6Qq");
-        await setConnectedWallet(demoPubkey);
-        setIsConnecting(false);
+      if (!provider?.connect) {
+        setConnectError("No wallet found");
         return;
       }
 
       const resp = await provider.connect();
       const pubkey = new PublicKey(resp.publicKey.toString());
       await setConnectedWallet(pubkey);
-    } catch (err) {
-      console.warn("Wallet connect failed or rejected, falling back to vault:", err);
-      const fallback = new PublicKey("CcwpTCpWMtKGo1fqnZuH4Psdj6yugbmSrAPaeTdEy6Qq");
-      await setConnectedWallet(fallback);
+    } catch {
+      setConnectError("Connection rejected");
     } finally {
       setIsConnecting(false);
     }
@@ -81,7 +69,7 @@ export function WalletButton() {
       disabled={isConnecting}
       className="bg-scram-plasma hover:bg-scram-flare text-black font-bold px-4 py-1.5 rounded text-xs tracking-wider uppercase transition-all shadow-plasma flex items-center space-x-1.5"
     >
-      <span>{isConnecting ? "Connecting..." : "Connect Wallet"}</span>
+      <span>{isConnecting ? "Connecting..." : connectError ?? "Connect Wallet"}</span>
     </button>
   );
 }
