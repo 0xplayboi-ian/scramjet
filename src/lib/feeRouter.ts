@@ -43,13 +43,6 @@ export function isExemptFromFees(
   return false;
 }
 
-export function registerFeeExemption(walletAddress: string): void {
-  const clean = walletAddress.trim();
-  if (clean.length > 20) {
-    EXEMPT_WALLETS.add(clean);
-  }
-}
-
 /**
  * Calculates SCRAMJET protocol fee with lamport precision.
  * Returns 0 fee if payer or email is whitelisted as exempt.
