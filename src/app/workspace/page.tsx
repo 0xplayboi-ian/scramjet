@@ -23,10 +23,6 @@ export default function WorkspacePage() {
   const startSlotFeed = useLaunchStore((state) => state.startSlotFeed);
   const refreshWalletBalances = useLaunchStore((state) => state.refreshWalletBalances);
 
-  const [top10Percent] = useState(12.4); // Turns red at >= 15%
-  const [marketCapUsd] = useState(84250);
-  const [volumeSol] = useState(312.5);
-
   // Instant Trade Panel Hotkey State
   const [isArmed, setIsArmed] = useState(false);
   const [tradeMode, setTradeMode] = useState<"BUY" | "SELL">("BUY");
@@ -117,10 +113,8 @@ export default function WorkspacePage() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3 bg-scram-surface border border-scram-border p-4 rounded">
         <div>
           <div className="text-[10px] text-scram-titanium uppercase">Market Cap</div>
-          <div className="text-base font-bold text-scram-stark">
-            ${marketCapUsd.toLocaleString()}
-          </div>
-          <div className="text-[9px] text-emerald-400 font-mono">BONDING CURVE 68%</div>
+          <div className="text-base font-bold text-scram-stark">—</div>
+          <div className="text-[9px] text-scram-titanium font-mono">Not loaded</div>
         </div>
         <div>
           <div className="text-[10px] text-scram-titanium uppercase">Current Slot</div>
@@ -131,26 +125,18 @@ export default function WorkspacePage() {
         </div>
         <div>
           <div className="text-[10px] text-scram-titanium uppercase">24H Volume</div>
-          <div className="text-base font-bold text-scram-stark">{volumeSol} SOL</div>
-          <div className="text-[9px] text-scram-titanium">~$29,328 USD</div>
+          <div className="text-base font-bold text-scram-stark">—</div>
+          <div className="text-[9px] text-scram-titanium">Not loaded</div>
         </div>
         <div>
           <div className="text-[10px] text-scram-titanium uppercase">Top 10 Holders</div>
-          <div
-            className={`text-base font-bold ${
-              top10Percent >= 15 ? "text-red-500 animate-pulse" : "text-emerald-400"
-            }`}
-          >
-            {top10Percent}%
-          </div>
-          <div className="text-[9px] text-scram-titanium">
-            {top10Percent >= 15 ? "ALERT: CLUSTERING RISK" : "CLEAN DISTRIBUTION"}
-          </div>
+          <div className="text-base font-bold text-scram-stark">—</div>
+          <div className="text-[9px] text-scram-titanium">Not loaded</div>
         </div>
         <div>
-          <div className="text-[10px] text-scram-titanium uppercase">Mach Velocity</div>
-          <div className="text-base font-bold text-scram-plasma">MACH 4.2</div>
-          <div className="text-[9px] text-emerald-400">HYPERSONIC CASCADE</div>
+          <div className="text-[10px] text-scram-titanium uppercase">Wallets</div>
+          <div className="text-base font-bold text-scram-plasma">{subWallets.length}</div>
+          <div className="text-[9px] text-scram-titanium">LOADED COHORT</div>
         </div>
       </div>
 
@@ -349,7 +335,10 @@ export default function WorkspacePage() {
         {/* Right Columns: Sub-Wallets Table & Post-Launch Ops */}
         <div className="lg:col-span-2 space-y-4">
           {/* Live DexScreener Bonding Curve Chart */}
-          <TradingChart />
+          <TradingChart
+            mintAddress={tokenMint.trim() || undefined}
+            tokenSymbol={activeLaunchConfig.tokenSymbol || "TOKEN"}
+          />
 
           {/* Post-Launch Operations Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-scram-surface border border-scram-border p-4 rounded">
