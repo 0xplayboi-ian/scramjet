@@ -78,6 +78,15 @@ export class BundleBuilder {
     }).compileToV0Message();
     txList.push(new VersionedTransaction(tipMsg));
 
+    const unsigned = txList.filter((tx) =>
+      tx.signatures.some((sig) => sig.every((byte) => byte === 0))
+    );
+    if (unsigned.length > 0) {
+      throw new Error(
+        `Refusing to encode ${unsigned.length} unsigned bundle transaction(s). The payer and mint must sign before send.`
+      );
+    }
+
     // Encode to base64 for Jito JSON-RPC sendBundle
     const encodedTransactions = txList.map((tx) =>
       Buffer.from(tx.serialize()).toString("base64")
