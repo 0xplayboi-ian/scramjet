@@ -4,6 +4,7 @@ import {
   SYSVAR_RENT_PUBKEY,
   TransactionInstruction,
 } from "@solana/web3.js";
+import { getAssociatedTokenAddressSync } from "@solana/spl-token";
 import { PUMP_FUN_PROGRAM_ID, PUMP_FEE_RECIPIENT } from "../constants";
 
 export interface PumpBondingCurveAccounts {
@@ -35,6 +36,14 @@ export class PumpFunAdapter {
       [Buffer.from("global")],
       this.PROGRAM_ID
     );
+  }
+
+  /**
+   * Associated token account of the bonding curve for this mint.
+   * The curve address is a PDA, so the owner-off-curve flag is required.
+   */
+  public static getAssociatedBondingCurve(mint: PublicKey, bondingCurve: PublicKey): PublicKey {
+    return getAssociatedTokenAddressSync(mint, bondingCurve, true);
   }
 
   /**
