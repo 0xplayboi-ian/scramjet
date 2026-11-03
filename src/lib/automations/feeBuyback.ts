@@ -37,9 +37,9 @@ export class FeeBuybackFlywheel {
     if (buybackSol > 0) {
       const buybackLamports = BigInt(Math.floor(buybackSol * 1e9));
       const [bondingCurve] = PumpFunAdapter.getBondingCurvePDA(mintPubkey);
-      const [associatedBondingCurve] = PublicKey.findProgramAddressSync(
-        [bondingCurve.toBuffer(), Buffer.from([6]), mintPubkey.toBuffer()],
-        PumpFunAdapter.PROGRAM_ID
+      const associatedBondingCurve = PumpFunAdapter.getAssociatedBondingCurve(
+        mintPubkey,
+        bondingCurve
       );
 
       // 1. Buy tokens on curve

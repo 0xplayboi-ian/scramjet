@@ -62,9 +62,9 @@ export class BumpBotEngine {
     amountLamports: bigint;
   }): TransactionInstruction {
     const [bondingCurve] = PumpFunAdapter.getBondingCurvePDA(params.mint);
-    const [associatedBondingCurve] = PublicKey.findProgramAddressSync(
-      [bondingCurve.toBuffer(), Buffer.from([6]), params.mint.toBuffer()],
-      PumpFunAdapter.PROGRAM_ID
+    const associatedBondingCurve = PumpFunAdapter.getAssociatedBondingCurve(
+      params.mint,
+      bondingCurve
     );
 
     return PumpFunAdapter.buyInstruction({

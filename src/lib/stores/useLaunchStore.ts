@@ -412,10 +412,7 @@ function distributeBuyAmounts(wallets: SubWallet[], config: MultiWalletTradeConf
 }
 
 function associatedBondingCurve(mint: PublicKey, bondingCurve: PublicKey): PublicKey {
-  return PublicKey.findProgramAddressSync(
-    [bondingCurve.toBuffer(), Buffer.from([6]), mint.toBuffer()],
-    PumpFunAdapter.PROGRAM_ID
-  )[0];
+  return PumpFunAdapter.getAssociatedBondingCurve(mint, bondingCurve);
 }
 
 function buildPumpSellInstruction(params: {

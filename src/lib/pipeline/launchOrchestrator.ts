@@ -55,9 +55,9 @@ export class LaunchOrchestrator {
 
     if (config.launchpad === "PUMP_FUN") {
       const [bondingCurve] = PumpFunAdapter.getBondingCurvePDA(mintKeypair.publicKey);
-      const [associatedBondingCurve] = PublicKey.findProgramAddressSync(
-        [bondingCurve.toBuffer(), Buffer.from([6]), mintKeypair.publicKey.toBuffer()],
-        PumpFunAdapter.PROGRAM_ID
+      const associatedBondingCurve = PumpFunAdapter.getAssociatedBondingCurve(
+        mintKeypair.publicKey,
+        bondingCurve
       );
       const [global] = PumpFunAdapter.getGlobalPDA();
 
