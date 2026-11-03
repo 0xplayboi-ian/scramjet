@@ -16,20 +16,13 @@ export class TurnkeyManager {
 
   constructor(config?: TurnkeyConfig) {
     this.organizationId =
-      config?.organizationId ||
-      process.env.TURNKEY_ORGANIZATION_ID ||
-      "5e495c5b-3486-4bbc-b84f-4286c6ab3a4a";
+      config?.organizationId || process.env.TURNKEY_ORGANIZATION_ID || "";
 
-    const apiKey =
-      config?.apiPublicKey ||
-      process.env.TURNKEY_API_PUBLIC_KEY ||
-      "027a157c103b34b8ef10410551b9f08ca8fbb3c7db418a072c89eacebd64b3f4bf";
+    const apiKey = config?.apiPublicKey || process.env.TURNKEY_API_PUBLIC_KEY || "";
     const apiPrivateKey =
-      config?.apiPrivateKey ||
-      process.env.TURNKEY_API_PRIVATE_KEY ||
-      "bd183cfe5d67e65b1e07a5f1489ffd15df61ab22689c547228cc7f40a530fc2f";
+      config?.apiPrivateKey || process.env.TURNKEY_API_PRIVATE_KEY || "";
 
-    if (apiKey && apiPrivateKey) {
+    if (this.organizationId && apiKey && apiPrivateKey) {
       const stamper = new ApiKeyStamper({
         apiPublicKey: apiKey,
         apiPrivateKey: apiPrivateKey,

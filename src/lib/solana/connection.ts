@@ -10,11 +10,9 @@ import {
 /** Cluster commitment used for reads, sends, and websocket subscriptions. */
 export const SOLANA_COMMITMENT: Commitment = "confirmed";
 
-/** Public mainnet beta RPC. Used when no provider URL is configured. */
+/** Public cluster RPC. Used when no provider URL is configured. */
 const PUBLIC_DEVNET_RPC = "https://api.devnet.solana.com";
 const PUBLIC_MAINNET_RPC = "https://api.mainnet-beta.solana.com";
-const DEFAULT_HELIUS_RPC =
-  "https://mainnet.helius-rpc.com/?api-key=c6c97d13-8d23-4285-ae19-ceddad65d3ff";
 
 export interface SolanaRpcEndpoints {
   /** First endpoint to try. */
@@ -68,8 +66,8 @@ function uniqueEndpoints(endpoints: Array<string | undefined>): string[] {
 
 /**
  * Resolves RPC endpoints from the environment.
- * Helius, Triton, and QuickNode are included only when their URLs are set,
- * so API keys are never embedded in source.
+ * Helius, Triton, and QuickNode are included only when their URLs are set.
+ * Do not embed API keys in source; set NEXT_PUBLIC_SOLANA_RPC_URL instead.
  *
  * Primary: NEXT_PUBLIC_SOLANA_RPC_URL or SOLANA_RPC_URL.
  * Provider fallbacks: NEXT_PUBLIC_HELIUS_RPC_URL, HELIUS_RPC_URL,
@@ -105,7 +103,6 @@ export function resolveSolanaRpcEndpoints(): SolanaRpcEndpoints {
   const ordered = uniqueEndpoints([
     readEnv(process.env.NEXT_PUBLIC_SOLANA_RPC_URL),
     readEnv(process.env.SOLANA_RPC_URL),
-    DEFAULT_HELIUS_RPC,
     readEnv(process.env.NEXT_PUBLIC_HELIUS_RPC_URL),
     readEnv(process.env.HELIUS_RPC_URL),
     readEnv(process.env.NEXT_PUBLIC_TRITON_RPC_URL),
