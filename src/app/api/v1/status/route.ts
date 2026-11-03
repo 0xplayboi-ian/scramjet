@@ -1,25 +1,19 @@
 import { NextResponse } from "next/server";
-import { JITO_BLOCK_ENGINE_URLS, JITO_TIP_ACCOUNTS, PROTOCOL_FEE_BPS } from "../../../../lib/constants";
+import { JITO_BLOCK_ENGINE_URLS, PROTOCOL_FEE_BPS } from "../../../../lib/constants";
 
+/**
+ * Process liveness only. Inclusion rate, uptime, and engine latency are not
+ * measured here, so this route does not invent them.
+ */
 export async function GET() {
   return NextResponse.json({
     status: "OPERATIONAL",
-    network: "solana-mainnet",
+    network: process.env.NEXT_PUBLIC_SOLANA_NETWORK || process.env.SOLANA_NETWORK || "solana-mainnet",
     version: "1.0.0-MAINNET-BETA",
-    metrics: {
-      blockZeroSuccessRate: "99.4%",
-      averageLandedSlotDelay: "0 slots",
-      uptimePercent: "99.98%",
-    },
-    jitoBlockEngines: JITO_BLOCK_ENGINE_URLS.map((url) => ({
-      url,
-      status: "HEALTHY",
-      latencyMs: Math.floor(8 + Math.random() * 14),
-    })),
+    jitoBlockEngines: JITO_BLOCK_ENGINE_URLS.map((url) => ({ url })),
     feePolicy: {
       standardFeeBps: PROTOCOL_FEE_BPS,
       standardFeePercent: "3.5%",
-      failedLaunchPolicy: "0% fee on failed launches (full refund)",
     },
   });
 }
