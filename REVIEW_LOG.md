@@ -17,7 +17,7 @@ Commit `6f66bd7` (and its ancestors) still contain a live-format Helius RPC API 
 - Site: `https://scramjet.tools` does not resolve (NXDOMAIN from this environment). No homepage URL on the GitHub repo. Frontend checks are source, local files, and `next dev` on port 3001. That server is not a production deploy.
 - Stack: Next.js 15 App Router, Solana web3.js, Turnkey, Jito, Zustand. No server session.
 - Passes: security, adversarial abuse, correctness, site and frontend, ops and reliability, code health
-- New findings: 1 CRITICAL, 8 HIGH, 7 MEDIUM, 3 LOW
+- New findings: 1 CRITICAL, 8 HIGH, 7 MEDIUM, 3 LOW, plus SJ-020 LOW found while checking the shell in the browser
 - Fixed on branches, not merged: SJ-002 through SJ-011, SJ-013, SJ-015, SJ-016, SJ-018, SJ-019, SJ-020
 - Still open: SJ-001 (credential rotation; I did not rotate or rewrite history), SJ-012 (marketplace copy is a product call), SJ-014 (dependency bump not applied), SJ-017 (no real social URLs to point at)
 
