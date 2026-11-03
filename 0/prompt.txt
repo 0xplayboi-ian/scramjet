@@ -1,0 +1,13 @@
+Look at my cell "SCRAMJET Flight Deck" (.empryo/morphs/scramjet.json) and improve it: tighter copy, a status chip if it has none, a useful key chord, and a guard if it touches anything risky. Show me the diff before writing.
+
+---
+
+i dodnt see the sign in screen
+
+---
+
+Paid 0 SOL launch fee to REDACTED! Atomically triggered Token deploy + dev buy + 24 sub-wallet Block-0 bundle on PUMP_FUN! its not working
+
+---
+
+ok change it to say beta on the site adn make sure everything works
