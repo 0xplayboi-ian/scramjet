@@ -2,7 +2,8 @@ import { ExportedWalletKeys, SubWallet } from "../../types";
 
 export class WalletExporter {
   /**
-   * Generates a downloadable JSON backup containing sub-wallet identities and encrypted keys.
+   * Generates a downloadable JSON backup of public sub-wallet identities.
+   * Secrets stay out of the file. A field named privateKeyEncrypted is still treated as a raw key by the store.
    */
   public static exportToJson(wallets: SubWallet[]): string {
     const backup = {
@@ -16,7 +17,6 @@ export class WalletExporter {
         balanceSol: w.balanceSol,
         tokenBalance: w.tokenBalance,
         status: w.status,
-        privateKeyEncrypted: w.privateKeyEncrypted ?? "Managed inside Turnkey Secure Enclave",
       })),
     };
     return JSON.stringify(backup, null, 2);
