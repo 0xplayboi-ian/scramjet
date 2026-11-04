@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { SavingsCalculator } from "../components/home/SavingsCalculator";
+import { ScramPresale } from "../components/home/ScramPresale";
 
 export default function HomePage() {
-  const [tokenAddressInput, setTokenAddressInput] = useState(
-    "ED5nyyWEZpPWiMP8vYm7sD7TD3LAt3Q3gRTWHZPJBY"
-  );
-
   const supportedLaunchpads = [
     { name: "Pump.fun", icon: "/icons/dex/pumpfun.webp" },
     { name: "Meteora DBC", icon: "/icons/dex/meteoradbc.webp" },
@@ -80,94 +77,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Product Terminal Hero Mockup */}
-        <div className="pt-8 text-left">
-          <div className="rounded-xl border border-[#1A1C25] bg-[#0E0F14] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)]">
-            {/* Mockup Header Bar */}
-            <div className="h-10 px-4 border-b border-[#1A1C25] bg-[#0A0B0E] flex items-center justify-between text-xs font-mono">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-bold text-[#F8FAFC]">$SCRAM</span>
-                <span className="text-[11px] text-[#717686]">Scramjet Mach 3.5 · Mainnet Live</span>
-              </div>
-              <div className="hidden sm:flex items-center gap-6 text-[11px]">
-                <span className="text-[#8E9AA8]">MCap: <strong className="text-[#F8FAFC]">$84.2K</strong></span>
-                <span className="text-[#8E9AA8]">Fee: <strong className="text-[#31E3AC]">3.5%</strong></span>
-                <span className="text-[#8E9AA8]">Min: <strong className="text-[#FF3E00]">0.01 SOL</strong></span>
-                <span className="text-[#31E3AC]">Rent Reclaim: +0.00204 SOL</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Link href="/launch" className="text-[10px] bg-[#FF3E00] text-black font-bold px-2.5 py-1 rounded">
-                  Create Launch
-                </Link>
-              </div>
-            </div>
-
-            {/* Mockup Body: Chart on Left, Trade Panel on Right */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 h-[360px] bg-[#08090C]">
-              {/* Simulated Chart */}
-              <div className="lg:col-span-2 border-r border-[#1A1C25] p-4 flex flex-col justify-between relative overflow-hidden">
-                <div className="flex justify-between items-center text-[10px] font-mono text-[#717686]">
-                  <span>1M · 5M · 15M · 1H</span>
-                  <span className="text-[#31E3AC]">● JITO BLOCK-0 CONFIRMED</span>
-                </div>
-
-                {/* Candlestick Waveform */}
-                <div className="flex items-end justify-between h-44 px-2 gap-1.5 opacity-90">
-                  {[40, 48, 42, 60, 55, 75, 70, 95, 88, 120, 110, 145, 138, 170, 160, 195, 180, 220, 210, 240].map((h, i) => (
-                    <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
-                      <div className="w-[1px] h-3 bg-[#31E3AC]/40" />
-                      <div
-                        style={{ height: `${h * 0.65}px` }}
-                        className={`w-full rounded-sm ${i % 3 === 0 ? "bg-[#FF2A55]" : "bg-[#31E3AC]"}`}
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex justify-between items-center text-[10px] font-mono text-[#717686] pt-2 border-t border-[#1A1C25]">
-                  <span>BubbleMaps Cluster Risk: <strong className="text-[#31E3AC]">0.0%</strong></span>
-                  <span className="text-[#31E3AC] font-bold">5 JITO BLOCK ENGINES ONLINE</span>
-                </div>
-              </div>
-
-              {/* Right Mini Trade Cockpit */}
-              <div className="p-4 space-y-3 font-mono text-xs hidden lg:block bg-[#0D0E13]">
-                <div className="flex justify-between items-center text-[11px] pb-1 border-b border-[#1A1C25]">
-                  <span className="text-[#8E9AA8]">Sub-Wallets (Cohort 1)</span>
-                  <span className="text-[#31E3AC]">24 Active</span>
-                </div>
-
-                <div className="space-y-1.5 text-[10px]">
-                  <div className="flex justify-between p-1.5 rounded bg-[#101117] border border-[#1A1C25]">
-                    <span className="text-[#8E9AA8]">Deployer</span>
-                    <span className="font-bold text-[#F8FAFC]">2.50 SOL</span>
-                  </div>
-                  <div className="flex justify-between p-1.5 rounded bg-[#101117] border border-[#1A1C25]">
-                    <span className="text-[#FF3E00]">Front MEV (2w)</span>
-                    <span className="font-bold text-[#F8FAFC]">0.50 SOL</span>
-                  </div>
-                  <div className="flex justify-between p-1.5 rounded bg-[#101117] border border-[#1A1C25]">
-                    <span className="text-[#38BDF8]">Back MEV (4w)</span>
-                    <span className="font-bold text-[#F8FAFC]">1.00 SOL</span>
-                  </div>
-                  <div className="flex justify-between p-1.5 rounded bg-[#101117] border border-[#1A1C25]">
-                    <span className="text-[#31E3AC]">Holders (18w)</span>
-                    <span className="font-bold text-[#F8FAFC]">0.18 SOL (0.01 min)</span>
-                  </div>
-                </div>
-
-                <div className="pt-2">
-                  <Link
-                    href="/launch"
-                    className="w-full h-8 rounded bg-[#FF3E00] hover:bg-[#FF5500] text-black font-bold text-[11px] flex items-center justify-center transition-all shadow-[0_0_12px_rgba(255,62,0,0.3)]"
-                  >
-                    Open Launch Wizard →
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ScramPresale />
       </section>
 
       {/* ================= 2. THE RECEIPTS: $45K/MO PROXIMA BUBBLEMAPS DEAL ================= */}
