@@ -8,7 +8,7 @@ import { ScramjetLogo } from "../brand/ScramjetLogo";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isLanding = pathname === "/";
+  const isLanding = pathname === "/product";
 
   // ================= 1. PUBLIC MARKETING HOMEPAGE LAYOUT (https://proxima.tools 1:1) =================
   if (isLanding) {
@@ -16,7 +16,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="min-h-screen bg-[#07080B] text-[#F8FAFC] flex flex-col font-sans selection:bg-[#FF3E00]/30 selection:text-white">
         {/* Top Marketing Header */}
         <header className="sticky top-0 z-50 h-[56px] px-6 md:px-12 bg-[#07080B]/90 backdrop-blur-md border-b border-[#14161F] flex items-center justify-between text-xs">
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <Link href="/product" className="flex items-center gap-2.5 group">
             <ScramjetLogo size={26} />
               <span className="font-bold text-sm tracking-tight text-[#F8FAFC] group-hover:text-[#FF3E00] transition-colors flex items-center gap-1.5">
                 <span>SCRAMJET</span>
@@ -46,10 +46,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               Log In
             </Link>
               <Link
-              href="/launch"
+              href="/"
               className="h-[36px] px-6 rounded-full bg-[#F8FAFC] hover:bg-[#FFFFFF] text-[#07080B] font-bold text-xs tracking-tight flex items-center justify-center transition-all shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:scale-[1.03] active:scale-[0.98]"
             >
-              Open SCRAMJET →
+              Open dashboard →
             </Link>
           </div>
         </header>
@@ -208,8 +208,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 href="/marketplace"
                 className={`flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs transition-colors ${
                   pathname === "/marketplace"
-                    ? "bg-[#161722] text-[#F8FAFC] font-semibold"
-                    : "text-[#8E9AA8] hover:text-[#F8FAFC] hover:bg-[#14161E]"
+                    ? "bg-[#161722] text-[#8E9AA8] font-semibold"
+                    : "text-[#636879] hover:text-[#8E9AA8] hover:bg-[#14161E]"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -218,8 +218,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   </svg>
                   <span>Marketplace</span>
                 </div>
-                <span className="text-[8px] font-bold font-mono px-1.5 py-0.2 rounded bg-[#FF3E00]/20 text-[#FF3E00] border border-[#FF3E00]/30">
-                  NEW
+                <span className="text-[8px] font-bold font-mono px-1.5 py-0.2 rounded bg-[#14151C] text-[#636879] border border-[#1C1E28]">
+                  SOON
                 </span>
               </Link>
 
@@ -249,7 +249,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
               <Link
                 href="/"
-                className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs text-[#8E9AA8] hover:text-[#F8FAFC] hover:bg-[#14161E] transition-colors"
+                className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs transition-colors ${
+                  pathname === "/"
+                    ? "bg-[#161722] text-[#F8FAFC] font-semibold"
+                    : "text-[#8E9AA8] hover:text-[#F8FAFC] hover:bg-[#14161E]"
+                }`}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
@@ -315,10 +319,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="flex-1 flex flex-col overflow-y-auto bg-[#08090C]">
           {/* Top Minimal Strip with Fast Navigation & WalletButton */}
           <div className="h-[44px] px-6 border-b border-[#1C202B] flex items-center justify-between text-xs bg-[#08090C]/90 backdrop-blur z-20 sticky top-0">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 overflow-x-auto">
+              <Link
+                href="/"
+                className={`px-3 py-1.5 rounded-md font-bold text-xs whitespace-nowrap flex items-center gap-1.5 transition-all ${
+                  pathname === "/"
+                    ? "bg-[#FF3E00] text-black shadow-[0_0_15px_rgba(255,62,0,0.35)]"
+                    : "bg-[#161720] border border-[#22242F] text-[#F8FAFC] hover:border-[#FF3E00]"
+                }`}
+              >
+                <span>Dashboard</span>
+              </Link>
               <Link
                 href="/launch"
-                className={`px-3 py-1.5 rounded-md font-bold text-xs flex items-center gap-1.5 transition-all ${
+                className={`px-3 py-1.5 rounded-md font-bold text-xs whitespace-nowrap flex items-center gap-1.5 transition-all ${
                   pathname === "/launch"
                     ? "bg-[#FF3E00] text-black shadow-[0_0_15px_rgba(255,62,0,0.35)]"
                     : "bg-[#161720] border border-[#22242F] text-[#F8FAFC] hover:border-[#FF3E00]"
@@ -328,7 +342,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </Link>
               <Link
                 href="/workspace"
-                className={`px-3 py-1.5 rounded-md font-medium text-xs flex items-center gap-1.5 transition-all ${
+                className={`px-3 py-1.5 rounded-md font-medium text-xs whitespace-nowrap flex items-center gap-1.5 transition-all ${
                   pathname === "/workspace"
                     ? "bg-[#161722] text-[#F8FAFC] border border-[#31E3AC]"
                     : "text-[#8E9AA8] hover:text-[#F8FAFC]"
@@ -338,17 +352,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </Link>
               <Link
                 href="/marketplace"
-                className={`px-3 py-1.5 rounded-md font-medium text-xs flex items-center gap-1.5 transition-all ${
+                className={`px-3 py-1.5 rounded-md font-medium text-xs whitespace-nowrap flex items-center gap-1.5 transition-all ${
                   pathname === "/marketplace"
-                    ? "bg-[#161722] text-[#F8FAFC] border border-[#31E3AC]"
-                    : "text-[#8E9AA8] hover:text-[#F8FAFC]"
+                    ? "bg-[#161722] text-[#8E9AA8] border border-[#1C202B]"
+                    : "text-[#636879] hover:text-[#8E9AA8]"
                 }`}
               >
                 <span>Marketplace</span>
+                <span className="text-[8px] font-mono text-[#636879]">SOON</span>
               </Link>
               <Link
                 href="/funder"
-                className={`px-3 py-1.5 rounded-md font-medium text-xs flex items-center gap-1.5 transition-all ${
+                className={`px-3 py-1.5 rounded-md font-medium text-xs whitespace-nowrap flex items-center gap-1.5 transition-all ${
                   pathname === "/funder"
                     ? "bg-[#161722] text-[#F8FAFC] border border-[#31E3AC]"
                     : "text-[#8E9AA8] hover:text-[#F8FAFC]"

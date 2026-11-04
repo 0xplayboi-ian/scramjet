@@ -1,17 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   SolanaLaunchpad,
   LaunchMode,
   BuildPreset,
   SniperGuardAction,
   NukeWalletScope,
+  LaunchTemplate,
 } from "../../types";
 import { calculateUpfrontLaunchFee, isExemptFromFees } from "../../lib/feeRouter";
 import { useLaunchStore } from "../../lib/stores/useLaunchStore";
-import { DEFAULT_PLATFORM_FEE_VAULT } from "../../lib/constants";
+import { DEFAULT_PLATFORM_FEE_VAULT, PROXIMA_FEE_BPS, SCRAMJET_BRAND } from "../../lib/constants";
+import { PROVEN_LAUNCH_TEMPLATES } from "../../lib/pipeline/autopilotLauncher";
 import { LaunchOrchestrator, LaunchOrchestrationResult } from "../../lib/pipeline/launchOrchestrator";
 import { getSolanaConnection } from "../../lib/solana/connection";
 import { PublicKey } from "@solana/web3.js";
@@ -20,7 +23,103 @@ import {
   AsciiStyle,
 } from "../../components/launch/AsciiLogoModal";
 
+const DRAFT_KEY = "scramjet.launchDraft.v1";
+const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
+
+type LaunchDraft = {
+  tokenName: string;
+  tokenSymbol: string;
+  tokenDescription: string;
+  website: string;
+  twitter: string;
+  telegram: string;
+  imagePreview: string | null;
+  launchpad: SolanaLaunchpad;
+  launchMode: "BLOCK_0" | "ORGANIC" | "MANUAL";
+  preset: BuildPreset;
+  devBuyPercent: number;
+  holdersBuyPercent: number;
+  holderCount: number;
+  backMevTuning: number;
+  jitoTipSol: number;
+  sniperGuardEnabled: boolean;
+  sniperTriggerSol: number;
+  selectedTemplate: string | null;
+};
+
+const TEMPLATE_COPY: Record<string, { title: string; line: string }> = {
+  "proven-volume-builder": {
+    title: "Volume builder",
+    line: "Pump · Clean · 12% dev · 18% holders · 20 wallets · 0.015 SOL tip",
+  },
+  "stealth-anti-sniper": {
+    title: "Tight bundle",
+    line: "Meteora · Full · 8% dev · 15% holders · 24 wallets · 0.025 SOL tip",
+  },
+  "hypersonic-moonshot": {
+    title: "Fast fill",
+    line: "Pump · Quick · 15% dev · 25% holders · 16 wallets · 0.02 SOL tip",
+  },
+};
+
+function readDraft(): LaunchDraft | null {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<LaunchDraft>;
+    if (!parsed || typeof parsed !== "object") return null;
+    const image =
+      typeof parsed.imagePreview === "string" && !parsed.imagePreview.startsWith("blob:")
+        ? parsed.imagePreview
+        : null;
+    return {
+      tokenName: typeof parsed.tokenName === "string" ? parsed.tokenName.slice(0, 32) : "",
+      tokenSymbol: typeof parsed.tokenSymbol === "string" ? parsed.tokenSymbol.slice(0, 10) : "",
+      tokenDescription: typeof parsed.tokenDescription === "string" ? parsed.tokenDescription.slice(0, 500) : "",
+      website: typeof parsed.website === "string" ? parsed.website : "",
+      twitter: typeof parsed.twitter === "string" ? parsed.twitter : "",
+      telegram: typeof parsed.telegram === "string" ? parsed.telegram : "",
+      imagePreview: image,
+      launchpad: parsed.launchpad ?? "PUMP_FUN",
+      launchMode: parsed.launchMode ?? "BLOCK_0",
+      preset: parsed.preset ?? "CLEAN_BUILD",
+      devBuyPercent: Number(parsed.devBuyPercent) || 0,
+      holdersBuyPercent: Number(parsed.holdersBuyPercent) || 0,
+      holderCount: Number(parsed.holderCount) || 24,
+      backMevTuning: Number(parsed.backMevTuning) || 0,
+      jitoTipSol: Number(parsed.jitoTipSol) || 0,
+      sniperGuardEnabled: parsed.sniperGuardEnabled !== false,
+      sniperTriggerSol: Number(parsed.sniperTriggerSol) || 5,
+      selectedTemplate: typeof parsed.selectedTemplate === "string" ? parsed.selectedTemplate : null,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function draftIsBlank(draft: LaunchDraft): boolean {
+  return (
+    !draft.tokenName &&
+    !draft.tokenSymbol &&
+    !draft.tokenDescription &&
+    !draft.website &&
+    !draft.twitter &&
+    !draft.telegram &&
+    !draft.imagePreview &&
+    !draft.selectedTemplate &&
+    draft.launchpad === "PUMP_FUN" &&
+    draft.launchMode === "BLOCK_0" &&
+    draft.preset === "CLEAN_BUILD" &&
+    draft.devBuyPercent === 0 &&
+    draft.holdersBuyPercent === 0 &&
+    draft.holderCount === 24 &&
+    draft.backMevTuning === 40 &&
+    draft.jitoTipSol === 0.015
+  );
+}
+
 export default function LaunchPage() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<"chain" | "token" | "settings">("chain");
   const [selectedChain, setSelectedChain] = useState<"solana" | "bsc" | "base" | "eth">("solana");
   const [launchpad, setLaunchpad] = useState<SolanaLaunchpad>("PUMP_FUN");
@@ -38,6 +137,15 @@ export default function LaunchPage() {
   const [asciiDetail, setAsciiDetail] = useState(40);
   const [asciiGlow, setAsciiGlow] = useState(true);
   const [asciiTexture, setAsciiTexture] = useState(false);
+  const [mintAddress, setMintAddress] = useState("");
+  const [cloneBusy, setCloneBusy] = useState(false);
+  const [cloneMessage, setCloneMessage] = useState<string | null>(null);
+  const [tokenError, setTokenError] = useState<string | null>(null);
+  const [imageError, setImageError] = useState<string | null>(null);
+  const [draftBanner, setDraftBanner] = useState(false);
+  const [draftReady, setDraftReady] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
+  const ignoredDraft = useRef<string | null>(null);
   const [website, setWebsite] = useState("");
   const [twitter, setTwitter] = useState("");
   const [telegram, setTelegram] = useState("");
@@ -266,12 +374,215 @@ export default function LaunchPage() {
     { id: "LESGO", name: "Pangea", icon: "/icons/dex/pangea.webp" },
   ];
 
+  const currentDraft = (): LaunchDraft => ({
+    tokenName,
+    tokenSymbol,
+    tokenDescription,
+    website,
+    twitter,
+    telegram,
+    imagePreview: imagePreview && !imagePreview.startsWith("blob:") ? imagePreview : null,
+    launchpad,
+    launchMode,
+    preset,
+    devBuyPercent,
+    holdersBuyPercent,
+    holderCount,
+    backMevTuning,
+    jitoTipSol,
+    sniperGuardEnabled,
+    sniperTriggerSol,
+    selectedTemplate,
+  });
+
+  const serializedDraft = JSON.stringify(currentDraft());
+
+  useEffect(() => {
+    const draft = readDraft();
+    if (draft && !draftIsBlank(draft)) {
+      setTokenName(draft.tokenName);
+      setTokenSymbol(draft.tokenSymbol);
+      setTokenDescription(draft.tokenDescription);
+      setWebsite(draft.website);
+      setTwitter(draft.twitter);
+      setTelegram(draft.telegram);
+      setImagePreview(draft.imagePreview);
+      setLaunchpad(draft.launchpad);
+      setLaunchMode(draft.launchMode);
+      setPreset(draft.preset);
+      setDevBuyPercent(draft.devBuyPercent);
+      setHoldersBuyPercent(draft.holdersBuyPercent);
+      setHolderCount(draft.holderCount);
+      setBackMevTuning(draft.backMevTuning);
+      setJitoTipSol(draft.jitoTipSol);
+      setSniperGuardEnabled(draft.sniperGuardEnabled);
+      setSniperTriggerSol(draft.sniperTriggerSol);
+      setSelectedTemplate(draft.selectedTemplate);
+      setDraftBanner(true);
+    }
+    setDraftReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!draftReady) return;
+    if (serializedDraft === ignoredDraft.current) return;
+    if (draftIsBlank(JSON.parse(serializedDraft) as LaunchDraft)) return;
+    ignoredDraft.current = null;
+    const handle = window.setTimeout(() => {
+      try {
+        localStorage.setItem(DRAFT_KEY, serializedDraft);
+      } catch {
+        const slim = JSON.parse(serializedDraft) as LaunchDraft;
+        slim.imagePreview = null;
+        try {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(slim));
+        } catch {
+          // The browser refused the draft. The form itself stays intact.
+        }
+      }
+    }, 400);
+    return () => window.clearTimeout(handle);
+  }, [draftReady, serializedDraft]);
+
+  const forgetDraft = () => {
+    ignoredDraft.current = serializedDraft;
+    localStorage.removeItem(DRAFT_KEY);
+    setDraftBanner(false);
+  };
+
+  const acceptImageFile = (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      setImageError("Use a jpg, png, or gif.");
+      return;
+    }
+    if (file.size > MAX_IMAGE_BYTES) {
+      setImageError("Images must be 2 MB or smaller.");
+      return;
+    }
+    setImageError(null);
+    setTokenError(null);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const url = typeof reader.result === "string" ? reader.result : "";
+      if (!url.startsWith("data:image/")) {
+        setImageError("Use a jpg, png, or gif.");
+        return;
+      }
+      setImagePreview(url);
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setImagePreview(url);
+    if (file) acceptImageFile(file);
+    e.target.value = "";
+  };
+
+  const pasteImage = async () => {
+    try {
+      const items = await Promise.race([
+        navigator.clipboard.read(),
+        new Promise<ClipboardItem[]>((_, reject) => {
+          window.setTimeout(() => reject(new Error("clipboard timeout")), 4000);
+        }),
+      ]);
+      for (const item of items) {
+        const type = item.types.find((entry) => entry.startsWith("image/"));
+        if (!type) continue;
+        const blob = await item.getType(type);
+        acceptImageFile(new File([blob], "pasted-logo", { type }));
+        return;
+      }
+      setImageError("The clipboard has no image.");
+    } catch {
+      setImageError("Allow clipboard access, or use Choose file.");
     }
+  };
+
+  const cloneToken = async () => {
+    const mint = mintAddress.trim();
+    if (!mint) {
+      setCloneMessage("Paste a mint address first.");
+      return;
+    }
+    try {
+      new PublicKey(mint);
+    } catch {
+      setCloneMessage("That is not a Solana address.");
+      return;
+    }
+    setCloneBusy(true);
+    setCloneMessage(null);
+    try {
+      const response = await fetch(`/api/v1/metadata?mint=${encodeURIComponent(mint)}`);
+      const body = (await response.json()) as {
+        error?: string;
+        name?: string;
+        symbol?: string;
+        description?: string;
+        image?: string | null;
+        twitter?: string;
+        telegram?: string;
+        website?: string;
+      };
+      if (!response.ok) {
+        setCloneMessage(body.error || "Could not read that mint.");
+        return;
+      }
+      setTokenName((body.name || "").slice(0, 32));
+      setTokenSymbol((body.symbol || "").slice(0, 10));
+      setTokenDescription(body.description || "");
+      if (body.image) setImagePreview(body.image);
+      setTwitter(body.twitter || "");
+      setTelegram(body.telegram || "");
+      setWebsite(body.website || "");
+      setTokenError(null);
+      setCloneMessage("Cloned the name, symbol, and links. Supply and holders stay on the original mint.");
+      setActiveTab("token");
+    } catch {
+      setCloneMessage("Metadata lookup failed.");
+    } finally {
+      setCloneBusy(false);
+    }
+  };
+
+  const importToken = () => {
+    const mint = mintAddress.trim();
+    if (!mint) {
+      setCloneMessage("Paste a mint address first.");
+      return;
+    }
+    try {
+      new PublicKey(mint);
+    } catch {
+      setCloneMessage("That is not a Solana address.");
+      return;
+    }
+    router.push(`/workspace?mint=${encodeURIComponent(mint)}`);
+  };
+
+  const applyTemplate = (template: LaunchTemplate) => {
+    setLaunchpad(template.launchpad);
+    setPreset(template.preset);
+    setDevBuyPercent(template.devBuyPercent);
+    setHoldersBuyPercent(template.holdersBuyPercent);
+    setHolderCount(template.holderCount);
+    setBackMevTuning(template.backMevTuning);
+    setJitoTipSol(template.jitoTipSol);
+    setSniperGuardEnabled(template.sniperGuardEnabled);
+    setSniperTriggerSol(template.sniperTriggerSol);
+    setSelectedTemplate(template.id);
+  };
+
+  const openSettings = () => {
+    if (!tokenName.trim() || !tokenSymbol.trim() || !imagePreview) {
+      setTokenError("Add a name, a symbol, and an image to open launch settings.");
+      setActiveTab("token");
+      return;
+    }
+    setTokenError(null);
+    setActiveTab("settings");
   };
 
   return (
@@ -302,7 +613,7 @@ export default function LaunchPage() {
           </button>
 
           <button
-            onClick={() => setActiveTab("settings")}
+            onClick={openSettings}
             className={`pb-1 transition-colors ${
               activeTab === "settings"
                 ? "text-[#F8FAFC] border-b-2 border-[#FF3E00] font-bold"
@@ -315,6 +626,22 @@ export default function LaunchPage() {
       </div>
 
       <div className="max-w-[760px] mx-auto px-6 pt-8">
+        {draftBanner && (
+          <div
+            data-testid="draft-banner"
+            className="mb-6 flex items-center justify-between gap-3 rounded-lg border border-[#1D3256] bg-[#10192A] px-3 py-2"
+          >
+            <span className="text-[12px] text-[#93C5FD]">Restored your last launch draft.</span>
+            <button
+              type="button"
+              data-testid="forget-draft"
+              onClick={forgetDraft}
+              className="h-7 px-2.5 rounded-md border border-[#1D3256] text-[11px] text-[#C5CDD8] hover:text-[#F8FAFC]"
+            >
+              Forget
+            </button>
+          </div>
+        )}
         {/* ================= VIEW 1: CHAIN & LAUNCHPAD ================= */}
         {activeTab === "chain" && (
           <div className="space-y-7 animate-fadeIn">
@@ -872,21 +1199,47 @@ export default function LaunchPage() {
                 <div className="flex-1 h-[1px] bg-[#161720]" />
               </div>
 
-              <div className="flex justify-center gap-3">
-                <button
-                  onClick={() => alert("Clone an existing token address")}
-                  className="px-4 h-8 rounded-lg bg-[#111218] border border-[#1A1C25] hover:border-[#2D3344] text-[11px] text-[#8E9AA8] hover:text-[#F8FAFC] flex items-center gap-1.5"
-                >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-                  <span>Clone a Token</span>
-                </button>
-                <button
-                  onClick={() => alert("Import existing token")}
-                  className="px-4 h-8 rounded-lg bg-[#111218] border border-[#1A1C25] hover:border-[#2D3344] text-[11px] text-[#8E9AA8] hover:text-[#F8FAFC] flex items-center gap-1.5"
-                >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-                  <span>Import a Token</span>
-                </button>
+              <div className="max-w-[420px] mx-auto space-y-2">
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[#717686] font-semibold">
+                  Existing mint
+                </label>
+                <input
+                  type="text"
+                  data-testid="mint-input"
+                  placeholder="Mint address"
+                  value={mintAddress}
+                  onChange={(e) => setMintAddress(e.target.value)}
+                  className="w-full h-10 bg-[#0E0F14] border border-[#1A1C25] focus:border-[#FF3E00] rounded-lg px-3 text-xs font-mono text-[#F8FAFC] outline-none"
+                />
+                <p className="text-[10px] text-[#565B6D] leading-relaxed">
+                  Clone fills a new launch with the name, symbol, image, and links. Import opens this mint in the workspace. Supply and holders stay on the original.
+                </p>
+                <div className="flex justify-center gap-3">
+                  <button
+                    type="button"
+                    data-testid="clone-token"
+                    disabled={cloneBusy}
+                    onClick={() => void cloneToken()}
+                    className="px-4 h-8 rounded-lg bg-[#111218] border border-[#1A1C25] hover:border-[#2D3344] text-[11px] text-[#8E9AA8] hover:text-[#F8FAFC] flex items-center gap-1.5 disabled:opacity-50"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                    <span>{cloneBusy ? "Reading mint…" : "Clone a Token"}</span>
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="import-token"
+                    onClick={importToken}
+                    className="px-4 h-8 rounded-lg bg-[#111218] border border-[#1A1C25] hover:border-[#2D3344] text-[11px] text-[#8E9AA8] hover:text-[#F8FAFC] flex items-center gap-1.5"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                    <span>Import a Token</span>
+                  </button>
+                </div>
+                {cloneMessage && (
+                  <p data-testid="clone-message" className="text-[11px] text-[#C5CDD8] text-center">
+                    {cloneMessage}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -902,6 +1255,11 @@ export default function LaunchPage() {
               <p className="text-[12px] text-[#717686]">
                 Define how your token will appear on explorers, wallets, and launchpads.
               </p>
+              {cloneMessage && (
+                <p data-testid="clone-message" className="text-[12px] text-[#C5CDD8] pt-1">
+                  {cloneMessage}
+                </p>
+              )}
             </div>
 
             <div className="space-y-4">
@@ -909,10 +1267,14 @@ export default function LaunchPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-mono text-[#8E9AA8]">
-                    Project Name* <span className="text-[#565B6D] font-normal">(0/32)</span>
+                    Project Name*{" "}
+                    <span data-testid="name-count" className="text-[#565B6D] font-normal">
+                      ({tokenName.length}/32)
+                    </span>
                   </label>
                   <input
                     type="text"
+                    data-testid="token-name"
                     maxLength={32}
                     placeholder="SCRAMJET"
                     value={tokenName}
@@ -923,10 +1285,14 @@ export default function LaunchPage() {
 
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-mono text-[#8E9AA8]">
-                    Symbol* <span className="text-[#565B6D] font-normal">(0/10)</span>
+                    Symbol*{" "}
+                    <span data-testid="symbol-count" className="text-[#565B6D] font-normal">
+                      ({tokenSymbol.length}/10)
+                    </span>
                   </label>
                   <input
                     type="text"
+                    data-testid="token-symbol"
                     maxLength={10}
                     placeholder="SCRAM"
                     value={tokenSymbol}
@@ -943,6 +1309,7 @@ export default function LaunchPage() {
                 </label>
                 <textarea
                   rows={3}
+                  maxLength={500}
                   placeholder="Enter a description..."
                   value={tokenDescription}
                   onChange={(e) => setTokenDescription(e.target.value)}
@@ -957,6 +1324,14 @@ export default function LaunchPage() {
                     <span>Image*</span>
                     <button
                       type="button"
+                      data-testid="paste-image"
+                      onClick={() => void pasteImage()}
+                      className="h-7 px-2.5 rounded-md border border-[#2A2D3A] bg-[#0E0F14] text-[10px] font-mono tracking-wide text-[#F8FAFC] hover:border-[#3B82F6]"
+                    >
+                      Paste
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => setAsciiOpen(true)}
                       className="h-7 px-2.5 rounded-md border border-[#2A2D3A] bg-[#0E0F14] text-[10px] font-mono tracking-wide text-[#F8FAFC] hover:border-[#3B82F6]"
                     >
@@ -968,8 +1343,17 @@ export default function LaunchPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                   {/* Upload Box (Col 3) */}
-                  <label className="sm:col-span-3 h-28 border border-dashed border-[#222432] hover:border-[#FF3E00]/50 rounded-xl bg-[#0E0F14] flex flex-col items-center justify-center cursor-pointer transition-colors p-4 text-center">
-                    <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                  <label
+                    data-testid="image-drop"
+                    onDragOver={(event) => event.preventDefault()}
+                    onDrop={(event) => {
+                      event.preventDefault();
+                      const file = event.dataTransfer.files?.[0];
+                      if (file) acceptImageFile(file);
+                    }}
+                    className="sm:col-span-3 h-28 border border-dashed border-[#222432] hover:border-[#FF3E00]/50 rounded-xl bg-[#0E0F14] flex flex-col items-center justify-center cursor-pointer transition-colors p-4 text-center"
+                  >
+                    <input data-testid="image-file" type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#717686" strokeWidth="2" className="mb-2">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
                     </svg>
@@ -992,6 +1376,11 @@ export default function LaunchPage() {
                     )}
                   </div>
                 </div>
+                {imageError && (
+                  <p data-testid="image-error" className="text-[11px] text-[#E2B340]">
+                    {imageError}
+                  </p>
+                )}
               </div>
 
               <AsciiLogoModal
@@ -1053,9 +1442,16 @@ export default function LaunchPage() {
               </div>
 
               {/* Centered Create Button */}
-              <div className="flex justify-center pt-8">
+              <div className="flex flex-col items-center gap-2 pt-8">
+                {tokenError && (
+                  <p data-testid="token-error" className="text-[11px] text-[#E2B340] text-center">
+                    {tokenError}
+                  </p>
+                )}
                 <button
-                  onClick={() => setActiveTab("settings")}
+                  type="button"
+                  data-testid="create-token"
+                  onClick={openSettings}
                   className="w-full max-w-[280px] h-[40px] rounded-lg bg-[#14151D] hover:bg-[#1A1C26] border border-[#222432] text-[#8E9AA8] hover:text-[#F8FAFC] font-medium text-xs tracking-wide transition-all shadow-sm"
                 >
                   Create
@@ -1119,6 +1515,37 @@ export default function LaunchPage() {
                   <div className="font-bold text-sm text-[#F8FAFC]">Manual Mode</div>
                   <div className="text-[10px] text-[#8E9AA8]">Submit orders yourself in HUD</div>
                 </button>
+              </div>
+            </div>
+
+            <div className="space-y-2.5">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#717686] font-semibold">
+                Start from a template
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                {PROVEN_LAUNCH_TEMPLATES.map((template) => {
+                  const copy = TEMPLATE_COPY[template.id] ?? {
+                    title: template.name,
+                    line: `${template.preset.replace("_", " ")} · ${template.devBuyPercent}% dev · ${template.holderCount} wallets`,
+                  };
+                  const selected = selectedTemplate === template.id;
+                  return (
+                    <button
+                      key={template.id}
+                      type="button"
+                      data-testid={`template-${template.id}`}
+                      onClick={() => applyTemplate(template)}
+                      className={`p-3 rounded-xl border text-left transition-all ${
+                        selected
+                          ? "border-[#FF3E00] bg-[#FF3E00]/10"
+                          : "border-[#1A1C25] bg-[#0E0F14] hover:border-[#2D3344]"
+                      }`}
+                    >
+                      <div className="text-xs font-semibold text-[#F8FAFC]">{copy.title}</div>
+                      <div className="mt-1 text-[10px] leading-relaxed text-[#8E9AA8]">{copy.line}</div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -1212,6 +1639,7 @@ export default function LaunchPage() {
                   <label className="text-[11px] font-mono text-[#8E9AA8] block mb-1">Holder Wallet Count</label>
                   <input
                     type="number"
+                    data-testid="holder-count"
                     value={holderCount}
                     onChange={(e) => setHolderCount(Number(e.target.value))}
                     className="w-full h-10 bg-[#08090C] border border-[#1A1C25] rounded px-3 text-xs font-mono text-[#F8FAFC]"
@@ -1273,6 +1701,9 @@ export default function LaunchPage() {
                 <div className="text-[10px] text-[#717686] pt-1">
                   Fee recipient: {DEFAULT_PLATFORM_FEE_VAULT.toBase58().slice(0, 4)}...{DEFAULT_PLATFORM_FEE_VAULT.toBase58().slice(-4)}
                 </div>
+                <p data-testid="fee-note" className="text-[10px] text-[#8E9AA8] leading-relaxed pt-1">
+                  {upfrontFee.totalLaunchFeeSol.toFixed(3)} SOL is the upfront launch fee. Sells routed through SCRAMJET pay {SCRAMJET_BRAND.feePercent}%. Proxima charges {PROXIMA_FEE_BPS / 100}% of the SOL received on a sell.
+                </p>
               </div>
             </div>
 

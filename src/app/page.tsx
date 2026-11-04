@@ -1,363 +1,301 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { SavingsCalculator } from "../components/home/SavingsCalculator";
+import { SCRAMJET_BRAND } from "../lib/constants";
+import { calculateUpfrontLaunchFee } from "../lib/feeRouter";
+import { withSolanaRpc } from "../lib/solana/connection";
+import { useLaunchStore } from "../lib/stores/useLaunchStore";
+import type { SolanaLaunchpad } from "../types";
 
-export default function HomePage() {
-  const [tokenAddressInput, setTokenAddressInput] = useState(
-    "ED5nyyWEZpPWiMP8vYm7sD7TD3LAt3Q3gRTWHZPJBY"
-  );
+const DRAFT_KEY = "scramjet.launchDraft.v1";
+const MIN_WALLET_SOL = 0.01;
 
-  const supportedLaunchpads = [
-    { name: "Pump.fun", icon: "/icons/dex/pumpfun.webp" },
-    { name: "Meteora DBC", icon: "/icons/dex/meteoradbc.webp" },
-    { name: "Raydium LaunchLab", icon: "/icons/dex/raydium.webp" },
-    { name: "Bags", icon: "/icons/dex/bags.webp" },
-    { name: "LetsBonk", icon: "/icons/dex/bonkfun.webp" },
-    { name: "StonkFun", icon: "/icons/dex/stonkfun.webp" },
-    { name: "Anoncoin", icon: "/icons/dex/anoncoin.webp" },
-    { name: "Surge", icon: "/icons/dex/surge.webp" },
-  ];
+const PAD_LABEL: Record<SolanaLaunchpad, string> = {
+  PUMP_FUN: "Pump.fun",
+  METEORA_DBC: "Meteora DBC",
+  RAYDIUM_LAUNCHLAB: "Raydium LaunchLab",
+  BAGS: "Bags",
+  LETS_BONK: "LetsBonk",
+  STONK_FUN: "Stonk.fun",
+  PRINTR: "Printr",
+  ANONCOIN: "Anoncoin",
+  SURGE: "Surge",
+  STOXES: "Stoxes",
+  LESGO: "Pangea",
+  MEME_FUN: "meme.fun",
+};
+
+type LaunchDraft = {
+  tokenName: string;
+  tokenSymbol: string;
+  launchpad: SolanaLaunchpad | null;
+  holderCount: number;
+  devBuyPercent: number;
+};
+
+function readDraft(): LaunchDraft | null {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<LaunchDraft>;
+    const tokenName = typeof parsed.tokenName === "string" ? parsed.tokenName.trim() : "";
+    const tokenSymbol = typeof parsed.tokenSymbol === "string" ? parsed.tokenSymbol.trim() : "";
+    if (!tokenName && !tokenSymbol) return null;
+    return {
+      tokenName,
+      tokenSymbol,
+      launchpad: parsed.launchpad ?? null,
+      holderCount: Number(parsed.holderCount) || 0,
+      devBuyPercent: Number(parsed.devBuyPercent) || 0,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function sol(value: number): string {
+  return `${value.toFixed(value >= 10 ? 2 : 4)} SOL`;
+}
+
+function shortKey(value: string): string {
+  return value.length > 12 ? `${value.slice(0, 4)}…${value.slice(-4)}` : value;
+}
+
+export default function DashboardPage() {
+  const connectedWallet = useLaunchStore((state) => state.connectedWallet);
+  const masterBalanceSol = useLaunchStore((state) => state.masterBalanceSol);
+  const config = useLaunchStore((state) => state.activeLaunchConfig);
+  const subWallets = useLaunchStore((state) => state.subWallets);
+  const folders = useLaunchStore((state) => state.folders);
+  const automations = useLaunchStore((state) => state.activeAutomations);
+  const reclaimedRentSol = useLaunchStore((state) => state.reclaimedRentSol);
+  const lastActionMessage = useLaunchStore((state) => state.lastActionMessage);
+  const refreshWalletBalances = useLaunchStore((state) => state.refreshWalletBalances);
+
+  const [draft, setDraft] = useState<LaunchDraft | null>(null);
+  const [slot, setSlot] = useState<number | null>(null);
+  const [slotState, setSlotState] = useState<"loading" | "live" | "unavailable">("loading");
+
+  useEffect(() => {
+    setDraft(readDraft());
+    void refreshWalletBalances();
+    let cancel = false;
+    withSolanaRpc((connection) => connection.getSlot("confirmed"))
+      .then((value) => {
+        if (cancel) return;
+        setSlot(value);
+        setSlotState("live");
+      })
+      .catch(() => {
+        if (!cancel) setSlotState("unavailable");
+      });
+    return () => {
+      cancel = true;
+    };
+  }, [refreshWalletBalances]);
+
+  const cohortSol = subWallets.reduce((sum, wallet) => sum + wallet.balanceSol, 0);
+  const thinWallets = [...subWallets]
+    .filter((wallet) => wallet.balanceSol < MIN_WALLET_SOL)
+    .sort((a, b) => a.balanceSol - b.balanceSol);
+  const fundedCount = subWallets.filter((wallet) => wallet.balanceSol >= MIN_WALLET_SOL).length;
+  const statusCounts = subWallets.reduce<Record<string, number>>((counts, wallet) => {
+    counts[wallet.status] = (counts[wallet.status] ?? 0) + 1;
+    return counts;
+  }, {});
+  const upfront = calculateUpfrontLaunchFee(subWallets.length, connectedWallet);
+  const pad = PAD_LABEL[config.launchpad] ?? config.launchpad;
+
+  const nextStep = !connectedWallet
+    ? "Connect a wallet. Master SOL stays at zero until the wallet is on this page."
+    : thinWallets.length > 0
+      ? `${thinWallets.length} cohort wallet${thinWallets.length === 1 ? "" : "s"} sit under the 0.01 SOL minimum.`
+      : draft
+        ? `Resume ${draft.tokenName || draft.tokenSymbol}. The draft is saved in this browser.`
+        : "Cohort clears the 0.01 SOL minimum. Open the terminal or start a launch.";
 
   return (
-    <div className="bg-[#07080B] text-[#F8FAFC] font-sans selection:bg-[#FF3E00]/30 selection:text-white">
-      {/* ================= 1. HERO SECTION ================= */}
-      <section className="pt-20 pb-16 px-6 text-center max-w-5xl mx-auto space-y-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3E00]/10 border border-[#FF3E00]/30 text-[#FF3E00] text-xs font-mono font-bold tracking-wider uppercase">
-          <span>SOLANA MAINNET BETA // 3.5% PROTOCOL FEE</span>
+    <div className="max-w-6xl mx-auto px-6 py-8 space-y-6">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="space-y-1">
+          <h1 data-testid="dashboard-title" className="text-[22px] font-semibold tracking-tight text-[#F8FAFC]">
+            Dashboard
+          </h1>
+          <p data-testid="dashboard-next" className="text-[13px] text-[#8E9AA8] max-w-xl">
+            {nextStep}
+          </p>
         </div>
-
-        <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-[#F8FAFC] leading-[1.06]">
-          Hypersonic Solana Launches. <br />
-          <span className="bg-gradient-to-r from-[#FF3E00] via-[#FF7700] to-[#F8FAFC] bg-clip-text text-transparent">
-            Zero $45k Retainers.
-          </span>
-        </h1>
-
-        <p className="text-base sm:text-lg text-[#8E9AA8] max-w-2xl mx-auto leading-relaxed">
-          The first mathematically unclusterable Solana launchpad. 3.5% platform fee (30% less than Proxima), 
-          0.01 SOL sub-wallet micro-funding, and cryptographic Merkle relay trees that bypass BubbleMaps detection 
-          without paying off analytics firms.
-        </p>
-
-        {/* Live on Solana & Key Metrics */}
-        <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs font-mono text-[#8E9AA8]">
-          <div className="flex items-center gap-2">
-            <span>Live on</span>
-            <div className="flex items-center gap-1.5">
-              <img src="/icons/chains/sol.webp" alt="Solana" className="w-4 h-4 object-contain" />
-              <span className="text-[#31E3AC] font-bold">Solana</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-1.5 text-[#F8FAFC]">
-            <span className="text-[#636879]">Secured by</span>
-            <span className="font-bold">turnkey</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-[#31E3AC]">
-            <span className="text-[#636879]">Platform Fee:</span>
-            <span className="font-bold font-mono">3.5% (-30% vs Proxima)</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-[#FF3E00]">
-            <span className="text-[#636879]">Min Funding:</span>
-            <span className="font-bold font-mono">0.01 SOL (10x lower)</span>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+        <div className="flex flex-wrap gap-2">
           <Link
             href="/launch"
-            className="h-[44px] px-8 rounded-lg bg-[#FF3E00] hover:bg-[#FF5500] text-black font-extrabold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(255,62,0,0.4)] flex items-center justify-center"
+            className="h-9 px-4 rounded-lg bg-[#FF3E00] text-black text-xs font-bold flex items-center"
           >
-            Launch a Token Now →
+            {draft ? "Resume launch" : "Create launch"}
           </Link>
           <Link
             href="/workspace"
-            className="h-[44px] px-8 rounded-lg bg-[#0E0F14] hover:bg-[#161720] border border-[#1A1C25] hover:border-[#FF3E00]/50 text-[#F8FAFC] font-semibold text-xs tracking-wider uppercase transition-all flex items-center justify-center"
+            className="h-9 px-4 rounded-lg border border-[#222432] text-[#F8FAFC] text-xs font-medium flex items-center hover:border-[#31E3AC]"
           >
-            Live Terminal HUD
+            Live terminal
           </Link>
         </div>
+      </div>
 
-        {/* Product Terminal Hero Mockup */}
-        <div className="pt-8 text-left">
-          <div className="rounded-xl border border-[#1A1C25] bg-[#0E0F14] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)]">
-            {/* Mockup Header Bar */}
-            <div className="h-10 px-4 border-b border-[#1A1C25] bg-[#0A0B0E] flex items-center justify-between text-xs font-mono">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-bold text-[#F8FAFC]">$SCRAM</span>
-                <span className="text-[11px] text-[#717686]">Scramjet Mach 3.5 · Mainnet Live</span>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <Stat
+          label="Master wallet"
+          value={connectedWallet ? sol(masterBalanceSol) : "Not connected"}
+          detail={connectedWallet ? shortKey(connectedWallet.toBase58()) : "Connect to read SOL"}
+        />
+        <Stat
+          label="Cohort SOL"
+          value={sol(cohortSol)}
+          detail={`${fundedCount}/${subWallets.length} wallets at or above 0.01`}
+        />
+        <Stat
+          label="Slot"
+          value={slotState === "live" && slot !== null ? slot.toLocaleString() : slotState === "unavailable" ? "Unavailable" : "Reading"}
+          detail={slotState === "unavailable" ? "Mainnet RPC did not answer" : "Confirmed mainnet slot"}
+        />
+        <Stat
+          label="Upfront launch fee"
+          value={`${upfront.totalLaunchFeeSol.toFixed(3)} SOL`}
+          detail={`${subWallets.length} wallets · sells ${SCRAMJET_BRAND.feePercent}%`}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <section className="lg:col-span-2 rounded-xl border border-[#1A1C25] bg-[#0E0F14] p-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-[11px] font-mono uppercase tracking-wider text-[#717686]">Active launch</h2>
+            <span className="text-[10px] font-mono text-[#31E3AC]">
+              {config.launchMode === "BLOCK_0" ? "Block-0" : config.launchMode.replaceAll("_", " ")}
+            </span>
+          </div>
+          <div className="flex items-baseline justify-between gap-3">
+            <div>
+              <div className="text-lg font-semibold text-[#F8FAFC]">
+                {config.tokenName} <span className="text-[#8E9AA8] font-mono text-sm">${config.tokenSymbol}</span>
               </div>
-              <div className="hidden sm:flex items-center gap-6 text-[11px]">
-                <span className="text-[#8E9AA8]">MCap: <strong className="text-[#F8FAFC]">$84.2K</strong></span>
-                <span className="text-[#8E9AA8]">Fee: <strong className="text-[#31E3AC]">3.5%</strong></span>
-                <span className="text-[#8E9AA8]">Min: <strong className="text-[#FF3E00]">0.01 SOL</strong></span>
-                <span className="text-[#31E3AC]">Rent Reclaim: +0.00204 SOL</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Link href="/launch" className="text-[10px] bg-[#FF3E00] text-black font-bold px-2.5 py-1 rounded">
-                  Create Launch
-                </Link>
-              </div>
+              <div className="text-[12px] text-[#8E9AA8] mt-1">{pad}</div>
             </div>
-
-            {/* Mockup Body: Chart on Left, Trade Panel on Right */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 h-[360px] bg-[#08090C]">
-              {/* Simulated Chart */}
-              <div className="lg:col-span-2 border-r border-[#1A1C25] p-4 flex flex-col justify-between relative overflow-hidden">
-                <div className="flex justify-between items-center text-[10px] font-mono text-[#717686]">
-                  <span>1M · 5M · 15M · 1H</span>
-                  <span className="text-[#31E3AC]">● JITO BLOCK-0 CONFIRMED</span>
-                </div>
-
-                {/* Candlestick Waveform */}
-                <div className="flex items-end justify-between h-44 px-2 gap-1.5 opacity-90">
-                  {[40, 48, 42, 60, 55, 75, 70, 95, 88, 120, 110, 145, 138, 170, 160, 195, 180, 220, 210, 240].map((h, i) => (
-                    <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
-                      <div className="w-[1px] h-3 bg-[#31E3AC]/40" />
-                      <div
-                        style={{ height: `${h * 0.65}px` }}
-                        className={`w-full rounded-sm ${i % 3 === 0 ? "bg-[#FF2A55]" : "bg-[#31E3AC]"}`}
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex justify-between items-center text-[10px] font-mono text-[#717686] pt-2 border-t border-[#1A1C25]">
-                  <span>BubbleMaps Cluster Risk: <strong className="text-[#31E3AC]">0.0%</strong></span>
-                  <span className="text-[#31E3AC] font-bold">5 JITO BLOCK ENGINES ONLINE</span>
-                </div>
-              </div>
-
-              {/* Right Mini Trade Cockpit */}
-              <div className="p-4 space-y-3 font-mono text-xs hidden lg:block bg-[#0D0E13]">
-                <div className="flex justify-between items-center text-[11px] pb-1 border-b border-[#1A1C25]">
-                  <span className="text-[#8E9AA8]">Sub-Wallets (Cohort 1)</span>
-                  <span className="text-[#31E3AC]">24 Active</span>
-                </div>
-
-                <div className="space-y-1.5 text-[10px]">
-                  <div className="flex justify-between p-1.5 rounded bg-[#101117] border border-[#1A1C25]">
-                    <span className="text-[#8E9AA8]">Deployer</span>
-                    <span className="font-bold text-[#F8FAFC]">2.50 SOL</span>
-                  </div>
-                  <div className="flex justify-between p-1.5 rounded bg-[#101117] border border-[#1A1C25]">
-                    <span className="text-[#FF3E00]">Front MEV (2w)</span>
-                    <span className="font-bold text-[#F8FAFC]">0.50 SOL</span>
-                  </div>
-                  <div className="flex justify-between p-1.5 rounded bg-[#101117] border border-[#1A1C25]">
-                    <span className="text-[#38BDF8]">Back MEV (4w)</span>
-                    <span className="font-bold text-[#F8FAFC]">1.00 SOL</span>
-                  </div>
-                  <div className="flex justify-between p-1.5 rounded bg-[#101117] border border-[#1A1C25]">
-                    <span className="text-[#31E3AC]">Holders (18w)</span>
-                    <span className="font-bold text-[#F8FAFC]">0.18 SOL (0.01 min)</span>
-                  </div>
-                </div>
-
-                <div className="pt-2">
-                  <Link
-                    href="/launch"
-                    className="w-full h-8 rounded bg-[#FF3E00] hover:bg-[#FF5500] text-black font-bold text-[11px] flex items-center justify-center transition-all shadow-[0_0_12px_rgba(255,62,0,0.3)]"
-                  >
-                    Open Launch Wizard →
-                  </Link>
-                </div>
-              </div>
+            <div className="text-right font-mono text-[12px] text-[#C5CDD8]">
+              <div>Dev buy {config.devBuySol.toFixed(2)} SOL</div>
+              <div>Tip {config.block0Config.customJitoTipSol.toFixed(3)} SOL</div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ================= 2. THE RECEIPTS: $45K/MO PROXIMA BUBBLEMAPS DEAL ================= */}
-      <section className="py-20 px-6 max-w-5xl mx-auto border-t border-[#14161F] text-left space-y-10">
-        <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF2A55]/10 border border-[#FF2A55]/30 text-[#FF2A55] text-xs font-mono font-bold">
-            <span>THE RECEIPTS // BUBBLEMAPS ENTERPRISE SOW</span>
+          {draft && (
+            <div data-testid="dashboard-draft" className="rounded-lg border border-[#1D3256] bg-[#10192A] px-3 py-2 text-[12px] text-[#93C5FD]">
+              Browser draft: {draft.tokenName || "Untitled"}
+              {draft.tokenSymbol ? ` ($${draft.tokenSymbol})` : ""}
+              {draft.launchpad ? ` · ${PAD_LABEL[draft.launchpad] ?? draft.launchpad}` : ""}
+              {draft.holderCount ? ` · ${draft.holderCount} holders` : ""}
+              {draft.devBuyPercent ? ` · ${draft.devBuyPercent}% dev` : ""}
+            </div>
+          )}
+          <div className="grid grid-cols-3 gap-2 text-[11px]">
+            <Mini label="Sniper guard" value={automations.sniperGuard.enabled ? "On" : "Off"} />
+            <Mini label="Bump bot" value={automations.bumpBot.running ? "Running" : automations.bumpBot.enabled ? "Armed" : "Off"} />
+            <Mini label="Green TWAP" value={automations.greenTwap.running ? "Running" : "Off"} />
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#F8FAFC]">
-            Proxima Pays BubbleMaps $45,000 / Month. <br />
-            <span className="text-[#8E9AA8]">We Built Real Cryptographic Independence.</span>
-          </h2>
-          <p className="text-sm text-[#8E9AA8] max-w-3xl leading-relaxed">
-            Since April 2025, Proxima Tools has been on a recurring $45,000/month retainer with BubbleMaps SAS 
-            for "automated clustering parameters" and "block-level bundle processing visibility" (Exhibit A Statement of Work). 
-            When detection algorithms shift, their entire platform goes into emergency maintenance. 
-            SCRAMJET doesn't pay off analytics firms—we engineer mathematically unclusterable Merkle relay trees.
-          </p>
-        </div>
+          {lastActionMessage && (
+            <p className="text-[11px] text-[#8E9AA8] font-mono">{lastActionMessage}</p>
+          )}
+        </section>
 
-        {/* 3 Evidence Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
-          {/* Evidence 1: The Contract */}
-          <div className="p-5 rounded-xl border border-[#22242F] bg-[#0E0F14] space-y-3">
-            <div className="flex justify-between items-center text-[10px] text-[#717686]">
-              <span>SIGNED: APRIL 11, 2025</span>
-              <span className="text-[#FF2A55] font-bold">EXHIBIT A</span>
-            </div>
-            <div className="font-bold text-sm text-[#F8FAFC]">
-              $45,000 / Month Retainer
-            </div>
-            <p className="text-[11px] text-[#8E9AA8] leading-relaxed">
-              Section 3.1: Proxima pays BubbleMaps $45,000 USD monthly for 25 hours of advisory ($1,800/hr excess) 
-              covering bi-weekly audits of "automated clustering parameters" and liquidity distribution telemetry.
-            </p>
-            <div className="text-[10px] text-[#565B6D] pt-2 border-t border-[#1C202B]">
-              Signers: Théo Martin (Proxima CEO) &amp; Nicolas Vaiman (Bubblemaps CEO)
-            </div>
+        <section className="rounded-xl border border-[#1A1C25] bg-[#0E0F14] p-5 space-y-3">
+          <h2 className="text-[11px] font-mono uppercase tracking-wider text-[#717686]">Folders</h2>
+          <ul className="space-y-2">
+            {folders.map((folder) => (
+              <li key={folder.id} className="flex items-center justify-between text-[12px]">
+                <span className="text-[#F8FAFC]">{folder.name}</span>
+                <span className="font-mono text-[#8E9AA8]">
+                  {folder.walletCount} · {folder.totalBalanceSol.toFixed(2)}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className="pt-2 border-t border-[#1A1C25] flex justify-between text-[11px] font-mono text-[#8E9AA8]">
+            <span>Rent reclaimed</span>
+            <span className="text-[#31E3AC]">{reclaimedRentSol.toFixed(4)} SOL</span>
           </div>
+          <Link href="/funder" className="block text-[12px] text-[#FF3E00] hover:underline">
+            Open funder
+          </Link>
+        </section>
+      </div>
 
-          {/* Evidence 2: The Telegram Leak */}
-          <div className="p-5 rounded-xl border border-[#22242F] bg-[#0E0F14] space-y-3">
-            <div className="flex justify-between items-center text-[10px] text-[#717686]">
-              <span>TELEGRAM: MAY 19, 2025</span>
-              <span className="text-[#FF7700] font-bold">THE LEAK</span>
-            </div>
-            <div className="font-bold text-sm text-[#F8FAFC]">
-              "InsightX Patched Us"
-            </div>
-            <blockquote className="text-[11px] text-[#8E9AA8] leading-relaxed italic border-l-2 border-[#FF7700] pl-2.5">
-              "InsightX (Bubblemaps) has fixed the technique that most bundlers were using to stay undetected. 
-              We've put Proxima into maintenance while we find a new solution..."
-            </blockquote>
-            <div className="text-[10px] text-[#565B6D] pt-2 border-t border-[#1C202B]">
-              Public announcement from !Theo to Proxima users
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <section className="lg:col-span-2 rounded-xl border border-[#1A1C25] bg-[#0E0F14] p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-[11px] font-mono uppercase tracking-wider text-[#717686]">Cohort wallets</h2>
+            <div className="flex gap-3 text-[10px] font-mono text-[#8E9AA8]">
+              {Object.entries(statusCounts).map(([status, count]) => (
+                <span key={status}>
+                  {status} {count}
+                </span>
+              ))}
             </div>
           </div>
-
-          {/* Evidence 3: The SCRAMJET Solution */}
-          <div className="p-5 rounded-xl border border-[#FF3E00]/40 bg-[#0E0F14] space-y-3 shadow-[0_0_20px_rgba(255,62,0,0.1)]">
-            <div className="flex justify-between items-center text-[10px] text-[#FF3E00]">
-              <span>SCRAMJET ENGINE</span>
-              <span className="font-bold">ZERO BRIBES</span>
-            </div>
-            <div className="font-bold text-sm text-[#F8FAFC]">
-              Cryptographic Relay Trees
-            </div>
-            <p className="text-[11px] text-[#8E9AA8] leading-relaxed">
-              We don't rely on backroom whitelists. Our Ghost Funder breaks wallet graphs via multi-hop Merkle relays, 
-              randomized timestamp spacing (30m–12h), and 0.01 SOL micro-funding that leaves zero single-parent links.
-            </p>
-            <div className="text-[10px] text-[#31E3AC] pt-2 border-t border-[#1C202B] font-bold">
-              100% On-Chain Mathematical Independence
-            </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-[12px]">
+              <thead className="text-[10px] font-mono uppercase text-[#717686]">
+                <tr>
+                  <th className="py-2 pr-3 font-medium">Role</th>
+                  <th className="py-2 pr-3 font-medium">Address</th>
+                  <th className="py-2 pr-3 font-medium">SOL</th>
+                  <th className="py-2 font-medium">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {subWallets.map((wallet) => (
+                  <tr key={wallet.id} className="border-t border-[#1A1C25]">
+                    <td className="py-2 pr-3 text-[#F8FAFC]">{wallet.role.replaceAll("_", " ")}</td>
+                    <td className="py-2 pr-3 font-mono text-[#8E9AA8]">{shortKey(wallet.publicKey)}</td>
+                    <td className={`py-2 pr-3 font-mono ${wallet.balanceSol < MIN_WALLET_SOL ? "text-[#E2B340]" : "text-[#F8FAFC]"}`}>
+                      {wallet.balanceSol.toFixed(4)}
+                    </td>
+                    <td className="py-2 text-[#8E9AA8]">{wallet.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ================= 3. SCRAMJET KEY DIFFERENCES & UPGRADES ================= */}
-      <section className="py-20 px-6 max-w-5xl mx-auto border-t border-[#14161F] text-left space-y-12">
-        <div className="space-y-3">
-          <span className="text-xs font-mono font-bold px-2.5 py-1 rounded bg-[#161720] border border-[#22242F] text-[#8E9AA8]">
-            Feature Matrix
+        <section className="rounded-xl border border-[#1C1E28] bg-[#101114] p-5 space-y-3">
+          <span className="inline-flex text-[10px] font-mono font-bold tracking-wider px-2 py-0.5 rounded bg-[#14151C] text-[#8E9AA8] border border-[#1C1E28]">
+            COMING SOON
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#F8FAFC]">
-            SCRAMJET vs Proxima: High-Leverage Upgrades
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-          {/* Upgrade 1: Platform Fee */}
-          <div className="p-5 rounded-xl border border-[#1A1C25] bg-[#0E0F14] space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="font-bold text-sm text-[#F8FAFC]">1. Platform Fee (30% Lower)</span>
-              <span className="text-[#31E3AC] font-bold">3.5% vs 5.0%</span>
-            </div>
-            <p className="text-[#8E9AA8] text-[11px] leading-relaxed">
-              Proxima takes 5.0% (500 bps) on every creator fee harvest. SCRAMJET charges only 3.5% (350 bps), 
-              putting 30% more SOL directly back into developer pockets on every trade.
-            </p>
-          </div>
-
-          {/* Upgrade 2: Sub-Wallet Minimum */}
-          <div className="p-5 rounded-xl border border-[#1A1C25] bg-[#0E0F14] space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="font-bold text-sm text-[#F8FAFC]">2. Sub-Wallet Micro-Funding</span>
-              <span className="text-[#FF3E00] font-bold">0.01 SOL vs 0.10 SOL</span>
-            </div>
-            <p className="text-[#8E9AA8] text-[11px] leading-relaxed">
-              Proxima forces an arbitrary 0.10 SOL (~$9.50) lockup per sub-wallet. Across 20 wallets, that ties up 2.0+ SOL. 
-              SCRAMJET allows 0.01 SOL (~$0.95) micro-subwallets, cutting capital requirements by 90%.
-            </p>
-          </div>
-
-          {/* Upgrade 3: Rent Reclaim */}
-          <div className="p-5 rounded-xl border border-[#1A1C25] bg-[#0E0F14] space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="font-bold text-sm text-[#F8FAFC]">3. Automated Rent Reclamation</span>
-              <span className="text-[#31E3AC] font-bold">+0.00204 SOL / Wallet</span>
-            </div>
-            <p className="text-[#8E9AA8] text-[11px] leading-relaxed">
-              When sub-wallets liquidate on legacy tools, your Associated Token Account (ATA) rent is abandoned. 
-              SCRAMJET automatically batch-closes empty token accounts post-sale, refunding rent straight to your vault.
-            </p>
-          </div>
-
-          {/* Upgrade 4: AMM Automations */}
-          <div className="p-5 rounded-xl border border-[#1A1C25] bg-[#0E0F14] space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="font-bold text-sm text-[#F8FAFC]">4. Built-In Market Maker Suite</span>
-              <span className="text-[#38BDF8] font-bold">Photon Bump Bot + Green TWAP</span>
-            </div>
-            <p className="text-[#8E9AA8] text-[11px] leading-relaxed">
-              Proxima leaves you with manual trades after launch. SCRAMJET features an automated micro-buy bumper 
-              to keep you trending on Photon and a Green-Candle TWAP that only liquidates inventory into green price delta.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= 4. INTERACTIVE SAVINGS CALCULATOR ================= */}
-      <section className="py-16 px-6 max-w-5xl mx-auto border-t border-[#14161F]">
-        <SavingsCalculator />
-      </section>
-
-      {/* ================= 5. LAUNCH ACROSS 12 LAUNCHPADS ================= */}
-      <section className="py-16 border-t border-[#14161F] bg-[#0A0B0E] text-center space-y-6">
-        <div className="space-y-1">
-          <h3 className="text-xl font-bold text-[#F8FAFC] tracking-tight uppercase">
-            Deploy Across 12 Solana Protocols
-          </h3>
-          <p className="text-xs text-[#8E9AA8]">
-            Full native instruction builders for bonding curves, dynamic fee tiers, and AMMs.
+          <h2 className="text-sm font-semibold text-[#F8FAFC]">Marketplace</h2>
+          <p className="text-[12px] text-[#8E9AA8] leading-relaxed">
+            Warmed wallets stay off the shelf until they can be preloaded with SOL. Your own cohort still funds from the Funder.
           </p>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 px-6 max-w-5xl mx-auto">
-          {supportedLaunchpads.map((lp, idx) => (
-            <Link
-              key={idx}
-              href="/launch"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#1A1C25] bg-[#0E0F14] hover:border-[#FF3E00]/40 text-xs font-semibold text-[#8E9AA8] hover:text-[#F8FAFC] transition-all"
-            >
-              <img src={lp.icon} alt={lp.name} className="w-5 h-5 object-contain rounded" />
-              <span>{lp.name}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ================= 6. FINAL CALL TO ACTION ================= */}
-      <section className="py-24 px-6 max-w-4xl mx-auto text-center space-y-6">
-        <h2 className="text-4xl sm:text-5xl font-black text-[#F8FAFC] tracking-tight uppercase">
-          Ready to Outrun the Cartel?
-        </h2>
-        <p className="text-sm text-[#8E9AA8] max-w-xl mx-auto leading-relaxed">
-          Launch with Jito Block-0 atomic guarantee, 0.01 SOL micro-subwallets, and zero backroom analytics deals.
-        </p>
-        <div className="pt-2">
-          <Link
-            href="/launch"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#FF3E00] hover:bg-[#FF5500] text-black font-extrabold text-xs tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,62,0,0.4)] hover:scale-105"
-          >
-            <span>Launch on Solana Now →</span>
+          <Link href="/marketplace" className="text-[12px] text-[#8E9AA8] hover:text-[#F8FAFC]">
+            Read the notice
           </Link>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
 
+function Stat({ label, value, detail }: { label: string; value: string; detail: string }) {
+  return (
+    <div className="rounded-xl border border-[#1A1C25] bg-[#0E0F14] p-4 space-y-1">
+      <div className="text-[10px] font-mono uppercase tracking-wider text-[#717686]">{label}</div>
+      <div className="text-[15px] font-semibold text-[#F8FAFC]">{value}</div>
+      <div className="text-[11px] text-[#8E9AA8]">{detail}</div>
+    </div>
+  );
+}
 
-
+function Mini({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-[#1A1C25] bg-[#08090C] px-3 py-2">
+      <div className="text-[10px] font-mono text-[#717686]">{label}</div>
+      <div className="text-[12px] text-[#F8FAFC] mt-0.5">{value}</div>
+    </div>
+  );
+}
