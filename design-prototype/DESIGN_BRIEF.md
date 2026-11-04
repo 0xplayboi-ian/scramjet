@@ -26,7 +26,7 @@ No CMS or auth is required for the proposals. If either arrives, it belongs in t
 
 ## Research summary
 
-Thirty-six live pages were opened, listed with URLs, awards, and what the source scan actually found in `RESEARCH.md`. Twelve are shortlisted. Award-index rows that never returned a live page are listed there as not opened, including the Cartier experience (403) and Nick Ho (403).
+The first pass opened thirty-six live pages, listed with URLs, awards, and what the source scan actually found in `RESEARCH.md`. A second pass opened Brandon Yasin, Niki Lauda, Colonia Zacamil, Cerebrium, Butter, Seasats, and USAvionix, plus a second Site of the Day index. Twelve sites from the first pass are shortlisted. Award-index rows that never returned a live page are listed there as not opened, including the Cartier experience (403) and Nick Ho (403). Moto Finance and Milledollars returned award text, and their live hosts did not open.
 
 What the useful sites shared: one scroll story, GSAP for the timeline, Lenis when scroll is smoothed, and 3D as either one canvas or a small accent inside HTML. The pages that stay readable on a phone put the words in the DOM (Grids, FORMAT, MindMarket, Mecha's editorial layer).
 
@@ -42,7 +42,46 @@ Rejected for a first release, with reasons:
 
 ## Proposals
 
-Thirteen elements. Five use 3D. The instrument dial is the only original idea. Fields in full are also on the prototype page.
+Forty-three elements are in the review build. Five of the original set use 3D. The instrument dial is the only original idea. The other thirty are DOM, CSS, and a little GSAP-free scroll math, so they do not add another WebGL chunk. Fields in full are also on the prototype page.
+
+The review build keeps every section from the first set. Four were rebuilt after a look at the running prototype: the venue viewer uses the real launch marks as objects (a capsule for Pump.fun, slash blocks, a hex prism, a bag, a disc, chevrons, a wordmark slab, and an S), the chamber travels through a long spin, the ribbon runs several wakes at once, and the shock field is a two-color lattice with a bow shock. Magnetic ignition, the section veil, and the instrument dial stay as they were. Anything not called out stays too.
+
+## New elements
+
+| Element | Reference | Technique | 3D | Cost |
+| --- | --- | --- | --- | --- |
+| Velocity Marquee | Grids | CSS tape | No | Low |
+| Decode Headline | Niki Lauda | Character scramble | No | Low |
+| Sticky Stack | Why Zero | Sticky cards | No | Low |
+| Fee Compare | Grids | Range input | No | Low |
+| Spotlight | Colombel | Pointer gradient | No | Low |
+| Tilt Cards | Mecha | CSS tilt | No | Low |
+| Path Draw | Forge | SVG stroke | No | Low |
+| Boot Log | USAvionix live boot sequence | Typed log | No | Low |
+| Velocity Skew | TRIONN | Scroll-speed skew | No | Low |
+| Cell Invert | Grids | Invert state | No | Low |
+| Film Sprocket | Spyker chapters | Horizontal strip | No | Low |
+| Color Burst | Colonia Zacamil | One click burst | No | Low |
+| Underline Draw | FORMAT | Link underline | No | Low |
+| Count Runway | Grids | Count once | No | Low |
+| Clip Mask | Forge clip-path | Revealed fee | No | Low |
+| Scroll Grain | EDOLUS, as CSS | Grain while scrolling | No | Low |
+| Command Hint | DeepBook, USAvionix | Keys 1–4 | No | Low |
+| Scroll Equalizer | Anime.js | Progress bars | No | Low |
+| Footer Lift | Butter | Closing plate | No | Low |
+| Ignition Count | Brandon Yasin preloader | Replayable count | No | Low |
+| Snap Chapters | Colonia Zacamil | Scroll-snap cards | No | Low |
+| Cursor Trail | Colombel | Dots inside one panel | No | Low |
+| Morph Tabs | Grids | Tab indicator | No | Low |
+| Name Loop | Brandon Yasin archive line | CSS ticker | No | Low |
+| Tracked Headline | Seasats live type | Scroll-linked tracking | No | Low |
+| Glitch Lockup | Don't Look Up | One manual glitch | No | Low |
+| Spec Accordion | MindMarket | Native disclosures | No | Low |
+| Split Fee | Grids | 3.5 against 5.0 | No | Low |
+| Local Clock | Brandon Yasin clock | Local time plus a slider | No | Low |
+| Constellation | Cerebrium force field | SVG points, no WebGL | No | Low |
+
+## Original set
 
 | Element | Reference | Technique | 3D | Cost | Priority |
 | --- | --- | --- | --- | --- | --- |
@@ -55,10 +94,10 @@ Thirteen elements. Five use 3D. The instrument dial is the only original idea. F
 | Section Veil | Forge clip-path, Oryzo reveal | Route wipe | No | Low | Later |
 | Hover Shear | Colombel fluid mouse (award page) | CSS shear, decorative crosshair, system cursor kept | No | Low | Later |
 | Instrument Dial | Original | SVG scroll gauge | No | Low | Later |
-| Venue Viewer | Oryzo, iyO award exploded view | Drag and button object viewer | Yes | Medium | Later, one route only |
-| Mach Ribbon | EDOLUS, Shader studio | Fragment shader | Yes | Medium | Later, or as CSS |
-| Shock Field | Oryzo particles | Pointer point cloud | Yes | Medium | Cut for v1 |
-| Cascade Chamber | Why Zero narrative scroll | Scrubbed 3D chapter camera | Yes | High | Cut if the rail ships |
+| Venue Viewer | Oryzo, iyO award exploded view | Real logo objects, including a Pump.fun capsule | Yes | Medium | Later, one route only |
+| Mach Ribbon | EDOLUS, Shader studio | Faster multi-band fragment shader | Yes | Medium | Later, or as CSS |
+| Shock Field | Oryzo particles | Diamond lattice and bow shock | Yes | Medium | Cut for v1 |
+| Cascade Chamber | Why Zero narrative scroll | Long spin through a frame stack | Yes | High | Cut if the rail ships |
 
 ## Recommended combination
 
@@ -84,7 +123,7 @@ That set is one canvas, four HTML sections, and a shared plasma / void palette. 
 
 ## Risks
 
-- **Performance.** Five 3D sections exist so they can be reviewed. Running them all on a phone is the failure mode. The recommended set keeps one. Bloom and a full-resolution shader are the first things low power removes. Lighthouse on the main page still has to download React, GSAP, and Lenis even when the canvases have not mounted.
+- **Performance.** Five 3D sections exist so they can be reviewed, and thirty more sections are DOM. Running every canvas on a phone is the failure mode. The recommended production set still keeps one canvas. Bloom and a full-resolution shader are the first things low power removes. The long review page still has to download React, GSAP, and Lenis even when the canvases have not mounted. Lighthouse has to be re-measured after the extra sections.
 - **Accessibility.** A custom cursor that hides the system pointer was rejected. Magnetic offset is pointer-only. Pins are removed for reduced motion. Canvas text is not used for the steps; the steps are HTML.
 - **Mobile.** Default low power under 800px and for coarse pointers. Horizontal tape is a native scroller with buttons. The chamber's four cards stack. This was not lab-tested on a physical phone.
 - **SEO.** Anything that matters (fee, venues, steps) is DOM text. Do not move it into WebGL. The production page should stay on Next.js so that text is in the first HTML response. This Vite prototype is a review tool and is not indexed as the product.

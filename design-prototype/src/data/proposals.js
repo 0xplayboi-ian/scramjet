@@ -1,4 +1,6 @@
-export const PROPOSALS = [
+import { MORE_PROPOSALS } from "./more-proposals.js";
+
+const CORE = [
   {
     id: "intake-hero",
     name: "Intake Hero",
@@ -22,7 +24,7 @@ export const PROPOSALS = [
     reference: "EDOLUS shader environments and Shader Development Studio’s full-bleed WebGL",
     referenceUrl: "https://www.awwwards.com/sites/edolus",
     liveUrl: "https://edolus.com/",
-    technique: "Fullscreen fragment shader driven by time and pointer",
+    technique: "Fullscreen fragment shader with three fast wakes, a traveling spark, and pointer bend",
     fit: "Plasma orange is already the brand accent. A ribbon uses that color as motion instead of as another gradient button.",
     cost: "medium",
     three: true,
@@ -37,11 +39,11 @@ export const PROPOSALS = [
     reference: "Oryzo AI’s 3D-to-2D product inspection and the iyO award page’s exploded product view",
     referenceUrl: "https://www.awwwards.com/sites/oryzo-ai",
     liveUrl: "https://oryzo.ai/",
-    technique: "Interactive object viewer with drag and keyboard focus",
+    technique: "Real venue marks as 3D objects: pill, slash blocks, hex prism, bag, disc, chevrons, wordmark slab, and an S",
     fit: "The product decision is which venue to deploy on. An object you can select is closer to that choice than a marquee of logos.",
     cost: "medium",
     three: true,
-    fallback: "Static diagram plus the same four buttons, which stay available when WebGL is off.",
+    fallback: "Static diagram plus the same eight buttons and logo images, which stay available when WebGL is off.",
     original: false,
   },
   {
@@ -52,7 +54,7 @@ export const PROPOSALS = [
     reference: "Why Zero’s narrative scroll and pinned chapter structure",
     referenceUrl: "https://www.awwwards.com/sites/why-zero",
     liveUrl: "https://why.zero.university/",
-    technique: "Pinned scroll-scrubbed camera path through a simple 3D chamber",
+    technique: "Pinned scroll flies a long stack of frames through a wide spin",
     fit: "New creators need the sequence, not a feature matrix. A chamber keeps the aerospace tone without hiding the steps in canvas text.",
     cost: "high",
     three: true,
@@ -67,7 +69,7 @@ export const PROPOSALS = [
     reference: "Oryzo AI footer particles",
     referenceUrl: "https://www.awwwards.com/sites/oryzo-ai",
     liveUrl: "https://oryzo.ai/",
-    technique: "Pointer-reactive point cloud",
+    technique: "Diamond lattice with a pointer bow shock and a traveling ring",
     fit: "Hypersonic inlets shed shock diamonds. A sparse field matches the instrument panel better than a fluid sim.",
     cost: "medium",
     three: true,
@@ -195,5 +197,7 @@ export const PROPOSALS = [
     original: true,
   },
 ];
+
+export const PROPOSALS = [...CORE, ...MORE_PROPOSALS];
 
 export const PROPOSAL_MAP = Object.fromEntries(PROPOSALS.map((item) => [item.id, item]));

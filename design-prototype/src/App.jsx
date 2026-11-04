@@ -20,7 +20,24 @@ import {
   ShockField,
   VenueViewer,
 } from "./sections/Elements.jsx";
+import { CATALOG } from "./sections/Catalog.jsx";
 import brief from "../DESIGN_BRIEF.md?raw";
+
+const BUILT = {
+  "intake-hero": IntakeHero,
+  "mach-ribbon": MachRibbon,
+  "venue-viewer": VenueViewer,
+  "cascade-chamber": CascadeChamber,
+  "shock-field": ShockField,
+  "kinetic-wordmark": KineticWordmark,
+  "chapter-rail": ChapterRail,
+  "protocol-strip": ProtocolStrip,
+  "magnetic-ignition": MagneticIgnition,
+  "fee-lockup": FeeLockup,
+  "hover-shear": HoverShear,
+  "section-veil": SectionVeil,
+  "instrument-dial": InstrumentDial,
+};
 
 function Cursor() {
   const { isActive } = usePrototype();
@@ -118,23 +135,15 @@ function Home() {
             <p className="eyebrow">Design prototype · not the production site</p>
             <h1>Proposed elements for SCRAMJET</h1>
             <p className="lede">
-              Thirteen working sections for a hypersonic Solana launch platform. Switch any of them off,
-              or open one on its own. 3D loads only when it is on screen.
+              Forty-three working sections for a hypersonic Solana launch platform. The venue marks are real
+              3D objects now, the chamber travels, the ribbon is faster, and the shock field is a lattice.
+              Switch any of them off, or open one on its own. 3D loads only when it is on screen.
             </p>
           </header>
-          <KineticWordmark />
-          <IntakeHero />
-          <FeeLockup />
-          <ChapterRail />
-          <CascadeChamber />
-          <VenueViewer />
-          <ProtocolStrip />
-          <MachRibbon />
-          <ShockField />
-          <HoverShear />
-          <MagneticIgnition />
-          <SectionVeil />
-          <InstrumentDial />
+          {PROPOSALS.map((item) => {
+            const Section = BUILT[item.id] || CATALOG[item.id];
+            return Section ? <Section key={item.id} /> : null;
+          })}
         </div>
       </div>
     </>

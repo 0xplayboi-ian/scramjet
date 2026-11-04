@@ -34,7 +34,7 @@ These filled the blanks in the request. Correct any of them and the proposals sh
 5. **Goal.** A first screen that can carry a launch click, plus a short explanation of the sequence. Portfolio craft is in service of that, not instead of it.
 6. **Constraints.** English only. The prototype must stay out of the production routes. Keyboard access, reduced motion, and a low-power path are required. No CMS, auth, or wallet connection in this build.
 7. **Stack.** Vite + React + React Three Fiber for this review surface. The production app should stay on Next.js. Reasoning is in `DESIGN_BRIEF.md`.
-8. **3D assets.** No downloaded models. Every mesh is built from Three.js primitives, so nothing approaches the 2 MB model cap.
+8. **3D assets.** No downloaded models. Meshes are Three.js primitives. The venue viewer also uses the existing venue images from `public/icons/dex/`, copied into `design-prototype/public/venues/`. Each file is a few kilobytes, under the 2 MB cap.
 
 ## Routes
 

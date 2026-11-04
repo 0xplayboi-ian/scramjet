@@ -51,7 +51,22 @@ Direct requests to `awwwards.com` with curl returned 403. The fetches used for t
 35. **MindMarket** — https://mindmarket.com/ — https://www.awwwards.com/sites/mindmarket — score 7.85, Site of the Month, December 2025, from the month index. Award tools: GSAP, illustration, storytelling. No WebGL tag. Live document contains Lenis. GSAP was not confirmed in the first HTML slice. https://www.mindmarket.co/ returned an empty title.
 36. **Lando Norris** — https://landonorris.com/ — https://www.awwwards.com/sites/lando-norris — score 8.18, Site of the Year 2025 from the month index. Award tools: WebGL, GSAP, Webflow. Palette `#D2FF00` / `#111112`. Live document contains Lenis and Webflow. WebGL and GSAP were not in the first 180 KB.
 
-That is 36 live responses. The review count used for the brief is these visits, not the index rows that were never opened.
+That is 36 live responses from the first pass. The second pass is below. The review count is visits, not index rows that were never opened.
+
+## Second pass
+
+Opened while adding the next thirty sections.
+
+37. **Brandon Yasin** — https://brandonyasin.com/ — https://www.awwwards.com/sites/brandon-yasin — Site of the Day, 24 Oct 2026, score 7.31. Award tools: GSAP, Nuxt. Award elements include Clock & Colours, an editorial menu, and a preloader. The live page shows a repeating archive line, “Local Time”, and “Time Travel”. Palette on the award page is `#505B44` and `#2C2922`. Bundles were not scanned.
+38. **Niki Lauda** — https://nikilauda.obys.agency/ — https://www.awwwards.com/sites/niki-lauda — score 7.39. Award elements: scroll-triggered type and a rollover font. Palette `#000`, `#D14836`, `#ffffff`. The live page is a Readymag viewer with timecode type (`00:03` and the name). This award page is older than the November 2026 index. It was still opened and used for the decode headline.
+39. **Site of the Day index, page 2** — https://www.awwwards.com/websites/sites_of_the_day/?page=2 — dates from 3 Oct 2026 back through 3 Sep 2026, including Tengile Malamala, Milledollars, Colonia Zacamil, Butter, Moto Finance, L.I.S.A., Seasats, Cerebrium, USAvionix, and Why Zero again as Site of the Month for September 2026. An index row is not a live visit.
+40. **Colonia Zacamil** — https://coloniazacamil.com/ — listed 1 Oct 2026, Adoratorio. Live title “Colonia Zacamil”. The page names chapters (including Color Explosion, The Bus, Cancha, Park), and the visible copy says to swipe, drag, and scroll. HTML included Lenis and a WebGL string. The award detail page was not fetched.
+41. **Cerebrium** — https://cerebrium.ai/ — https://www.awwwards.com/sites/cerebrium — Site of the Day, 10 Sep 2026, score 7.39, Louis Paquet. Award elements include a WebGL globe with a force field, a pricing calculator, and an intro scene. The live document fetched here contained Lenis. Three.js was not in that HTML slice, so the globe is an award-page claim. The constellation in the prototype is the DOM reading of the force field, not a second globe.
+42. **Butter** — https://www.butter.video/ — https://www.awwwards.com/sites/butter — Site of the Day, 28 Sep 2026, score 7.50, ToyFight. Award tools include WebGL, React, and p5. Award elements include a footer and a timeline. The live title is “Butter Video | Online Video Editor Engineered for Creativity”. The HTML slice contained a Three.js string. https://butter.app/ did not resolve.
+43. **Seasats** — https://www.seasats.com/ — listed 8 Sep 2026, Raw Materials. Live title “Seasats | Ocean Autonomy That Works”. Visible type includes numbered sections and letter-spaced lines (“E x p l o r e p r o d u c t s”). Lenis was in the HTML. The award detail page was not fetched. https://seasats.com/ redirected here.
+44. **USAvionix** — https://www.usavionix.com/ — listed 9 Sep 2026, basement. Live title “USAvionix | Advanced Jet Drone Systems for ISR & Defense”. The visible page includes a boot sequence (“BOOT SEQUENCE…”, spec labels, a status line). Lenis and a p5 string were in the HTML. The award detail page was not fetched. The prototype uses the boot-log form only. It does not reproduce the detection copy.
+
+Award text was also retrieved for Moto Finance (https://www.awwwards.com/sites/moto-finance, parallax, GSAP, Three.js, Webflow) and Milledollars (https://www.awwwards.com/sites/milledollars, gallery and loader, GSAP, Vue). https://motofinance.com/ returned 403. `milledollars.com` did not resolve. Those two are not technique sources.
 
 ## Not opened
 

@@ -1,10 +1,13 @@
 import { lazy, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { PROPOSAL_MAP } from "../data/proposals.js";
+import { VENUES } from "../data/venues.js";
 import { usePerf } from "../perf/PerfProvider.jsx";
 import { gsap, ScrollTrigger } from "../scroll/SmoothScroll.jsx";
 import { LazyStage } from "../three/LazyStage.jsx";
 import { usePrototype } from "../prototype/PrototypeContext.jsx";
+import { Block } from "./Block.jsx";
+import { CATALOG } from "./Catalog.jsx";
 
 const IntakeScene = lazy(() => import("../three/IntakeScene.jsx"));
 const RibbonScene = lazy(() => import("../three/RibbonScene.jsx"));
@@ -12,61 +15,12 @@ const VenueScene = lazy(() => import("../three/VenueScene.jsx"));
 const CascadeScene = lazy(() => import("../three/CascadeScene.jsx"));
 const ShockScene = lazy(() => import("../three/ShockScene.jsx"));
 
-const VENUES = [
-  { name: "Pump.fun", note: "Bonding curve" },
-  { name: "Meteora DBC", note: "Dynamic fee" },
-  { name: "Raydium", note: "LaunchLab" },
-  { name: "Bags", note: "Public sale" },
-];
-
 const CHAPTERS = [
   { k: "01", title: "Name it", copy: "A ticker, a supply, and one sentence a stranger can repeat." },
   { k: "02", title: "Pick a venue", copy: "Twelve Solana venues. The page should make that a choice, not a logo wall." },
   { k: "03", title: "Fund the wallet", copy: "The launch wallet is funded before the transaction is sent." },
   { k: "04", title: "Confirm", copy: "Solana finalizes the launch. The page returns to the terminal." },
 ];
-
-function Meta({ id }) {
-  const item = PROPOSAL_MAP[id];
-  return (
-    <footer className="meta">
-      <span>{item.three ? "3D" : "No 3D"}</span>
-      <span>Cost {item.cost}</span>
-      <span>{item.original ? "Original" : "Technique reference"}</span>
-      <span>{item.technique}</span>
-      {item.referenceUrl ? (
-        <a href={item.referenceUrl} target="_blank" rel="noreferrer">
-          Award page
-        </a>
-      ) : (
-        <span>No award page</span>
-      )}
-    </footer>
-  );
-}
-
-function Block({ id, children, className = "" }) {
-  const { isActive, solo } = usePrototype();
-  if (!isActive(id)) return null;
-  const item = PROPOSAL_MAP[id];
-  const headingId = solo === id ? "solo-title" : `${id}-title`;
-  return (
-    <section id={id} className={`block ${className}`} aria-labelledby={headingId}>
-      <div className="block-copy">
-        <p className="eyebrow">{item.three ? "3D proposal" : "Lightweight proposal"}</p>
-        {solo === id ? null : <h2 id={`${id}-title`}>{item.name}</h2>}
-        <p>{item.purpose}</p>
-        <p className="fit">{item.fit}</p>
-        <p className="fallback">
-          <strong>Fallback. </strong>
-          {item.fallback}
-        </p>
-      </div>
-      <div className="block-stage">{children}</div>
-      <Meta id={id} />
-    </section>
-  );
-}
 
 export function IntakeHero() {
   return (
@@ -131,6 +85,7 @@ export function VenueViewer() {
               aria-pressed={focus === index}
               onClick={() => setFocus(index)}
             >
+              <img src={venue.src} alt="" width="36" height="36" />
               <span>{venue.name}</span>
               <small>{venue.note}</small>
             </button>
@@ -156,7 +111,7 @@ export function CascadeChamber() {
       trigger: track.current,
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.4,
+      scrub: 0.15,
       onUpdate: (self) => {
         progress.current = self.progress;
         const active = Math.min(CHAPTERS.length - 1, Math.floor(self.progress * CHAPTERS.length));
@@ -499,6 +454,10 @@ export function InstrumentDial() {
 }
 
 export function ElementBody({ id }) {
+  if (CATALOG[id]) {
+    const Section = CATALOG[id];
+    return <Section />;
+  }
   switch (id) {
     case "intake-hero":
       return <IntakeHero />;

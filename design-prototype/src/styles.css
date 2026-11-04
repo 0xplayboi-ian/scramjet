@@ -230,7 +230,7 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
 
 .line.accent span { color: var(--plasma); }
 
-.cascade { height: 280vh; }
+.cascade { height: 560vh; }
 .cascade.is-flat { height: auto; }
 
 .cascade-sticky, .rail-sticky {
@@ -306,9 +306,19 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
 
 .venue-controls button {
   display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.55rem;
   text-align: left;
   border-radius: 0.4rem;
   min-width: 9rem;
+}
+
+.venue-controls button img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  grid-row: 1 / span 2;
 }
 
 .venue-controls small { color: var(--dim); }
@@ -459,4 +469,180 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
 @media (prefers-reduced-motion: reduce) {
   .shear-list a:hover { transform: none; }
   .veil { transition: none; }
+  .marquee-track, .path-draw path, .glitch.is-on { animation: none; }
+  .mask, .lift, .tab-indicator, .split p { transition: none; }
 }
+
+.marquee { overflow: hidden; margin-top: 0.8rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.marquee-track { display: flex; width: max-content; animation: ticker 16s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track p { margin: 0; padding-right: 1.4rem; font-size: clamp(1.4rem, 3vw, 2.6rem); letter-spacing: -0.04em; font-weight: 700; }
+.name-track { animation-duration: 11s; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+.decode, .skew-line, .tracked, .glitch {
+  margin: 0.4rem 0 0.8rem;
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+.decode { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: clamp(1.4rem, 3vw, 2.2rem); letter-spacing: 0.08em; }
+.tracked { letter-spacing: 0.42em; }
+
+.stack { display: grid; gap: 0.8rem; }
+.stack-card, .tilt-card, .boot-log, .grain-plate, .burst, .trail, .lift, .film article, .snap article, .specs details {
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.stack-card {
+  position: sticky;
+  top: 4.5rem;
+  min-height: 38vh;
+  padding: 1.2rem;
+}
+.stack-card:nth-child(2) { top: 5.4rem; }
+.stack-card:nth-child(3) { top: 6.3rem; }
+.stack-card:nth-child(4) { top: 7.2rem; }
+.stack-card h3, .tilt-card h3, .film h3, .snap h3 { margin: 0.2rem 0; }
+
+.range-label { display: grid; gap: 0.45rem; max-width: 28rem; margin: 0.8rem 0; }
+.range-label input { width: 100%; accent-color: var(--plasma); }
+
+.spotlight, .trail, .grain-plate, .burst, .stars {
+  position: relative;
+  min-height: 220px;
+  margin-top: 0.8rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.spotlight { display: grid; place-items: center; padding: 1.5rem; }
+.spotlight p {
+  margin: 0;
+  max-width: 16ch;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  color: transparent;
+  background: radial-gradient(circle 110px at var(--sx, 50%) var(--sy, 45%), var(--stark), transparent 72%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.spotlight.is-lit p { color: var(--stark); background: none; }
+
+.tilt-grid, .cells, .runway { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.7rem; margin-top: 0.8rem; }
+.tilt-card { min-height: 150px; padding: 1rem; transform-style: preserve-3d; }
+.tilt-card p, .runway strong, .cells strong { font-size: clamp(1.8rem, 4vw, 3rem); margin: 0; letter-spacing: -0.04em; }
+
+.cells button { display: grid; text-align: left; border-radius: 0.3rem; min-height: 110px; align-content: end; }
+.cells button:hover, .cells button:focus-visible { background: var(--stark); color: #08090c; }
+
+.path-draw { width: min(100%, 520px); height: auto; margin-top: 0.8rem; }
+.path-draw path { fill: none; stroke: var(--plasma); stroke-width: 3; stroke-dasharray: 1; stroke-dashoffset: 0; }
+html:not(.motion-off) .path-draw path { animation: draw 1.4s ease forwards; }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+.boot-log { list-style: none; margin: 0.8rem 0; padding: 1rem; font-family: "JetBrains Mono", ui-monospace, monospace; }
+.boot-log li { margin: 0.25rem 0; }
+
+.film, .snap {
+  display: flex;
+  gap: 0.7rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-top: 0.8rem;
+  padding-bottom: 0.4rem;
+}
+.film article, .snap article { flex: 0 0 240px; scroll-snap-align: start; min-height: 180px; padding: 1rem; }
+.snap article { flex-basis: 78%; }
+
+.burst { display: grid; place-items: center; }
+.burst-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--plasma);
+  animation: burst 0.7s ease-out forwards;
+}
+.burst.is-hot { background: #2a1008; }
+@keyframes burst { to { transform: translate(var(--dx), var(--dy)); opacity: 0; } }
+
+.draw-links { list-style: none; padding: 0; margin: 0.8rem 0 0; }
+.draw-links a {
+  color: var(--stark);
+  text-decoration: none;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  letter-spacing: -0.04em;
+  background-image: linear-gradient(var(--plasma), var(--plasma));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 2px;
+}
+.draw-links a:hover, .draw-links a:focus-visible { background-size: 100% 2px; }
+.motion-off .draw-links a:hover, .motion-off .draw-links a:focus-visible { background-size: 100% 2px; transition: none; }
+html:not(.motion-off) .draw-links a { transition: background-size 0.35s ease; }
+
+.runway p { margin: 0; }
+.runway span, .cells span, .film span, .snap span { color: var(--muted); }
+
+.mask {
+  margin: 0.6rem 0 0;
+  font-size: clamp(4rem, 12vw, 8rem);
+  line-height: 0.85;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  clip-path: inset(0 100% 0 0);
+}
+.mask.is-open { clip-path: inset(0); }
+html:not(.motion-off) .mask { transition: clip-path 0.45s ease; }
+
+.grain { position: absolute; inset: 0; opacity: 0; pointer-events: none; background-image: radial-gradient(rgba(248, 250, 252, 0.45) 0.6px, transparent 0.7px); background-size: 3px 3px; }
+.grain-plate p { position: relative; z-index: 1; padding: 1.2rem; margin: 0; }
+
+.command { margin-top: 0.4rem; }
+.eq { display: flex; align-items: end; gap: 6px; height: 140px; margin-top: 0.8rem; }
+.eq span { flex: 1; height: 100%; background: var(--plasma); transform-origin: bottom center; transform: scaleY(0.08); }
+
+.lift { margin-top: 0.8rem; padding: 1.2rem; transform: translateY(12px); opacity: 0.35; }
+.lift.is-up { transform: none; opacity: 1; }
+html:not(.motion-off) .lift { transition: transform 0.35s ease, opacity 0.35s ease; }
+.lift p { margin: 0; font-size: 1.3rem; }
+
+.tabs { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 0.8rem; }
+.tabs button { border-radius: 0; border-bottom: 0; }
+.tab-indicator { position: absolute; left: 0; bottom: 0; width: calc(100% / 3); height: 2px; background: var(--plasma); }
+html:not(.motion-off) .tab-indicator { transition: transform 0.3s ease; }
+
+.glitch.is-on { color: var(--plasma); animation: jitter 0.42s steps(2, end); }
+@keyframes jitter {
+  20% { transform: translate(-4px, 1px); }
+  50% { transform: translate(4px, -1px); }
+  80% { transform: translate(-2px, 0); }
+}
+
+.specs { display: grid; gap: 0.5rem; margin-top: 0.8rem; }
+.specs details { padding: 0.8rem 1rem; }
+.specs summary { cursor: pointer; font-weight: 700; }
+.split { display: grid; max-width: 16rem; margin-top: 0.6rem; }
+.split p { margin: 0; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9; font-weight: 700; }
+.split p:last-child { color: var(--dim); max-height: 0; overflow: hidden; }
+.split:hover p:last-child, .split:focus p:last-child, .split:focus-visible p:last-child, .motion-off .split p:last-child { max-height: 6rem; }
+html:not(.motion-off) .split p:last-child { transition: max-height 0.3s ease; }
+
+.clock-figure { font-variant-numeric: tabular-nums; font-size: clamp(2.4rem, 8vw, 5rem); }
+.stars { width: 100%; height: 280px; display: block; }
+.stars circle { fill: var(--flare); }
+.trail p { position: relative; z-index: 1; padding: 1rem; margin: 0; }
+.trail span { position: absolute; left: 0; top: 0; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--plasma); pointer-events: none; }
+
+.motion-off .marquee-track,
+.motion-off .path-draw path,
+.motion-off .glitch.is-on { animation: none; }
+.motion-off .mask,
+.motion-off .lift,
+.motion-off .tab-indicator,
+.motion-off .split p:last-child,
+.motion-off .draw-links a { transition: none; }
