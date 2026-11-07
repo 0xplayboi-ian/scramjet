@@ -15,6 +15,7 @@ import { DEFAULT_PLATFORM_FEE_VAULT } from "../../lib/constants";
 import { LaunchOrchestrator, LaunchOrchestrationResult } from "../../lib/pipeline/launchOrchestrator";
 import { getSolanaConnection } from "../../lib/solana/connection";
 import { PublicKey } from "@solana/web3.js";
+import { ArchitectureBento } from "../../components/hypersonic/ArchitectureBento";
 
 export default function LaunchPage() {
   const [activeTab, setActiveTab] = useState<"chain" | "token" | "settings">("chain");
@@ -1032,6 +1033,9 @@ export default function LaunchPage() {
                 Configure Block-0 bundle timing, wallet allocations, and sniper defense.
               </p>
             </div>
+
+            {/* Proposal #21: Architecture Bento (Differentiates Scramjet from Proxima) */}
+            <ArchitectureBento />
 
             {/* 3 Large Launch Mode Cards */}
             <div className="space-y-2.5">
