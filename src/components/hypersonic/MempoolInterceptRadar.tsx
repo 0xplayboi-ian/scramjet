@@ -47,7 +47,7 @@ export function MempoolInterceptRadar() {
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="font-mono text-[10px] font-bold text-[#FF7700] tracking-wider uppercase bg-[#FF7700]/10 border border-[#FF7700]/30 px-2 py-0.5 rounded">
-              PROPOSAL #07 · MEMPOOL INTERCEPT RADAR
+              MEMPOOL INTERCEPT RADAR
             </span>
             <span className="w-2 h-2 rounded-full bg-[#FF7700] animate-ping" />
           </div>

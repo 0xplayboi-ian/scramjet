@@ -161,7 +161,7 @@ export function HypersonicStream() {
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[#FF3E00] animate-ping" />
           <span className="font-mono text-[10px] font-bold text-[#FF7700] tracking-wider uppercase bg-[#FF7700]/10 border border-[#FF7700]/30 px-2 py-0.5 rounded">
-            PROPOSAL #04 · MACH HYPERSONIC FLOW
+            MACH 3.5 HYPERSONIC FLOW
           </span>
         </div>
         <p className="font-mono text-[11px] text-[#8E9AA8]">

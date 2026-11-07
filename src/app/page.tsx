@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { SavingsCalculator } from "../components/home/SavingsCalculator";
 import { PerfProvider } from "../components/perf/PerfProvider";
 import { SmoothScroll } from "../components/scroll/SmoothScroll";
 import { HoverShear } from "../components/interactions/HoverShear";
@@ -15,46 +14,28 @@ import { MempoolInterceptRadar } from "../components/hypersonic/MempoolIntercept
 import { AntiMevShield } from "../components/hypersonic/AntiMevShield";
 import { WorkingGhostFunderVault } from "../components/hypersonic/WorkingGhostFunderVault";
 import { FunctioningTerminalCli } from "../components/hypersonic/FunctioningTerminalCli";
-import { ChapterCascadeRail } from "../components/hypersonic/ChapterCascadeRail";
+import { ChapterRail, CascadeChamberSection } from "../components/hypersonic/ChapterCascadeRail";
 import LazyStage from "../components/three/LazyStage";
-import {
-  ScrollProgressBar,
-  Chapter,
-  StatsStrip,
-  Marquee,
-  DeepDiveTriad,
-  HowItWorks,
-  ProtocolComparisonTable,
-  Reveal,
-} from "../components/story/Story";
+import { ScrollProgressBar, Chapter, DeepDiveTriad, Reveal } from "../components/story/Story";
 
-// Dynamically import 3D Three.js scenes to guarantee zero SSR hydration mismatches
-const IntakeScene = dynamic(() => import("../components/three/IntakeScene"), {
-  ssr: false,
-});
-const RibbonScene = dynamic(() => import("../components/three/RibbonScene"), {
-  ssr: false,
-});
-const ShockScene = dynamic(() => import("../components/three/ShockScene"), {
-  ssr: false,
-});
+const IntakeScene = dynamic(() => import("../components/three/IntakeScene"), { ssr: false });
+const RibbonScene = dynamic(() => import("../components/three/RibbonScene"), { ssr: false });
+const ShockScene = dynamic(() => import("../components/three/ShockScene"), { ssr: false });
+
+/** Full-bleed plasma wake section divider (#27 Mach Ribbon) */
+function MachRibbonDivider() {
+  return (
+    <div className="relative w-full h-36 sm:h-48 overflow-hidden my-8" aria-hidden="true">
+      <LazyStage fallbackSrc="/fallbacks/ribbon.svg">
+        <RibbonScene onReady={() => {}} />
+      </LazyStage>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[#07080B] to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#07080B] to-transparent" />
+    </div>
+  );
+}
 
 export default function HomePage() {
-  const supportedLaunchpads = [
-    { name: "Pump.fun", icon: "/icons/dex/pumpfun.webp", desc: "Bonding Curve" },
-    { name: "Meteora DBC", icon: "/icons/dex/meteoradbc.webp", desc: "Dynamic DLMM" },
-    { name: "Raydium LaunchLab", icon: "/icons/dex/raydium.webp", desc: "OpenBook v2" },
-    { name: "Bags", icon: "/icons/dex/bags.webp", desc: "Creator Rewards" },
-    { name: "LetsBonk", icon: "/icons/dex/bonkfun.webp", desc: "Bonk Liquidity" },
-    { name: "StonkFun", icon: "/icons/dex/stonkfun.webp", desc: "Velocity Bonding" },
-    { name: "Printr", icon: "/icons/dex/pumpfun.webp", desc: "Instant Rails" },
-    { name: "Anoncoin", icon: "/icons/dex/anoncoin.webp", desc: "Privacy Mint" },
-    { name: "Surge", icon: "/icons/dex/surge.webp", desc: "Multi-Route" },
-    { name: "Stoxes", icon: "/icons/dex/pumpfun.webp", desc: "AMM Pool" },
-    { name: "Lesgo", icon: "/icons/dex/pumpfun.webp", desc: "Fair Launch" },
-    { name: "MemeFun", icon: "/icons/dex/bonkfun.webp", desc: "Ecosystem Pool" },
-  ];
-
   return (
     <PerfProvider>
       <SmoothScroll />
@@ -63,10 +44,10 @@ export default function HomePage() {
       <InstrumentDial />
 
       <div className="bg-[#07080B] text-[#F8FAFC] font-sans selection:bg-[#FF3E00]/30 selection:text-white min-h-screen relative overflow-x-hidden">
-        {/* Subtle Ambient Background Flare */}
+        {/* Ambient Top Glow */}
         <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[550px] bg-gradient-to-b from-[#FF3E00]/8 via-[#FF7700]/3 to-transparent blur-3xl pointer-events-none -z-10" />
 
-        {/* ================= 1. HERO SECTION ================= */}
+        {/* ================= HERO + 5X 3D GOD CANDLE (#02) ================= */}
         <section className="pt-20 pb-16 px-4 sm:px-6 text-center max-w-6xl mx-auto space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF3E00]/10 border border-[#FF3E00]/30 text-[#FF7700] text-xs font-mono font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(255,62,0,0.15)]">
             <span className="w-2 h-2 rounded-full bg-[#FF3E00] animate-pulse" />
@@ -82,8 +63,8 @@ export default function HomePage() {
 
           <p className="text-base sm:text-lg text-[#8E9AA8] max-w-2xl mx-auto leading-relaxed">
             The first mathematically unclusterable Solana launchpad.{" "}
-            <span className="text-[#31E3AC] font-semibold">3.5% platform fee</span> (30% less than Proxima),
-            <span className="text-[#FF7700] font-semibold"> 0.01 SOL sub-wallet micro-funding</span>, and cryptographic
+            <span className="text-[#31E3AC] font-semibold">3.5% platform fee</span> (30% less than Proxima),{" "}
+            <span className="text-[#FF7700] font-semibold">0.01 SOL sub-wallet micro-funding</span>, and cryptographic
             Merkle relay trees that bypass BubbleMaps detection without paying off analytics firms.
           </p>
 
@@ -110,7 +91,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Action Ignition Buttons */}
+          {/* Action Ignition Buttons (#30) */}
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <MagneticIgnitionButton
               href="/launch"
@@ -126,18 +107,17 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* ================= PROPOSAL #02: MONUMENTAL 5X 3D GOD CANDLE HERO ================= */}
+          {/* 3D God Candle Stage (#02) */}
           <div className="pt-10 text-left">
             <div className="rounded-2xl border border-[#FF3E00]/40 bg-[#08090C] overflow-hidden shadow-[0_25px_70px_-15px_rgba(255,62,0,0.15)] relative">
-              {/* Cockpit HUD Bar */}
               <div className="h-11 px-4 sm:px-6 border-b border-[#1C202B] bg-[#0C0E14] flex items-center justify-between text-xs font-mono">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FF3E00]/20 text-[#FF7700] text-[10px] font-bold">
-                    PROPOSAL #02 &bull; MONUMENTAL 5X GOD CANDLE
+                  <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#FF3E00]/20 text-[#FF7700] text-[10px] font-bold">
+                    LIVE BREAKOUT TELEMETRY
                   </span>
                   <span className="text-[#F8FAFC] font-bold">$SCRAM</span>
                   <span className="text-[11px] text-[#717686] hidden sm:inline">
-                    Mach 3.5 &bull; Flat Laser Cap &bull; Supersonic Shockwave
+                    Mach 3.5 &bull; Block-0 Execution Engine
                   </span>
                 </div>
                 <div className="flex items-center gap-4 text-[11px]">
@@ -151,8 +131,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* 3D God Candle Canvas Stage */}
-              <div className="h-[440px] sm:h-[490px] w-full relative bg-[#06080E]">
+              <div className="h-[440px] sm:h-[500px] w-full relative bg-[#06080E]">
                 <LazyStage fallbackSrc="/fallbacks/godcandle.svg">
                   <IntakeScene onReady={() => {}} />
                 </LazyStage>
@@ -161,21 +140,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ================= MARQUEE & STATS STRIP ================= */}
-        <Marquee
-          items={[
-            "Block-0 Atomic Launches",
-            "Zero Single-Parent Clusters",
-            "3.5% Platform Fee",
-            "0.01 SOL Micro Sub-Wallets",
-            "12 Native Solana Launchpads",
-            "5 Jito Block Engines",
-            "Automated ATA Rent Reclaim",
-          ]}
-        />
-        <StatsStrip />
+        {/* Full-bleed Mach Ribbon Plasma Wake (#27) */}
+        <MachRibbonDivider />
 
-        {/* ================= CHAPTER 01 + PROPOSAL #04 HYPERSONIC STREAM ================= */}
+        {/* ================= CHAPTER 01 + HYPERSONIC STREAM (#04) ================= */}
         <Chapter
           number="01"
           kicker="THE VELOCITY BOTTLENECK"
@@ -199,7 +167,7 @@ export default function HomePage() {
           ]}
         />
 
-        <Reveal className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
+        <Reveal className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
           <HypersonicStream />
         </Reveal>
 
@@ -228,35 +196,16 @@ export default function HomePage() {
 
         <SectionVeil />
 
-        {/* ================= CHAPTER 02 + PROPOSALS #25 & #26 CASCADE CHAMBER ================= */}
+        {/* ================= STICKY CHAPTER RAIL (#25) & 3D CASCADE CHAMBER (#26) ================= */}
+        <ChapterRail />
+        <CascadeChamberSection />
+
+        {/* Full-bleed Mach Ribbon Plasma Wake (#27) */}
+        <MachRibbonDivider />
+
+        {/* ================= CHAPTER 02 + MEMPOOL RADAR (#07) & ANTI-MEV SHIELD (#08) ================= */}
         <Chapter
           number="02"
-          kicker="SUPERSONIC FLIGHT PATH"
-          badge="4-STAGE LAUNCH PIPELINE"
-          title="Every token launch travels through four"
-          accent="precision chambers."
-          body="From configuring your bonding curve parameters to firing the atomic Jito bundle, each stage of a Scramjet launch is isolated and verified. Cycle through the four stages below to inspect the wind-tunnel telemetry."
-          points={[
-            {
-              label: "Stage 01–02 // Curve & Venue",
-              text: "Pick any of 12 Solana launchpads with native bonding curve or dynamic DLMM fee configuration.",
-            },
-            {
-              label: "Stage 03–04 // Fund & Ignite",
-              text: "Disperse SOL through Merkle relays, then lock in Block-0 atomic execution with a single click.",
-            },
-          ]}
-        />
-
-        <Reveal className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
-          <ChapterCascadeRail />
-        </Reveal>
-
-        <SectionVeil />
-
-        {/* ================= CHAPTER 03 + PROPOSALS #07 & #08 RADAR & SHIELD ================= */}
-        <Chapter
-          number="03"
           kicker="TACTICAL COUNTERMEASURES"
           badge="ACTIVE MEV DEFENCE"
           title="Hostile order flow is detected and"
@@ -264,26 +213,48 @@ export default function HomePage() {
           body="Legacy bundlers fire blind and hope snipers miss. Scramjet continuously scans unconfirmed leader queues for predatory sandwich bots and wraps your launch in a kinetic slippage corridor with automated Sniper Guard triggers."
           points={[
             {
-              label: "360° Mempool Sonar (#07)",
+              label: "360° Mempool Sonar",
               text: "Real-time classification of incoming priority tips, front-run bots, and shielded Jito bundles.",
             },
             {
-              label: "Kinetic Anti-MEV Deflector (#08)",
+              label: "Kinetic Anti-MEV Deflector",
               text: "Clamps slippage corridors to 0.00% leakage and triggers instant auto-nuke if external buys breach your threshold.",
             },
           ]}
         />
 
-        <Reveal className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <MempoolInterceptRadar />
-            <AntiMevShield />
-          </div>
+        <Reveal className="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+          <MempoolInterceptRadar />
         </Reveal>
 
         <SectionVeil />
 
-        {/* ================= CHAPTER 04 + PROPOSAL #10 GHOST FUNDER VAULT ================= */}
+        <Chapter
+          number="03"
+          kicker="KINETIC SLIPPAGE ARMOR"
+          badge="ZERO SANDWICH LEAKAGE"
+          title="Predatory bots bounce off an atomic"
+          accent="deflector shield."
+          body="When external snipers attempt to sandwich your initial liquidity pool, Scramjet's kinetic deflector isolates your mint and holder buys inside a locked slippage corridor—Compare vulnerable Public RPC routing against Scramjet Block-0 Armor below."
+          points={[
+            {
+              label: "100% Locked Slippage Corridor",
+              text: "Zero price-impact leakage between token creation and your cohort buys.",
+            },
+            {
+              label: "Automated Sniper Guard",
+              text: "Configure an external SOL threshold to automatically hold, TWAP-sell, or nuke if unwanted bots enter.",
+            },
+          ]}
+        />
+
+        <Reveal className="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+          <AntiMevShield />
+        </Reveal>
+
+        <SectionVeil />
+
+        {/* ================= CHAPTER 03 + WORKING GHOST FUNDER VAULT (#10) ================= */}
         <Chapter
           number="04"
           kicker="CRYPTOGRAPHIC UNCLUSTERABILITY"
@@ -313,7 +284,7 @@ export default function HomePage() {
 
         <SectionVeil />
 
-        {/* ================= CHAPTER 05 + PROPOSAL #23 TERMINAL CLI ================= */}
+        {/* ================= CHAPTER 04 + FUNCTIONING TERMINAL CLI (#23) ================= */}
         <Chapter
           number="05"
           kicker="DIRECT COMMAND MATRIX"
@@ -339,57 +310,7 @@ export default function HomePage() {
 
         <SectionVeil />
 
-        {/* ================= 4-STEP EXECUTION PIPELINE ================= */}
-        <HowItWorks />
-
-        {/* ================= PROPOSALS #27 & #28: MACH RIBBON & SHOCK FIELD ================= */}
-        <Reveal className="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
-          <div className="rounded-2xl border border-[#FF3E00]/30 bg-[#08090C] p-6 lg:p-8 space-y-6">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#1C202B] pb-4">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="px-2 py-0.5 rounded bg-[#FF3E00]/15 text-[#FF7700] text-[10px] font-mono font-bold">
-                    PROPOSALS #27 &bull; #28
-                  </span>
-                  <span className="text-xs font-mono text-[#8E9AA8]">WebGL Supersonic Aerodynamics</span>
-                </div>
-                <h3 className="text-xl font-bold text-[#F8FAFC]">
-                  Mach Ribbon &bull; Supersonic Shock Vector Lattice
-                </h3>
-                <p className="text-xs text-[#8E9AA8] mt-1">
-                  Move your cursor across the WebGL stages below to deform the Mach 3.5 shockwave ribbon and vector field.
-                </p>
-              </div>
-              <div className="text-xs font-mono text-[#31E3AC]">Mach 3.5 Boundary Wake Active</div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Mach Ribbon */}
-              <div className="h-[240px] rounded-xl overflow-hidden border border-[#1C202B] bg-[#050608] relative">
-                <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded bg-[#08090C]/80 border border-[#1C202B] text-[10px] font-mono text-[#FF7700]">
-                  PROPOSAL #27: MACH RIBBON (GLSL SHOCK)
-                </div>
-                <LazyStage fallbackSrc="/fallbacks/ribbon.svg">
-                  <RibbonScene onReady={() => {}} />
-                </LazyStage>
-              </div>
-
-              {/* Shock Field */}
-              <div className="h-[240px] rounded-xl overflow-hidden border border-[#1C202B] bg-[#050608] relative">
-                <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded bg-[#08090C]/80 border border-[#1C202B] text-[10px] font-mono text-[#38BDF8]">
-                  PROPOSAL #28: SHOCK FIELD (VECTOR LATTICE)
-                </div>
-                <LazyStage fallbackSrc="/fallbacks/shock.svg">
-                  <ShockScene onReady={() => {}} />
-                </LazyStage>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        <SectionVeil />
-
-        {/* ================= CHAPTER 06 + THE RECEIPTS & SAVINGS ================= */}
+        {/* ================= CHAPTER 05: THE RECEIPTS ================= */}
         <Chapter
           number="06"
           kicker="THE RECEIPTS // VERIFIED EVIDENCE"
@@ -409,10 +330,8 @@ export default function HomePage() {
           ]}
         />
 
-        <section className="pb-16 px-4 sm:px-6 max-w-6xl mx-auto space-y-10">
-          {/* 3 Evidence Cards */}
+        <section className="pb-20 px-4 sm:px-6 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 font-mono text-xs">
-            {/* Evidence 1: The Contract */}
             <Reveal delay={0}>
               <div className="p-6 rounded-2xl border border-[#22242F] bg-[#0E0F14] space-y-3 h-full flex flex-col justify-between">
                 <div className="space-y-3">
@@ -432,7 +351,6 @@ export default function HomePage() {
               </div>
             </Reveal>
 
-            {/* Evidence 2: The Telegram Leak */}
             <Reveal delay={120}>
               <div className="p-6 rounded-2xl border border-[#22242F] bg-[#0E0F14] space-y-3 h-full flex flex-col justify-between">
                 <div className="space-y-3">
@@ -452,7 +370,6 @@ export default function HomePage() {
               </div>
             </Reveal>
 
-            {/* Evidence 3: The SCRAMJET Solution */}
             <Reveal delay={240}>
               <div className="p-6 rounded-2xl border border-[#FF3E00]/40 bg-[#0E0F14] space-y-3 shadow-[0_0_25px_rgba(255,62,0,0.12)] h-full flex flex-col justify-between">
                 <div className="space-y-3">
@@ -474,77 +391,43 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ================= HEAD-TO-HEAD COMPARISON TABLE ================= */}
-        <ProtocolComparisonTable />
-
-        {/* ================= SAVINGS CALCULATOR ================= */}
-        <Reveal className="py-12 px-4 sm:px-6 max-w-6xl mx-auto">
-          <SavingsCalculator />
-        </Reveal>
-
-        {/* ================= LAUNCH ACROSS 12 PROTOCOLS ================= */}
-        <section className="py-20 border-t border-[#14161F] bg-[#0A0B0E] text-center space-y-8">
-          <Reveal>
-            <div className="space-y-2 max-w-xl mx-auto px-4">
-              <span className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#FF7700]">
-                MULTI-VENUE ROUTER
-              </span>
-              <h3 className="text-2xl sm:text-4xl font-extrabold text-[#F8FAFC] tracking-tight">
-                Deploy Across 12 Solana Launchpads
-              </h3>
-              <p className="text-xs sm:text-sm text-[#8E9AA8]">
-                Full native instruction builders for bonding curves, dynamic DLMM fee tiers, and OpenBook AMMs.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 px-4 sm:px-6 max-w-6xl mx-auto">
-            {supportedLaunchpads.map((lp, idx) => (
-              <Reveal key={idx} delay={idx * 40}>
-                <Link
-                  href="/launch"
-                  className="flex flex-col items-center justify-center p-4 rounded-xl border border-[#1A1C25] bg-[#0E0F14] hover:border-[#FF3E00]/50 hover:bg-[#141720] transition-all group"
-                >
-                  <img
-                    src={lp.icon}
-                    alt={lp.name}
-                    className="w-8 h-8 object-contain rounded mb-2 group-hover:scale-110 transition-transform"
-                  />
-                  <span className="text-xs font-bold text-[#F8FAFC]">{lp.name}</span>
-                  <span className="text-[10px] text-[#717686] font-mono mt-0.5">{lp.desc}</span>
-                </Link>
-              </Reveal>
-            ))}
+        {/* ================= FULL-BLEED SHOCK FIELD (#28) + FINAL IGNITION CTA (#30) ================= */}
+        <section className="relative w-full min-h-[520px] flex items-center justify-center overflow-hidden border-t border-[#14161F]">
+          {/* Section-scale pointer-reactive Shock Field backdrop (#28) */}
+          <div className="absolute inset-0">
+            <LazyStage fallbackSrc="/fallbacks/shock.svg">
+              <ShockScene onReady={() => {}} />
+            </LazyStage>
           </div>
-        </section>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#07080B] via-transparent to-[#07080B]" />
 
-        {/* ================= FINAL IGNITION CALL TO ACTION ================= */}
-        <section className="py-28 px-4 sm:px-6 max-w-4xl mx-auto text-center space-y-6">
-          <Reveal>
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3E00]/10 border border-[#FF3E00]/30 text-[#FF7700] text-[10px] font-mono font-bold uppercase tracking-widest mb-2">
-              READY FOR IGNITION
-            </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-[#F8FAFC] tracking-tight uppercase">
-              Ready to Outrun the Cartel?
-            </h2>
-            <p className="text-sm sm:text-base text-[#8E9AA8] max-w-xl mx-auto leading-relaxed mt-3">
-              Launch with Jito Block-0 atomic guarantee, 0.01 SOL micro-subwallets, and zero backroom analytics retainers.
-            </p>
-            <div className="pt-6 flex flex-wrap justify-center gap-4">
-              <MagneticIgnitionButton
-                href="/launch"
-                className="px-10 py-4 rounded-xl bg-gradient-to-r from-[#FF3E00] to-[#FF7700] text-black font-extrabold text-sm tracking-wider uppercase shadow-[0_0_35px_rgba(255,62,0,0.5)]"
-              >
-                Launch on Solana Now &rarr;
-              </MagneticIgnitionButton>
-              <Link
-                href="/funder"
-                className="px-8 py-4 rounded-xl border border-[#1C202B] bg-[#0C0E14] hover:border-[#FF3E00]/50 text-xs font-mono font-bold uppercase tracking-wider text-[#F8FAFC] transition-colors flex items-center"
-              >
-                Open Ghost Funder &rarr;
-              </Link>
-            </div>
-          </Reveal>
+          <div className="relative z-10 py-28 px-4 sm:px-6 max-w-4xl mx-auto text-center space-y-6">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3E00]/15 border border-[#FF3E00]/40 text-[#FF7700] text-[10px] font-mono font-bold uppercase tracking-widest mb-2 backdrop-blur-sm">
+                MACH 3.5 SHOCK FIELD // READY FOR IGNITION
+              </span>
+              <h2 className="text-4xl sm:text-6xl font-black text-[#F8FAFC] tracking-tight uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+                Ready to Outrun the Cartel?
+              </h2>
+              <p className="text-sm sm:text-base text-[#C5CCD6] max-w-xl mx-auto leading-relaxed mt-3 drop-shadow">
+                Launch with Jito Block-0 atomic guarantee, 0.01 SOL micro-subwallets, and zero backroom analytics retainers.
+              </p>
+              <div className="pt-6 flex flex-wrap justify-center gap-4">
+                <MagneticIgnitionButton
+                  href="/launch"
+                  className="px-10 py-4 rounded-xl bg-gradient-to-r from-[#FF3E00] to-[#FF7700] text-black font-extrabold text-sm tracking-wider uppercase shadow-[0_0_35px_rgba(255,62,0,0.5)]"
+                >
+                  Launch on Solana Now &rarr;
+                </MagneticIgnitionButton>
+                <Link
+                  href="/funder"
+                  className="px-8 py-4 rounded-xl border border-[#1C202B] bg-[#0C0E14]/90 hover:border-[#FF3E00]/50 text-xs font-mono font-bold uppercase tracking-wider text-[#F8FAFC] transition-colors flex items-center backdrop-blur-sm"
+                >
+                  Open Ghost Funder &rarr;
+                </Link>
+              </div>
+            </Reveal>
+          </div>
         </section>
       </div>
     </PerfProvider>

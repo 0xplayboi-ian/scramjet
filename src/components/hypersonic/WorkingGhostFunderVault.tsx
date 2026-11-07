@@ -93,7 +93,7 @@ export const WorkingGhostFunderVault: React.FC = () => {
           <div className="flex items-center gap-2 mb-1.5">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FF3E00]/15 text-[#FF7700] border border-[#FF3E00]/30 text-[10px] font-mono font-bold tracking-wider uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FF3E00] animate-pulse" />
-              PROPOSAL #10 • FUNCTIONING VAULT
+              GHOST FUNDER VAULT
             </span>
             <span className="text-[11px] font-mono text-[#8E9AA8]">
               Merkle Tree Cryptographic Dispersal

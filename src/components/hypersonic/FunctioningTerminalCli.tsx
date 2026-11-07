@@ -351,7 +351,7 @@ export const FunctioningTerminalCli: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-[#31E3AC] animate-pulse" />
             MAINNET-BETA
           </span>
-          <span className="text-[10px] font-mono text-[#717686]">PROPOSAL #23</span>
+          <span className="text-[10px] font-mono text-[#717686]">CLI v2.4</span>
         </div>
       </div>
 

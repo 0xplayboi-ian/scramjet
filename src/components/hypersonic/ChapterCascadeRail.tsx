@@ -1,187 +1,213 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
+import { ScrollTrigger } from "../scroll/SmoothScroll";
+import { usePerf } from "../perf/PerfProvider";
 import LazyStage from "../three/LazyStage";
 import CascadeScene from "../three/CascadeScene";
 
-interface ChapterPhase {
-  id: number;
-  label: string;
-  title: string;
-  description: string;
-  specs: { label: string; value: string }[];
-}
-
-const PHASES: ChapterPhase[] = [
+const CHAPTERS = [
   {
-    id: 1,
-    label: "PHASE 01",
-    title: "Name It & Configure Curve",
-    description: "Define ticker, token supply, metadata, and bonding curve configuration. Dynamic DLMM fee curve or classic pump mechanics.",
-    specs: [
-      { label: "Token Standard", value: "SPL Token-2022 / Classic" },
-      { label: "Total Supply", value: "1,000,000,000" },
-      { label: "Curve Liquidity", value: "Dynamic DLMM / Bonding" },
-    ],
+    k: "01",
+    title: "Name it",
+    copy: "Set ticker, supply, metadata, and curve parameters. Choose classic bonding curve or Meteora dynamic fee tiers.",
+    spec: "SPL Token / Dynamic Curve",
   },
   {
-    id: 2,
-    label: "PHASE 02",
-    title: "Select Protocol Venue",
-    description: "Deploy across 12 supported launchpads including Pump.fun, Meteora DBC, Raydium LaunchLab, Bags.fm, and LetsBonk with automated fee optimization.",
-    specs: [
-      { label: "Supported DEXes", value: "12 Solana Protocols" },
-      { label: "Routing Latency", value: "< 5ms (Jito Engine)" },
-      { label: "Auto LP Lock", value: "Permanent Burn / Escrow" },
-    ],
+    k: "02",
+    title: "Pick a venue",
+    copy: "Deploy across Pump.fun, Meteora DBC, Raydium LaunchLab, Bags, LetsBonk, and 7 other native Solana launchpads.",
+    spec: "12 Native DEX Protocols",
   },
   {
-    id: 3,
-    label: "PHASE 03",
-    title: "Fund Sub-Wallets (Ghost Vault)",
-    description: "Generate up to 24 ephemeral sub-wallets via Turnkey enclave. Distribute funds via Merkle relay trees with randomized jitter to break BubbleMaps clustering.",
-    specs: [
-      { label: "Sub-Wallets", value: "Up to 24 Wallets" },
-      { label: "BubbleMaps Score", value: "0% Single-Parent Risk" },
-      { label: "ATA Rent Recovery", value: "+0.00204 SOL / Wallet" },
-    ],
+    k: "03",
+    title: "Fund the wallet",
+    copy: "Disperse SOL across up to 24 Turnkey enclave sub-wallets via multi-hop Merkle relays with randomized lamport jitter.",
+    spec: "0.01 SOL Min • 0% Cluster Risk",
   },
   {
-    id: 4,
-    label: "PHASE 04",
-    title: "Atomic Block-0 Execution",
-    description: "Deploy mint transaction and simultaneous sub-wallet swaps inside a single atomic Jito Block-0 bundle with kinetic MEV sandwich protection.",
-    specs: [
-      { label: "Execution Mode", value: "Single-Slot Atomic Jito" },
-      { label: "Slippage Protection", value: "Kinetic MEV Deflector" },
-      { label: "Platform Fee", value: "3.5% (Scramjet Advantage)" },
-    ],
+    k: "04",
+    title: "Confirm & Launch",
+    copy: "Mint creation and all sub-wallet buys land atomically in Block-0 via 5 private Jito block engines, with automatic ATA rent reclaim.",
+    spec: "Single-Slot Jito Block-0",
   },
 ];
 
-export const ChapterCascadeRail: React.FC = () => {
-  const [activePhaseIndex, setActivePhaseIndex] = useState<number>(0);
-  const progressRef = useRef<number>(0);
+/** #25: Sticky scroll-scrubbed progress rail sequence */
+export const ChapterRail: React.FC = () => {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const { motionOff } = usePerf();
 
   useEffect(() => {
-    progressRef.current = activePhaseIndex / (PHASES.length - 1);
-  }, [activePhaseIndex]);
-
-  const currentPhase = PHASES[activePhaseIndex];
+    if (motionOff || !rootRef.current) return undefined;
+    const trigger = ScrollTrigger.create({
+      trigger: rootRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true,
+      onUpdate: (self) => {
+        if (barRef.current) {
+          barRef.current.style.transform = `scaleX(${self.progress})`;
+        }
+        const idx = Math.min(CHAPTERS.length - 1, Math.floor(self.progress * CHAPTERS.length));
+        setActiveIdx(idx);
+      },
+    });
+    return () => trigger.kill();
+  }, [motionOff]);
 
   return (
-    <div className="relative rounded-2xl border border-[#FF3E00]/30 bg-gradient-to-b from-[#0B0D12] via-[#08090C] to-[#040507] p-6 lg:p-8 overflow-hidden shadow-[0_0_40px_rgba(255,62,0,0.06)]">
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#FF3E0006_1px,transparent_1px),linear-gradient(to_bottom,#FF3E0006_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-
-      {/* Header */}
-      <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#1C202B] pb-6">
-        <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FF3E00]/15 text-[#FF7700] border border-[#FF3E00]/30 text-[10px] font-mono font-bold tracking-wider uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF3E00] animate-pulse" />
-              PROPOSAL #25 &amp; #26
-            </span>
-            <span className="text-[11px] font-mono text-[#8E9AA8]">
-              Chapter Rail &bull; 3D Cascade Chamber
-            </span>
-          </div>
-          <h3 className="text-xl lg:text-2xl font-bold tracking-tight text-[#F8FAFC]">
-            Hypersonic Launch Stages &amp; Cascade Chamber
-          </h3>
-          <p className="text-xs text-[#8E9AA8] mt-1 max-w-2xl">
-            Sticky flight rail tracking the four stages of a supersonic token launch. As you transition through
-            phases, the 3D Cascade Chamber accelerates through supersonic tunnel rings.
-          </p>
-        </div>
-
-        {/* Phase Indicator */}
-        <div className="flex items-center gap-2">
-          {PHASES.map((p, idx) => (
-            <button
-              key={p.id}
-              onClick={() => setActivePhaseIndex(idx)}
-              className={`w-9 h-9 rounded-xl font-mono text-xs font-bold transition-all flex items-center justify-center border ${
-                activePhaseIndex === idx
-                  ? "bg-[#FF3E00] text-black border-[#FF3E00] shadow-[0_0_15px_rgba(255,62,0,0.4)] scale-105"
-                  : "bg-[#0E1117] text-[#8E9AA8] border-[#1C202B] hover:border-[#2D3344]"
-              }`}
-            >
-              0{p.id}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Grid: Left Stage Details, Right 3D Cascade Chamber */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-center">
-        {/* Left Column: Stage Information */}
-        <div className="lg:col-span-6 space-y-4">
-          {/* Phase Breadcrumbs */}
-          <div className="flex items-center gap-2 text-xs font-mono text-[#FF7700]">
-            <span>{currentPhase.label}</span>
-            <span>&bull;</span>
-            <span className="text-[#31E3AC]">STAGE {activePhaseIndex + 1} OF 4</span>
-          </div>
-
-          <h4 className="text-2xl font-bold text-[#F8FAFC] tracking-tight">
-            {currentPhase.title}
-          </h4>
-
-          <p className="text-sm text-[#8E9AA8] leading-relaxed">
-            {currentPhase.description}
-          </p>
-
-          {/* Specs List */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            {currentPhase.specs.map((spec, sIdx) => (
-              <div
-                key={sIdx}
-                className="p-3 rounded-xl bg-[#08090C] border border-[#1C202B] space-y-1"
-              >
-                <div className="text-[10px] font-mono uppercase text-[#717686]">
-                  {spec.label}
-                </div>
-                <div className="text-xs font-mono font-bold text-[#F8FAFC]">
-                  {spec.value}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Action Row */}
-          <div className="pt-4 flex items-center gap-3">
-            <Link
-              href="/launch"
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF3E00] to-[#FF7700] text-black font-bold text-xs uppercase tracking-wider hover:opacity-95 transition-all shadow-[0_0_20px_rgba(255,62,0,0.3)] inline-flex items-center gap-2"
-            >
-              Open Launch HUD &rarr;
-            </Link>
-
-            <button
-              onClick={() => setActivePhaseIndex((prev) => (prev + 1) % PHASES.length)}
-              className="px-4 py-2.5 rounded-xl bg-[#141720] hover:bg-[#1F2433] text-xs font-mono text-[#F8FAFC] border border-[#1C202B] transition-colors"
-            >
-              Next Phase &rarr;
-            </button>
-          </div>
-        </div>
-
-        {/* Right Column: 3D Cascade Tunnel Scene */}
-        <div className="lg:col-span-6 h-[340px] rounded-xl overflow-hidden border border-[#1C202B] bg-[#050608] relative">
-          <div className="absolute top-3 left-3 z-10 flex items-center gap-2 px-2.5 py-1 rounded bg-[#08090C]/80 border border-[#1C202B] backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-[#FF7700] animate-ping" />
-            <span className="text-[10px] font-mono text-[#8E9AA8]">
-              WIND TUNNEL CAM: Z-PROGRESS {(progressRef.current * 100).toFixed(0)}%
+    <div ref={rootRef} className={motionOff ? "py-16" : "relative h-[240vh]"}>
+      <div className={motionOff ? "" : "sticky top-16 py-12 flex flex-col justify-center min-h-[75vh]"}>
+        <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <span className="text-[11px] font-mono font-bold tracking-[0.25em] uppercase text-[#FF7700]">
+                LAUNCH SEQUENCE // FOUR STEPS
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#F8FAFC] mt-2">
+                From zero to Block-0 in four beats.
+              </h2>
+            </div>
+            <span className="text-xs font-mono text-[#8E9AA8]">
+              STAGE 0{activeIdx + 1} / 04 ACTIVE
             </span>
           </div>
 
-          <LazyStage fallbackSrc="/fallbacks/cascade.svg">
-            <CascadeScene onReady={() => {}} progressRef={progressRef} />
-          </LazyStage>
+          {/* Horizontal Progress Rail */}
+          <div className="relative h-1 w-full bg-[#1C202B] rounded-full overflow-hidden">
+            <div
+              ref={barRef}
+              className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-[#FF3E00] via-[#FF7700] to-[#31E3AC] origin-left transition-transform duration-75"
+              style={{ transform: motionOff ? "scaleX(1)" : "scaleX(0.15)" }}
+            />
+          </div>
+
+          {/* 4 Chapter Steps */}
+          <ol className="grid grid-cols-1 md:grid-cols-4 gap-5">
+            {CHAPTERS.map((chapter, index) => {
+              const isOn = motionOff || index <= activeIdx;
+              const isCurrent = index === activeIdx;
+              return (
+                <li
+                  key={chapter.k}
+                  onClick={() => setActiveIdx(index)}
+                  className={`cursor-pointer p-6 rounded-2xl border transition-all duration-500 ${
+                    isCurrent
+                      ? "border-[#FF3E00] bg-[#0D1017] shadow-[0_0_30px_rgba(255,62,0,0.14)] -translate-y-1"
+                      : isOn
+                      ? "border-[#FF7700]/40 bg-[#0A0C10] opacity-90"
+                      : "border-[#1C202B] bg-[#08090C]/60 opacity-45"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className={`text-xs font-mono font-bold px-2.5 py-1 rounded ${
+                        isCurrent
+                          ? "bg-[#FF3E00] text-black"
+                          : isOn
+                          ? "bg-[#FF3E00]/15 text-[#FF7700]"
+                          : "bg-[#141720] text-[#717686]"
+                      }`}
+                    >
+                      {chapter.k}
+                    </span>
+                    <span className="text-[10px] font-mono text-[#717686]">{chapter.spec}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[#F8FAFC] mb-2">{chapter.title}</h3>
+                  <p className="text-xs sm:text-sm text-[#8E9AA8] leading-relaxed">{chapter.copy}</p>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </div>
   );
 };
+
+/** #26: Pinned scroll-scrubbed 3D Cascade Chamber wind tunnel */
+export const CascadeChamberSection: React.FC = () => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<number>(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const { motionOff } = usePerf();
+
+  useEffect(() => {
+    if (motionOff || !trackRef.current) return undefined;
+    const trigger = ScrollTrigger.create({
+      trigger: trackRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.4,
+      onUpdate: (self) => {
+        progressRef.current = self.progress;
+        const idx = Math.min(CHAPTERS.length - 1, Math.floor(self.progress * CHAPTERS.length));
+        setActiveStep(idx);
+      },
+    });
+    return () => trigger.kill();
+  }, [motionOff]);
+
+  return (
+    <div ref={trackRef} className={motionOff ? "py-16" : "relative h-[260vh]"}>
+      <div className={motionOff ? "" : "sticky top-14 h-[85vh] flex items-center"}>
+        <div className="max-w-6xl mx-auto w-full px-4 sm:px-6">
+          <div className="relative rounded-2xl border border-[#FF3E00]/30 bg-[#06070A] overflow-hidden h-[540px] sm:h-[600px] shadow-[0_0_50px_rgba(255,62,0,0.08)]">
+            {/* Full-bleed 3D Cascade Chamber Canvas */}
+            <div className="absolute inset-0">
+              <LazyStage fallbackSrc="/fallbacks/cascade.svg">
+                <CascadeScene onReady={() => {}} progressRef={progressRef} />
+              </LazyStage>
+            </div>
+
+            {/* Overlay Telemetry Header */}
+            <div className="relative z-10 p-6 sm:p-8 flex flex-col justify-between h-full pointer-events-none">
+              <div className="flex items-center justify-between">
+                <div className="px-3 py-1.5 rounded-lg bg-[#08090C]/85 border border-[#1C202B] backdrop-blur-md">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF7700] font-bold">
+                    SUPERSONIC CASCADE CHAMBER // Z-TUNNEL SCRUB
+                  </span>
+                </div>
+                <div className="px-3 py-1.5 rounded-lg bg-[#08090C]/85 border border-[#1C202B] backdrop-blur-md text-xs font-mono text-[#31E3AC]">
+                  CHAMBER 0{activeStep + 1} LOCKED
+                </div>
+              </div>
+
+              {/* Bottom Overlay Step Readout */}
+              <ol className="grid grid-cols-2 lg:grid-cols-4 gap-3 pointer-events-auto">
+                {CHAPTERS.map((chapter, idx) => {
+                  const isActive = idx === activeStep;
+                  return (
+                    <li
+                      key={chapter.k}
+                      onClick={() => {
+                        setActiveStep(idx);
+                        progressRef.current = idx / (CHAPTERS.length - 1);
+                      }}
+                      className={`cursor-pointer p-4 rounded-xl border backdrop-blur-md transition-all ${
+                        isActive
+                          ? "bg-[#0B0E14]/90 border-[#FF3E00] text-[#F8FAFC]"
+                          : "bg-[#08090C]/70 border-[#1C202B]/80 text-[#8E9AA8] opacity-60 hover:opacity-90"
+                      }`}
+                    >
+                      <div className="text-[10px] font-mono text-[#FF7700] font-bold mb-1">
+                        CHAMBER {chapter.k}
+                      </div>
+                      <div className="text-sm font-bold text-[#F8FAFC]">{chapter.title}</div>
+                      <p className="text-[11px] text-[#8E9AA8] mt-1 line-clamp-2">{chapter.copy}</p>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const ChapterCascadeRail = ChapterRail;

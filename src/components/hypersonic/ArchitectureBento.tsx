@@ -14,7 +14,7 @@ export const ArchitectureBento: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FF3E00]/15 text-[#FF7700] border border-[#FF3E00]/30 text-[10px] font-mono font-bold tracking-wider uppercase">
-              PROPOSAL #21 &bull; ARCHITECTURE BENTO
+              SYSTEM ARCHITECTURE
             </span>
             <span className="text-[10px] font-mono text-[#31E3AC] font-semibold">
               SCRAMJET VS PROXIMA BENCHMARK

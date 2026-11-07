@@ -21,7 +21,7 @@ export function AntiMevShield() {
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="font-mono text-[10px] font-bold text-[#FF7700] tracking-wider uppercase bg-[#FF7700]/10 border border-[#FF7700]/30 px-2 py-0.5 rounded">
-              PROPOSAL #08 · KINETIC ANTI-MEV DEFLECTOR
+              KINETIC ANTI-MEV DEFLECTOR
             </span>
           </div>
           <h3 className="text-xl sm:text-2xl font-bold text-[#F8FAFC]">
