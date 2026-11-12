@@ -1515,7 +1515,34 @@ export default function LaunchPage() {
               </div>
 
               <div className="space-y-1.5 text-[11px]">
-                  <div className="flex justify-between text-[#8E9AA8]">
+                <div className="flex justify-between text-[#8E9AA8]">
+                  <span>Hard Cap Supply &amp; Decimals:</span>
+                  <span className="font-bold text-[#F8FAFC]">
+                    {totalSupply.toLocaleString()} Tokens ({decimals} Decimals)
+                  </span>
+                </div>
+                <div className="flex justify-between text-[#8E9AA8]">
+                  <span>Authority Revocations:</span>
+                  <span className="font-bold text-[#31E3AC]">
+                    {revokeMintAuthority && revokeFreezeAuthority
+                      ? "MINT & FREEZE REVOKED (IMMUTABLE)"
+                      : revokeMintAuthority
+                      ? "MINT REVOKED"
+                      : "ACTIVE"}
+                  </span>
+                </div>
+                <div className="flex justify-between text-[#8E9AA8]">
+                  <span>LP Burn Target:</span>
+                  <a
+                    href={SOLANA_INCINERATOR_SOLSCAN}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-bold text-[#FF5500] hover:underline"
+                  >
+                    100% -&gt; {lpBurnTarget.slice(0, 6)}...{lpBurnTarget.slice(-4)} (Incinerator) ↗
+                  </a>
+                </div>
+                <div className="flex justify-between text-[#8E9AA8] pt-1 border-t border-[#161720]">
                   <span>Base Deployment Fee:</span>
                   <span className="font-bold text-[#F8FAFC]">{upfrontFee.baseFeeSol.toFixed(3)} SOL</span>
                 </div>
@@ -1536,7 +1563,7 @@ export default function LaunchPage() {
                 <div className="flex justify-between text-[12px] pt-2 border-t border-[#1C202B] font-bold items-center">
                   <span className="text-[#FF3E00]">Total Launch Fee:</span>
                   <div className="flex items-center gap-2">
-                      {isExempt && (
+                    {isExempt && (
                       <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-[#31E3AC]/20 text-[#31E3AC] border border-[#31E3AC]/30 font-bold">
                         VIP EXEMPT (0 FEE)
                       </span>
@@ -1557,12 +1584,12 @@ export default function LaunchPage() {
             <div className="flex flex-col items-center gap-3 pt-4">
               {dispatchError && (
                 <div className="p-3 rounded-lg bg-[#FF2A55]/10 border border-[#FF2A55]/30 text-[#FF2A55] text-xs font-mono max-w-md text-center">
-                    {dispatchError}
-                  </div>
-                )}
+                  {dispatchError}
+                </div>
+              )}
 
-                {isDispatching && (
-                  <div className="p-3 rounded-lg bg-[#14151C] border border-[#FF3E00]/40 text-[#FF3E00] text-xs font-mono max-w-md text-center animate-pulse flex items-center gap-2">
+              {isDispatching && (
+                <div className="p-3 rounded-lg bg-[#14151C] border border-[#FF3E00]/40 text-[#FF3E00] text-xs font-mono max-w-md text-center animate-pulse flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#FF3E00] animate-ping" />
                   <span>{dispatchStep}</span>
                 </div>
@@ -1593,6 +1620,60 @@ export default function LaunchPage() {
                     <span className="text-[#8E9AA8]">Token Mint:</span>
                     <span className="font-bold text-[#F8FAFC]">{dispatchResult.mintPublicKey}</span>
                   </div>
+                  {dispatchResult.totalSupply && (
+                    <div className="flex justify-between">
+                      <span className="text-[#8E9AA8]">Total Supply (Hard Cap):</span>
+                      <span className="font-bold text-[#31E3AC]">
+                        {dispatchResult.totalSupply.toLocaleString()} $33RD (Immutable)
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span className="text-[#8E9AA8]">Mint Authority:</span>
+                    <span className="font-bold text-[#31E3AC]">
+                      {dispatchResult.mintAuthorityRevoked ? "PERMANENTLY REVOKED (✓)" : "Active"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[#8E9AA8]">Freeze Authority:</span>
+                    <span className="font-bold text-[#31E3AC]">
+                      {dispatchResult.freezeAuthorityRevoked ? "PERMANENTLY REVOKED (✓)" : "Active"}
+                    </span>
+                  </div>
+                  {dispatchResult.lpBurnTargetAddress && (
+                    <div className="flex justify-between">
+                      <span className="text-[#8E9AA8]">LP Token Burn Target:</span>
+                      <span className="font-bold text-[#FF5500]">
+                        {dispatchResult.lpBurnTargetAddress}
+                      </span>
+                    </div>
+                  )}
+                  {dispatchResult.lpBurnSolscanUrl && (
+                    <div className="flex justify-between">
+                      <span className="text-[#8E9AA8]">LP Burn Solscan Proof:</span>
+                      <a
+                        href={dispatchResult.lpBurnSolscanUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#38BDF8] underline hover:text-white"
+                      >
+                        Verify Burn on Solscan ↗
+                      </a>
+                    </div>
+                  )}
+                  {dispatchResult.metadataUri && (
+                    <div className="flex justify-between">
+                      <span className="text-[#8E9AA8]">Metaplex Metadata URI:</span>
+                      <a
+                        href={dispatchResult.metadataUri}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#60A5FA] underline hover:text-white truncate max-w-xs"
+                      >
+                        {dispatchResult.metadataUri} ↗
+                      </a>
+                    </div>
+                  )}
                   <div className="flex justify-between">
                     <span className="text-[#8E9AA8]">Jito Bundle ID:</span>
                     <span className="font-bold text-[#38BDF8] truncate max-w-xs">{dispatchResult.bundleId}</span>
@@ -1626,6 +1707,13 @@ export default function LaunchPage() {
           </div>
         )}
       </div>
+
+      {/* Interactive T-Minus Countdown Runbook Drawer */}
+      <TMinusRunbookDrawer
+        isOpen={tMinusDrawerOpen}
+        onClose={() => setTMinusDrawerOpen(false)}
+        onLoadPreset={applySingularityProtocolPreset}
+      />
     </div>
   );
 }
