@@ -1,0 +1,214 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - complementary [ref=e4]:
+        - generic [ref=e5]:
+          - generic [ref=e6]:
+            - link "SCRAMJET BETA" [ref=e7] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e14]:
+                - generic [ref=e15]: SCRAMJET
+                - generic [ref=e16]: BETA
+            - button [ref=e17] [cursor=pointer]
+          - generic [ref=e21] [cursor=pointer]:
+            - generic [ref=e22]: Search
+            - generic [ref=e27]: ⌘K
+          - generic [ref=e29]:
+            - generic [ref=e30]: Features
+            - link "Create Launch 12 DEX" [ref=e31] [cursor=pointer]:
+              - /url: /launch
+              - generic [ref=e32]: Create Launch
+              - generic [ref=e36]: 12 DEX
+            - link "Live Terminal" [ref=e37] [cursor=pointer]:
+              - /url: /workspace
+            - link "My Wallets" [ref=e41] [cursor=pointer]:
+              - /url: /funder
+            - link "Marketplace NEW" [ref=e47] [cursor=pointer]:
+              - /url: /marketplace
+              - generic [ref=e48]: Marketplace
+              - generic [ref=e54]: NEW
+            - link "Tracker" [ref=e55] [cursor=pointer]:
+              - /url: /workspace
+            - link "Sign In" [ref=e60] [cursor=pointer]:
+              - /url: /login
+            - link "Dashboard" [ref=e64] [cursor=pointer]:
+              - /url: /
+            - link "Rewards" [ref=e71] [cursor=pointer]:
+              - /url: /marketplace
+            - link "Funder" [ref=e78] [cursor=pointer]:
+              - /url: /funder
+        - generic [ref=e86]:
+          - link "Import" [ref=e87] [cursor=pointer]:
+            - /url: /launch
+          - link "+ Launch" [ref=e92] [cursor=pointer]:
+            - /url: /launch
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - link "Create Launch" [ref=e97] [cursor=pointer]:
+              - /url: /launch
+            - link "Live Terminal" [ref=e99] [cursor=pointer]:
+              - /url: /workspace
+            - link "Marketplace" [ref=e101] [cursor=pointer]:
+              - /url: /marketplace
+            - link "Funder" [ref=e103] [cursor=pointer]:
+              - /url: /funder
+          - generic [ref=e105]:
+            - generic [ref=e106]: SOL $92.31
+            - button "Connect Wallet" [ref=e109] [cursor=pointer]
+        - main [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e114]:
+              - button "CHAIN & LAUNCHPAD" [ref=e115] [cursor=pointer]
+              - button "TOKEN DETAILS" [ref=e116] [cursor=pointer]
+              - button "LAUNCH SETTINGS" [active] [ref=e117] [cursor=pointer]
+            - generic [ref=e311]:
+              - generic [ref=e312]:
+                - heading "Launch Settings" [level=1] [ref=e313]
+                - paragraph [ref=e314]: Configure Block-0 bundle timing, wallet allocations, and sniper defense.
+              - generic [ref=e315]:
+                - generic [ref=e316]:
+                  - generic [ref=e317]:
+                    - generic [ref=e318]:
+                      - generic [ref=e319]: "PROPOSAL #21 • ARCHITECTURE BENTO"
+                      - generic [ref=e320]: SCRAMJET VS PROXIMA BENCHMARK
+                    - heading "Hypersonic Architecture • Competitive Edge" [level=3] [ref=e321]
+                    - paragraph [ref=e322]: Why elite token creators launch on Scramjet instead of legacy platforms like Proxima.
+                  - generic [ref=e324]:
+                    - generic [ref=e325]: Launch Fee Delta
+                    - generic [ref=e326]: 30% LESS COST
+                - generic [ref=e327]:
+                  - generic [ref=e328]:
+                    - generic [ref=e329]:
+                      - generic [ref=e330]:
+                        - generic [ref=e331]: ANTI-CLUSTERING CRYPTOGRAPHY
+                        - generic [ref=e332]: "BUBBLEMAPS: 0% CORRELATION"
+                      - heading "Merkle Relay Trees vs $45,000/mo BubbleMaps Retainer" [level=4] [ref=e333]
+                      - paragraph [ref=e334]: Proxima launches fund all sub-wallets from a single parent account, forcing creators into costly compliance retainers or getting publicly flagged. Scramjet executes dynamic intermediate relay trees with non-round randomized jitter lamports, completely severing funding lineage on-chain.
+                    - generic [ref=e335]:
+                      - generic [ref=e336]:
+                        - generic [ref=e337]: PROXIMA BOTTLENECK
+                        - generic [ref=e338]: Single-Parent Funding
+                        - generic [ref=e339]: 96% cluster detection risk
+                      - generic [ref=e340]:
+                        - generic [ref=e341]: SCRAMJET ADVANTAGE
+                        - generic [ref=e342]: Ghost Funder Relay Trees
+                        - generic [ref=e343]: 0.0% cluster correlation
+                  - generic [ref=e344]:
+                    - generic [ref=e345]:
+                      - generic [ref=e346]:
+                        - generic [ref=e347]: FEE EFFICIENCY
+                        - generic [ref=e348]: "-30% LOWER FEES"
+                      - heading "3.5% Platform Fee vs Proxima 5.0%" [level=4] [ref=e349]
+                      - paragraph [ref=e350]: Keep more profits on every block. While Proxima extracts 5.0% flat fees with zero rebate tiers, Scramjet caps platform fee at 3.5%, saving up to 15 SOL per 1,000 SOL volume.
+                    - generic [ref=e351]:
+                      - generic [ref=e352]:
+                        - generic [ref=e353]: "Proxima Take Rate:"
+                        - generic [ref=e354]: 5.0% (No Rebate)
+                      - generic [ref=e355]:
+                        - generic [ref=e356]: "Scramjet Take Rate:"
+                        - generic [ref=e357]: "3.5% (VIP Tier: 0.0%)"
+                  - generic [ref=e358]:
+                    - generic [ref=e359]:
+                      - generic [ref=e360]: CAPITAL VELOCITY
+                      - heading "0.01 SOL Sub-Wallets" [level=4] [ref=e361]
+                      - paragraph [ref=e362]: Proxima demands 0.10 SOL lockup per sub-wallet. Scramjet micro-funding requires only 0.01 SOL, unlocking 10x greater wallet granularity without tying up capital.
+                    - generic [ref=e363]: 10x Lower Minimum Capital Lockup
+                  - generic [ref=e364]:
+                    - generic [ref=e365]:
+                      - generic [ref=e366]: RENT RECLAIM SWEEP
+                      - heading "Auto ATA Rent Recovery" [level=4] [ref=e367]
+                      - paragraph [ref=e368]: Every Solana SPL token account reserves ~0.00204 SOL in rent. Scramjet automatically closes zero-balance accounts and sweeps 100% of rent lamports back to your master payer.
+                    - generic [ref=e369]: +0.0489 SOL Reclaimed / 24 Wallets
+                  - generic [ref=e370]:
+                    - generic [ref=e371]:
+                      - generic [ref=e372]: MEV PRIVACY
+                      - heading "Atomic Jito Block-0 Relay" [level=4] [ref=e373]
+                      - paragraph [ref=e374]: Direct private validator leader bundles. Token deploy and initial sub-wallet purchases land in the very first slot with zero public mempool exposure or frontrun risk.
+                    - generic [ref=e375]: Zero Sandwich Leakage Guaranteed
+              - generic [ref=e376]:
+                - text: CHOOSE LAUNCH MODE
+                - generic [ref=e377]:
+                  - button "Block-0 Mode Atomic multi-wallet MEV bundle" [ref=e378] [cursor=pointer]:
+                    - generic [ref=e379]: Block-0 Mode
+                    - generic [ref=e380]: Atomic multi-wallet MEV bundle
+                  - button "Organic Mode Sequential buys with buy delay" [ref=e381] [cursor=pointer]:
+                    - generic [ref=e382]: Organic Mode
+                    - generic [ref=e383]: Sequential buys with buy delay
+                  - button "Manual Mode Submit orders yourself in HUD" [ref=e384] [cursor=pointer]:
+                    - generic [ref=e385]: Manual Mode
+                    - generic [ref=e386]: Submit orders yourself in HUD
+              - generic [ref=e387]:
+                - generic [ref=e388]:
+                  - generic [ref=e389]: ALLOCATION & PRESET
+                  - generic [ref=e390]:
+                    - button "QUICK BUILD" [ref=e391] [cursor=pointer]
+                    - button "CLEAN BUILD" [ref=e392] [cursor=pointer]
+                    - button "FULL BUILD" [ref=e393] [cursor=pointer]
+                - generic [ref=e394]:
+                  - generic [ref=e395]:
+                    - generic [ref=e396]:
+                      - generic [ref=e397]: Developer Buy % (optional)
+                      - generic [ref=e398]: 0%
+                    - generic [ref=e399]:
+                      - spinbutton [ref=e400]: "0"
+                      - generic [ref=e401]: "%"
+                  - generic [ref=e402]:
+                    - generic [ref=e403]:
+                      - generic [ref=e404]: Holders Buy * (Excluding Developer)
+                      - generic [ref=e405]: 0%
+                    - generic [ref=e406]:
+                      - spinbutton [ref=e407]: "0"
+                      - generic [ref=e408]: "%"
+                - generic [ref=e409]:
+                  - generic [ref=e410]:
+                    - generic [ref=e411]: Back MEV Tuning Slider
+                    - generic [ref=e412]: Less Sniper Markers (40%)
+                  - slider [ref=e413]: "40"
+                  - generic [ref=e414]:
+                    - generic [ref=e415]: ← Fewer sniper markers
+                    - generic [ref=e416]: Less top-trader visibility →
+                - generic [ref=e417]:
+                  - generic [ref=e418]:
+                    - generic [ref=e419]: Holder Wallet Count
+                    - spinbutton [ref=e420]: "24"
+                  - generic [ref=e421]:
+                    - generic [ref=e422]: Jito Block-0 Bribe (SOL)
+                    - spinbutton [ref=e423]: "0.015"
+              - generic [ref=e424]:
+                - generic [ref=e425]:
+                  - generic [ref=e426]: "FINAL STEP: LAUNCH FEE & DISPATCH SUMMARY"
+                  - generic [ref=e427]: SOLANA MAINNET
+                - generic [ref=e428]:
+                  - generic [ref=e429]:
+                    - generic [ref=e430]: "Base Deployment Fee:"
+                    - generic [ref=e431]: 0.150 SOL
+                  - generic [ref=e432]:
+                    - generic [ref=e433]: "Sub-Wallet Coordination (24 wallets × 0.005 SOL):"
+                    - generic [ref=e434]: +0.120 SOL
+                  - generic [ref=e435]:
+                    - generic [ref=e436]: "Jito Priority Leader Bribe:"
+                    - generic [ref=e437]: 0.015 SOL
+                  - generic [ref=e438]:
+                    - generic [ref=e439]: "Total Launch Fee:"
+                    - generic [ref=e440]: 0.270 SOL
+                  - generic [ref=e442]: "Fee recipient: Ccwp...y6Qq"
+              - button "Pay Launch Fee & Dispatch (0.27 SOL) →" [ref=e444] [cursor=pointer]
+    - contentinfo [ref=e293]:
+      - generic [ref=e294]:
+        - generic [ref=e295]: SCRAMJET MAINNET BETA · All Services Live · 396ms
+        - generic [ref=e298] [cursor=pointer]: Help
+      - generic [ref=e299]:
+        - generic [ref=e300]: Market Overview
+        - generic [ref=e301]: $92.31 ↗
+        - generic [ref=e302]: $697 ↗
+        - generic [ref=e303]: $2,266 ↘
+      - generic [ref=e304]:
+        - link "X" [ref=e305] [cursor=pointer]:
+          - /url: https://x.com
+        - generic [ref=e306] [cursor=pointer]: News
+        - link "Documentation" [ref=e307] [cursor=pointer]:
+          - /url: /docs
+        - generic [ref=e308] [cursor=pointer]: Activity
+        - generic [ref=e309] [cursor=pointer]: Settings
+  - alert [ref=e310]

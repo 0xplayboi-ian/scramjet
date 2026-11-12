@@ -11,11 +11,12 @@ import {
 } from "../../types";
 import { calculateUpfrontLaunchFee, isExemptFromFees } from "../../lib/feeRouter";
 import { useLaunchStore } from "../../lib/stores/useLaunchStore";
-import { DEFAULT_PLATFORM_FEE_VAULT } from "../../lib/constants";
+import { DEFAULT_PLATFORM_FEE_VAULT, SOLANA_INCINERATOR_ADDRESS, SOLANA_INCINERATOR_SOLSCAN, THIRTY_THIRD_TREE_LABS_CONFIG } from "../../lib/constants";
 import { LaunchOrchestrator, LaunchOrchestrationResult } from "../../lib/pipeline/launchOrchestrator";
 import { getSolanaConnection } from "../../lib/solana/connection";
 import { PublicKey } from "@solana/web3.js";
 import { ArchitectureBento } from "../../components/hypersonic/ArchitectureBento";
+import { TMinusRunbookDrawer } from "../../components/launch/TMinusRunbookDrawer";
 
 export default function LaunchPage() {
   const [activeTab, setActiveTab] = useState<"chain" | "token" | "settings">("chain");
@@ -30,6 +31,17 @@ export default function LaunchPage() {
   const [website, setWebsite] = useState("");
   const [twitter, setTwitter] = useState("");
   const [telegram, setTelegram] = useState("");
+
+  // Tokenomics & Authority Parameters (33rd Tree Labs Runbook)
+  const [totalSupply, setTotalSupply] = useState<number>(33333333);
+  const [decimals, setDecimals] = useState<number>(9);
+  const [metadataUri, setMetadataUri] = useState<string>("https://33rdtreelabs.tech/assets/token_metadata.json");
+  const [revokeMintAuthority, setRevokeMintAuthority] = useState<boolean>(true);
+  const [revokeFreezeAuthority, setRevokeFreezeAuthority] = useState<boolean>(true);
+  const [lpBurnTarget, setLpBurnTarget] = useState<string>("1nc1nerator11111111111111111111111111111111");
+  const [lpBurnPercent, setLpBurnPercent] = useState<number>(100);
+  const [tMinusDrawerOpen, setTMinusDrawerOpen] = useState<boolean>(false);
+  const [singularityPresetActive, setSingularityPresetActive] = useState<boolean>(false);
 
   // Currency & Creator Rewards Selection (Screenshots 2-8)
   const [currency, setCurrency] = useState<"SOL" | "USDC" | "USD1" | "CHIP" | "ORE" | "CUSTOM">("SOL");
@@ -86,6 +98,39 @@ export default function LaunchPage() {
   const [dispatchResult, setDispatchResult] = useState<LaunchOrchestrationResult | null>(null);
   const [dispatchError, setDispatchError] = useState<string | null>(null);
 
+  /**
+   * 1-Click Launch Preset: 33RD TREE LABS // THE SINGULARITY PROTOCOL
+   * Loads all parameters from TOKENOMICS_AND_LAUNCH_RUNBOOK.md into state.
+   */
+  const applySingularityProtocolPreset = () => {
+    setSelectedChain("solana");
+    setLaunchpad("RAYDIUM_LAUNCHLAB");
+    setCurrency("SOL");
+    setTokenName(THIRTY_THIRD_TREE_LABS_CONFIG.name);
+    setTokenSymbol(THIRTY_THIRD_TREE_LABS_CONFIG.symbol);
+    setTokenDescription(THIRTY_THIRD_TREE_LABS_CONFIG.description);
+    setTotalSupply(THIRTY_THIRD_TREE_LABS_CONFIG.hardCapSupply);
+    setDecimals(THIRTY_THIRD_TREE_LABS_CONFIG.decimals);
+    setWebsite(THIRTY_THIRD_TREE_LABS_CONFIG.website);
+    setMetadataUri(THIRTY_THIRD_TREE_LABS_CONFIG.metadataUri);
+    setImagePreview(THIRTY_THIRD_TREE_LABS_CONFIG.imageUrl);
+    setRevokeMintAuthority(THIRTY_THIRD_TREE_LABS_CONFIG.revokeMintAuthority);
+    setRevokeFreezeAuthority(THIRTY_THIRD_TREE_LABS_CONFIG.revokeFreezeAuthority);
+    setLpBurnTarget(THIRTY_THIRD_TREE_LABS_CONFIG.incineratorAddress);
+    setLpBurnPercent(THIRTY_THIRD_TREE_LABS_CONFIG.lpBurnPercent);
+    setPreset("THE_SINGULARITY_PROTOCOL");
+    setDevBuyPercent(15);
+    setHoldersBuyPercent(15);
+    setHolderCount(32);
+    setBackMevTuning(33);
+    setJitoTipSol(0.033);
+    setSniperGuardEnabled(true);
+    setSniperTriggerSol(5.0);
+    setSniperAction("NUKE");
+    setNukeScope("HOLDERS_ONLY");
+    setSingularityPresetActive(true);
+  };
+
   const handleDispatchBundle = async () => {
     try {
       setIsDispatching(true);
@@ -104,10 +149,18 @@ export default function LaunchPage() {
       setDispatchStep("3/4 Assembling atomic Jito Block-0 bundle...");
       const result = await LaunchOrchestrator.executeLaunch({
         config: {
-          tokenName: tokenName.trim() || "SCRAMJET",
-          tokenSymbol: tokenSymbol.trim() || "SCRAM",
-          tokenDescription: tokenDescription.trim() || "Hypersonic Solana Launch",
-          imageUrl: imagePreview || "https://scramjet.tools/logo.png",
+          tokenName: tokenName.trim() || THIRTY_THIRD_TREE_LABS_CONFIG.name,
+          tokenSymbol: tokenSymbol.trim() || THIRTY_THIRD_TREE_LABS_CONFIG.symbol,
+          tokenDescription: tokenDescription.trim() || THIRTY_THIRD_TREE_LABS_CONFIG.description,
+          imageUrl: imagePreview || THIRTY_THIRD_TREE_LABS_CONFIG.imageUrl,
+          websiteUrl: website.trim() || THIRTY_THIRD_TREE_LABS_CONFIG.website,
+          totalSupply,
+          decimals,
+          metadataUri: metadataUri.trim() || THIRTY_THIRD_TREE_LABS_CONFIG.metadataUri,
+          revokeMintAuthority,
+          revokeFreezeAuthority,
+          lpBurnTarget,
+          lpBurnPercent,
           network: "SOLANA",
           launchpad,
           launchMode: "BLOCK_0",
@@ -265,8 +318,48 @@ export default function LaunchPage() {
 
   return (
     <div className="min-h-full bg-[#08090C] text-[#F8FAFC] font-sans pb-16">
+      {/* 33RD Tree Labs Canary Protocol Top Notification & 1-Click Launch Bar */}
+      <div className="border-b border-[#1C202E] bg-gradient-to-r from-[#110D0E] via-[#0B0D13] to-[#0A1211] px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-20 shadow-md">
+        <div className="flex items-center gap-2.5">
+          <span className="w-2 h-2 rounded-full bg-[#FF2424] animate-ping flex-shrink-0" />
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[10px] text-[#FF5500] font-bold tracking-wider uppercase">
+              CANARY RUNBOOK:
+            </span>
+            <span className="text-xs font-semibold text-[#F8FAFC]">
+              33rd Tree Labs // The Singularity Protocol
+            </span>
+            <span className="hidden md:inline-block text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#31E3AC]/15 text-[#31E3AC] border border-[#31E3AC]/30 font-bold">
+              33,333,333 $33RD HARD CAP
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setTMinusDrawerOpen(true)}
+            className="px-3 py-1.5 rounded-lg bg-[#141722] hover:bg-[#1E2333] border border-[#2A3144] text-[#8E9AA8] hover:text-[#38BDF8] text-xs font-mono flex items-center gap-1.5 transition-all"
+          >
+            <span>⏱</span>
+            <span>T-Minus Runbook (9/9 Gates)</span>
+          </button>
+
+          <button
+            onClick={applySingularityProtocolPreset}
+            className={`px-3 py-1.5 rounded-lg border text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-sm ${
+              singularityPresetActive || preset === "THE_SINGULARITY_PROTOCOL"
+                ? "bg-[#FF2424]/20 border-[#FF2424] text-[#FF5500] shadow-[0_0_15px_rgba(255,36,36,0.3)]"
+                : "bg-[#FF3E00] hover:bg-[#FF5500] border-[#FF3E00] text-black hover:scale-[1.02]"
+            }`}
+          >
+            <span>⚡</span>
+            <span>Load 33RD Preset</span>
+          </button>
+        </div>
+      </div>
+
       {/* 1:1 Subheader Centered Pill Breadcrumbs (Screenshot 1 & 9) */}
-      <div className="h-[48px] border-b border-[#1A1C25] bg-[#0A0B0E] px-6 flex items-center justify-center text-xs sticky top-0 z-10">
+      <div className="h-[48px] border-b border-[#1A1C25] bg-[#0A0B0E] px-6 flex items-center justify-center text-xs sticky top-[49px] z-10">
         <div className="flex items-center gap-6 font-mono text-[11px]">
           <button
             onClick={() => setActiveTab("chain")}
@@ -315,6 +408,49 @@ export default function LaunchPage() {
               <p className="text-[12px] text-[#717686]">
                 Choose where your token will be launched and associated settings.
               </p>
+            </div>
+
+            {/* 33RD TREE LABS // THE SINGULARITY PROTOCOL 1-Click Launch Preset Card */}
+            <div className="p-4 sm:p-5 rounded-2xl border border-[#FF3E00]/40 bg-gradient-to-r from-[#140E10] via-[#0D0F16] to-[#0A1412] relative overflow-hidden shadow-[0_0_30px_rgba(255,62,0,0.1)]">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-1.5 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-mono text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-[#FF2424]/20 text-[#FF5500] border border-[#FF2424]/40">
+                      ★ RUNBOOK 1-CLICK PRESET
+                    </span>
+                    <span className="font-mono text-[10px] text-[#31E3AC] font-bold">
+                      33,333,333 $33RD (Hard Capped)
+                    </span>
+                    <span className="text-[10px] text-[#717686] font-mono">
+                      &bull; 9 Decimals &bull; Solana Mainnet
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-bold text-[#F8FAFC]">
+                    33RD TREE LABS // THE SINGULARITY PROTOCOL
+                  </h3>
+
+                  <p className="text-xs text-[#8E9AA8] leading-relaxed max-w-xl">
+                    Loads bit-exact Runbook parameters: Verifiable DePIN Compute Fabric, immutable mint &amp; freeze authority revocations, and 100% LP token burn to Solana Incinerator (<code className="text-[#FCA5A5] font-mono text-[10px]">1nc1nerator...1111</code>).
+                  </p>
+                </div>
+
+                <div className="flex sm:flex-col items-center gap-2 flex-shrink-0 w-full sm:w-auto">
+                  <button
+                    onClick={applySingularityProtocolPreset}
+                    className="flex-1 sm:flex-none w-full px-4 py-2.5 rounded-lg bg-[#FF3E00] hover:bg-[#FF5500] text-black font-extrabold text-xs font-mono uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,62,0,0.4)] hover:scale-[1.02] flex items-center justify-center gap-1.5"
+                  >
+                    <span>⚡</span>
+                    <span>Load 33RD Preset</span>
+                  </button>
+                  <button
+                    onClick={() => setTMinusDrawerOpen(true)}
+                    className="flex-1 sm:flex-none w-full px-3 py-1.5 rounded-lg bg-[#141722] hover:bg-[#1E2333] border border-[#252C3E] text-[11px] font-mono text-[#8E9AA8] hover:text-[#38BDF8] text-center"
+                  >
+                    ⏱ T-Minus Checklist
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* BLOCKCHAIN Selection */}
@@ -939,6 +1075,181 @@ export default function LaunchPage() {
                 />
               </div>
 
+              {/* Exact Hard Cap & Decimals (Runbook Specification) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[11px] font-mono text-[#8E9AA8]">
+                      Total Supply &amp; Hard Cap*
+                    </label>
+                    <span className="text-[9px] font-mono font-bold px-1.5 py-0.2 rounded bg-[#31E3AC]/15 text-[#31E3AC] border border-[#31E3AC]/30">
+                      CANONICAL CEILING
+                    </span>
+                  </div>
+                  <input
+                    type="number"
+                    value={totalSupply}
+                    onChange={(e) => setTotalSupply(Number(e.target.value))}
+                    placeholder="33333333"
+                    className="w-full h-10 bg-[#0E0F14] border border-[#1A1C25] focus:border-[#FF3E00] rounded-lg px-3 text-xs font-mono text-[#F8FAFC] outline-none"
+                  />
+                  <p className="text-[10px] text-[#717686] font-mono">
+                    Strict hard cap: 33,333,333 $33RD (Mint authority disabled at genesis).
+                  </p>
+                </div>
+
+                <div className="space-y-1.5">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[11px] font-mono text-[#8E9AA8]">
+                      Decimals*
+                    </label>
+                    <span className="text-[9px] font-mono text-[#8E9AA8]">
+                      SPL STANDARD
+                    </span>
+                  </div>
+                  <input
+                    type="number"
+                    value={decimals}
+                    onChange={(e) => setDecimals(Number(e.target.value))}
+                    placeholder="9"
+                    className="w-full h-10 bg-[#0E0F14] border border-[#1A1C25] focus:border-[#FF3E00] rounded-lg px-3 text-xs font-mono text-[#F8FAFC] outline-none"
+                  />
+                  <p className="text-[10px] text-[#717686] font-mono">
+                    9 decimals (1 $33RD = 1,000,000,000 atomic units/lamports).
+                  </p>
+                </div>
+              </div>
+
+              {/* Metaplex On-Chain Metadata URI */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between items-center">
+                  <label className="text-[11px] font-mono text-[#8E9AA8]">
+                    Metadata URI (Metaplex JSON)*
+                  </label>
+                  <a
+                    href="https://33rdtreelabs.tech/assets/token_metadata.json"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[10px] font-mono text-[#38BDF8] hover:underline"
+                  >
+                    Verify metadata.json ↗
+                  </a>
+                </div>
+                <input
+                  type="text"
+                  value={metadataUri}
+                  onChange={(e) => setMetadataUri(e.target.value)}
+                  placeholder="https://33rdtreelabs.tech/assets/token_metadata.json"
+                  className="w-full h-10 bg-[#0E0F14] border border-[#1A1C25] focus:border-[#FF3E00] rounded-lg px-3 text-xs font-mono text-[#F8FAFC] outline-none"
+                />
+                <p className="text-[10px] text-[#717686] font-mono">
+                  Off-chain canonical JSON hosting official Mark #06 wireframe and tensor compute attributes.
+                </p>
+              </div>
+
+              {/* Irrevocable Authority Revocations & LP Incinerator Burn Gate */}
+              <div className="p-4 rounded-xl border border-[#1C202B] bg-[#0A0C11] space-y-4">
+                <div className="flex items-center justify-between border-b border-[#1A1C25] pb-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#FF7700] font-bold">
+                      CANARY PROTOCOL IMMUTABILITY GATES
+                    </span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#FF3E00]/15 text-[#FF5500] border border-[#FF3E00]/30 font-bold">
+                      IRREVERSIBLE
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#31E3AC]">SOLANA ON-CHAIN RULES</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* Mint Authority Revocation */}
+                  <div className={`p-3 rounded-lg border transition-all ${revokeMintAuthority ? "border-[#31E3AC]/40 bg-[#0E1F1D]" : "border-[#1A1C25] bg-[#0E0F14]"}`}>
+                    <label className="flex items-start gap-2.5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={revokeMintAuthority}
+                        onChange={(e) => setRevokeMintAuthority(e.target.checked)}
+                        className="accent-[#31E3AC] w-4 h-4 mt-0.5 cursor-pointer"
+                      />
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-[#F8FAFC]">Revoke Mint Authority</span>
+                          <span className="text-[8px] font-mono font-bold px-1 rounded bg-[#31E3AC]/20 text-[#31E3AC]">HARD CAP</span>
+                        </div>
+                        <p className="text-[11px] text-[#8E9AA8] leading-tight">
+                          Permanently disables token printing. Enforces exact 33,333,333 supply mathematically on Solana.
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+
+                  {/* Freeze Authority Revocation */}
+                  <div className={`p-3 rounded-lg border transition-all ${revokeFreezeAuthority ? "border-[#31E3AC]/40 bg-[#0E1F1D]" : "border-[#1A1C25] bg-[#0E0F14]"}`}>
+                    <label className="flex items-start gap-2.5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={revokeFreezeAuthority}
+                        onChange={(e) => setRevokeFreezeAuthority(e.target.checked)}
+                        className="accent-[#31E3AC] w-4 h-4 mt-0.5 cursor-pointer"
+                      />
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-[#F8FAFC]">Revoke Freeze Authority</span>
+                          <span className="text-[8px] font-mono font-bold px-1 rounded bg-[#31E3AC]/20 text-[#31E3AC]">CENSORSHIP RESISTANT</span>
+                        </div>
+                        <p className="text-[11px] text-[#8E9AA8] leading-tight">
+                          Permanently strips freeze permissions so user and node cluster token accounts can never be blacklisted.
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                {/* LP Token Burn Target: Solana Incinerator */}
+                <div className="p-3.5 rounded-lg border border-[#FF2424]/40 bg-[#120A0D] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#FF2424] animate-pulse" />
+                      <span className="text-xs font-bold text-[#F8FAFC]">
+                        LP Token Burn Target: Solana Incinerator
+                      </span>
+                    </div>
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-[#FF2424]/20 text-[#FF5500] border border-[#FF2424]/40 font-bold">
+                      {lpBurnPercent}% LP BURN
+                    </span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="p-2 rounded bg-[#090507] border border-[#2B141B] font-mono text-xs text-[#FCA5A5] flex items-center justify-between">
+                      <span className="truncate">{lpBurnTarget}</span>
+                      <button
+                        onClick={() => {
+                          if (typeof navigator !== "undefined" && navigator.clipboard) {
+                            navigator.clipboard.writeText(lpBurnTarget);
+                          }
+                          alert("Copied Solana Incinerator address!");
+                        }}
+                        className="text-[10px] text-[#8E9AA8] hover:text-white px-2 py-0.5 rounded bg-[#1C1115] hover:bg-[#2C1920]"
+                      >
+                        Copy
+                      </button>
+                    </div>
+
+                    <div className="flex items-center justify-between text-[10px] font-mono pt-1 text-[#8E9AA8]">
+                      <span>Public mathematical proof of permanently locked liquidity.</span>
+                      <a
+                        href={SOLANA_INCINERATOR_SOLSCAN}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#38BDF8] hover:underline flex items-center gap-1 font-bold"
+                      >
+                        <span>View Incinerator on Solscan ↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Image Upload Dropzone + Preview Box */}
               <div className="space-y-1.5">
                 <div className="flex justify-between items-center text-[11px] font-mono text-[#8E9AA8]">
@@ -1083,22 +1394,29 @@ export default function LaunchPage() {
 
             {/* Presets and Inputs */}
             <div className="p-5 rounded-xl border border-[#1A1C25] bg-[#0E0F14] space-y-4">
-              <div className="flex justify-between items-center border-b border-[#1A1C25] pb-3">
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-[#1A1C25] pb-3">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-[#717686] font-semibold">
                   ALLOCATION &amp; PRESET
                 </span>
-                <div className="flex gap-1.5 font-mono text-[10px]">
-                  {(["QUICK_BUILD", "CLEAN_BUILD", "FULL_BUILD"] as const).map((p) => (
+                <div className="flex flex-wrap gap-1.5 font-mono text-[10px]">
+                  {(["QUICK_BUILD", "CLEAN_BUILD", "FULL_BUILD", "THE_SINGULARITY_PROTOCOL"] as const).map((p) => (
                     <button
                       key={p}
-                      onClick={() => setPreset(p)}
-                      className={`px-2.5 py-1 rounded border ${
+                      onClick={() => {
+                        setPreset(p);
+                        if (p === "THE_SINGULARITY_PROTOCOL") {
+                          applySingularityProtocolPreset();
+                        }
+                      }}
+                      className={`px-2.5 py-1 rounded border transition-all ${
                         preset === p
-                          ? "border-[#FF3E00] bg-[#FF3E00]/10 text-[#FF3E00] font-bold"
-                          : "border-[#1C202B] text-[#8E9AA8] bg-[#0B0C10]"
+                          ? p === "THE_SINGULARITY_PROTOCOL"
+                            ? "border-[#FF2424] bg-[#FF2424]/20 text-[#FF5500] font-extrabold shadow-[0_0_12px_rgba(255,36,36,0.35)]"
+                            : "border-[#FF3E00] bg-[#FF3E00]/10 text-[#FF3E00] font-bold"
+                          : "border-[#1C202B] text-[#8E9AA8] bg-[#0B0C10] hover:text-[#F8FAFC]"
                       }`}
                     >
-                      {p.replace("_", " ")}
+                      {p === "THE_SINGULARITY_PROTOCOL" ? "⚡ THE SINGULARITY PROTOCOL" : p.replace("_", " ")}
                     </button>
                   ))}
                 </div>

@@ -1,0 +1,62 @@
+- main [ref=f2e3]:
+  - paragraph [ref=f2e4]:
+    - link "All proposals" [ref=f2e5] [cursor=pointer]:
+      - /url: /#venue-viewer
+  - paragraph [ref=f2e6]: Single element
+  - heading "Venue Viewer" [level=1] [ref=f2e7]
+  - paragraph [ref=f2e8]: Let a visitor turn through launch venues as objects, so multi-venue deploy is something they handle, not a logo row.
+  - region "Venue Viewer" [ref=f2e9]:
+    - generic [ref=f2e10]:
+      - paragraph [ref=f2e11]: 3D proposal
+      - paragraph [ref=f2e12]: Let a visitor turn through launch venues as objects, so multi-venue deploy is something they handle, not a logo row.
+      - paragraph [ref=f2e13]: The product decision is which venue to deploy on. An object you can select is closer to that choice than a marquee of logos.
+      - paragraph [ref=f2e14]:
+        - strong [ref=f2e15]: Fallback.
+        - text: Static diagram plus the same four buttons, which stay available when WebGL is off.
+    - generic [ref=f2e17]:
+      - paragraph [ref=f2e20]: Venue viewer Decorative graphic. The description is in the heading beside it.
+      - group "Launch venues" [ref=f2e21]:
+        - button "Pump.fun Bonding curve" [ref=f2e22] [cursor=pointer]:
+          - generic [ref=f2e23]: Pump.fun
+          - generic [ref=f2e24]: Bonding curve
+        - button "Meteora DBC Dynamic fee" [ref=f2e25] [cursor=pointer]:
+          - generic [ref=f2e26]: Meteora DBC
+          - generic [ref=f2e27]: Dynamic fee
+        - button "Raydium LaunchLab" [ref=f2e28] [cursor=pointer]:
+          - generic [ref=f2e29]: Raydium
+          - generic [ref=f2e30]: LaunchLab
+        - button "Bags Creator share" [active] [pressed] [ref=f2e31] [cursor=pointer]:
+          - generic [ref=f2e32]: Bags
+          - generic [ref=f2e33]: Creator share
+        - button "LetsBonk Bonk native" [ref=f2e34] [cursor=pointer]:
+          - generic [ref=f2e35]: LetsBonk
+          - generic [ref=f2e36]: Bonk native
+        - button "StonkFun Token-2022" [ref=f2e37] [cursor=pointer]:
+          - generic [ref=f2e38]: StonkFun
+          - generic [ref=f2e39]: Token-2022
+        - button "Printr Supply scaler" [ref=f2e40] [cursor=pointer]:
+          - generic [ref=f2e41]: Printr
+          - generic [ref=f2e42]: Supply scaler
+        - button "Anoncoin Privacy curve" [ref=f2e43] [cursor=pointer]:
+          - generic [ref=f2e44]: Anoncoin
+          - generic [ref=f2e45]: Privacy curve
+        - button "Surge Instant AMM" [ref=f2e46] [cursor=pointer]:
+          - generic [ref=f2e47]: Surge
+          - generic [ref=f2e48]: Instant AMM
+        - button "Clanker AI autonomous" [ref=f2e49] [cursor=pointer]:
+          - generic [ref=f2e50]: Clanker
+          - generic [ref=f2e51]: AI autonomous
+        - button "FourMeme Fast bonding" [ref=f2e52] [cursor=pointer]:
+          - generic [ref=f2e53]: FourMeme
+          - generic [ref=f2e54]: Fast bonding
+        - button "Flap Fair launch" [ref=f2e55] [cursor=pointer]:
+          - generic [ref=f2e56]: Flap
+          - generic [ref=f2e57]: Fair launch
+      - paragraph [ref=f2e58]: Drag the object or use the buttons.
+    - generic [ref=f2e59]:
+      - generic [ref=f2e60]: 3D
+      - generic [ref=f2e61]: Cost medium
+      - generic [ref=f2e62]: Technique reference
+      - generic [ref=f2e63]: Interactive object viewer with drag and keyboard focus
+      - link "Award page" [ref=f2e64] [cursor=pointer]:
+        - /url: https://www.awwwards.com/sites/oryzo-ai

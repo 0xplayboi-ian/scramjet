@@ -1,0 +1,231 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - complementary [ref=e4]:
+        - generic [ref=e5]:
+          - generic [ref=e6]:
+            - link "SCRAMJET BETA" [ref=e7] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e14]:
+                - generic [ref=e15]: SCRAMJET
+                - generic [ref=e16]: BETA
+            - button [ref=e17] [cursor=pointer]
+          - generic [ref=e21] [cursor=pointer]:
+            - generic [ref=e22]: Search
+            - generic [ref=e27]: ⌘K
+          - generic [ref=e29]:
+            - generic [ref=e30]: Features
+            - link "Create Launch 12 DEX" [ref=e31] [cursor=pointer]:
+              - /url: /launch
+              - generic [ref=e32]: Create Launch
+              - generic [ref=e36]: 12 DEX
+            - link "Live Terminal" [ref=e37] [cursor=pointer]:
+              - /url: /workspace
+            - link "My Wallets" [ref=e41] [cursor=pointer]:
+              - /url: /funder
+            - link "Marketplace NEW" [ref=e47] [cursor=pointer]:
+              - /url: /marketplace
+              - generic [ref=e48]: Marketplace
+              - generic [ref=e54]: NEW
+            - link "Tracker" [ref=e55] [cursor=pointer]:
+              - /url: /workspace
+            - link "Sign In" [ref=e60] [cursor=pointer]:
+              - /url: /login
+            - link "Dashboard" [ref=e64] [cursor=pointer]:
+              - /url: /
+            - link "Rewards" [ref=e71] [cursor=pointer]:
+              - /url: /marketplace
+            - link "Funder" [ref=e78] [cursor=pointer]:
+              - /url: /funder
+        - generic [ref=e86]:
+          - link "Import" [ref=e87] [cursor=pointer]:
+            - /url: /launch
+          - link "+ Launch" [ref=e92] [cursor=pointer]:
+            - /url: /launch
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - link "Create Launch" [ref=e97] [cursor=pointer]:
+              - /url: /launch
+            - link "Live Terminal" [ref=e99] [cursor=pointer]:
+              - /url: /workspace
+            - link "Marketplace" [ref=e101] [cursor=pointer]:
+              - /url: /marketplace
+            - link "Funder" [ref=e103] [cursor=pointer]:
+              - /url: /funder
+          - generic [ref=e105]:
+            - generic [ref=e106]: SOL $92.31
+            - button "Connect Wallet" [ref=e109] [cursor=pointer]
+        - main [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e114]:
+              - button "CHAIN & LAUNCHPAD" [ref=e115] [cursor=pointer]
+              - button "TOKEN DETAILS" [ref=e116] [cursor=pointer]
+              - button "LAUNCH SETTINGS" [ref=e117] [cursor=pointer]
+            - generic [ref=e119]:
+              - generic [ref=e120]:
+                - heading "Create a new launch" [level=1] [ref=e121]
+                - paragraph [ref=e122]: Choose where your token will be launched and associated settings.
+              - generic [ref=e123]:
+                - text: BLOCKCHAIN
+                - generic [ref=e124]:
+                  - button "Solana Solana 12 LAUNCHPADS" [ref=e125] [cursor=pointer]:
+                    - generic [ref=e127]:
+                      - img "Solana" [ref=e128]
+                      - generic [ref=e129]: Solana
+                    - generic [ref=e130]: 12 LAUNCHPADS
+                  - button "Robinhood Robinhood COMING SOON" [disabled] [ref=e133]:
+                    - generic [ref=e135]:
+                      - img "Robinhood" [ref=e136]
+                      - generic [ref=e137]: Robinhood
+                    - generic [ref=e138]: COMING SOON
+                  - button "BNB Smart Chain BNB Smart Chain COMING SOON" [disabled] [ref=e141]:
+                    - generic [ref=e143]:
+                      - img "BNB Smart Chain" [ref=e144]
+                      - generic [ref=e145]: BNB Smart Chain
+                    - generic [ref=e146]: COMING SOON
+                  - button "Arc Arc NEW COMING SOON" [disabled] [ref=e149]:
+                    - generic [ref=e150]:
+                      - generic [ref=e151]:
+                        - img "Arc" [ref=e152]
+                        - generic [ref=e153]: Arc
+                      - generic [ref=e154]: NEW
+                    - generic [ref=e155]: COMING SOON
+                  - button "Ethereum Ethereum COMING SOON" [disabled] [ref=e158]:
+                    - generic [ref=e160]:
+                      - img "Ethereum" [ref=e161]
+                      - generic [ref=e162]: Ethereum
+                    - generic [ref=e163]: COMING SOON
+                  - button "Base Base COMING SOON" [disabled] [ref=e166]:
+                    - generic [ref=e168]:
+                      - img "Base" [ref=e169]
+                      - generic [ref=e170]: Base
+                    - generic [ref=e171]: COMING SOON
+                  - button "X Layer X Layer COMING SOON" [disabled] [ref=e174]:
+                    - generic [ref=e176]:
+                      - img "X Layer" [ref=e177]
+                      - generic [ref=e178]: X Layer
+                    - generic [ref=e179]: COMING SOON
+              - generic [ref=e181]:
+                - text: LAUNCHPAD
+                - generic [ref=e182]:
+                  - button "PumpFun PumpFun" [ref=e183] [cursor=pointer]:
+                    - img "PumpFun" [ref=e184]
+                    - generic [ref=e185]: PumpFun
+                  - button "Meteora DBC Meteora DBC" [ref=e186] [cursor=pointer]:
+                    - img "Meteora DBC" [ref=e187]
+                    - generic [ref=e188]: Meteora DBC
+                  - button "Raydium LaunchLab Raydium LaunchLab" [ref=e189] [cursor=pointer]:
+                    - img "Raydium LaunchLab" [ref=e190]
+                    - generic [ref=e191]: Raydium LaunchLab
+                  - button "StonkFun StonkFun" [ref=e192] [cursor=pointer]:
+                    - img "StonkFun" [ref=e193]
+                    - generic [ref=e194]: StonkFun
+                  - button "LetsBonk LetsBonk" [ref=e195] [cursor=pointer]:
+                    - img "LetsBonk" [ref=e196]
+                    - generic [ref=e197]: LetsBonk
+                  - button "Bags Bags" [ref=e198] [cursor=pointer]:
+                    - img "Bags" [ref=e199]
+                    - generic [ref=e200]: Bags
+                  - button "Anoncoin Anoncoin" [ref=e201] [cursor=pointer]:
+                    - img "Anoncoin" [ref=e202]
+                    - generic [ref=e203]: Anoncoin
+                  - button "Surge Surge" [ref=e204] [cursor=pointer]:
+                    - img "Surge" [ref=e205]
+                    - generic [ref=e206]: Surge
+                  - button "Printr Printr" [ref=e207] [cursor=pointer]:
+                    - img "Printr" [ref=e208]
+                    - generic [ref=e209]: Printr
+                  - button "Stoxes Stoxes" [ref=e210] [cursor=pointer]:
+                    - img "Stoxes" [ref=e211]
+                    - generic [ref=e212]: Stoxes
+                  - button "meme.fun meme.fun" [ref=e213] [cursor=pointer]:
+                    - img "meme.fun" [ref=e214]
+                    - generic [ref=e215]: meme.fun
+                  - button "Pangea Pangea" [ref=e216] [cursor=pointer]:
+                    - img "Pangea" [ref=e217]
+                    - generic [ref=e218]: Pangea
+              - generic [ref=e219]:
+                - generic [ref=e220]:
+                  - text: LAUNCH CURRENCY
+                  - generic [ref=e221]:
+                    - button "SOL Solana SOL" [ref=e222] [cursor=pointer]:
+                      - img "SOL" [ref=e223]
+                      - generic [ref=e224]:
+                        - generic [ref=e225]: Solana
+                        - generic [ref=e226]: SOL
+                    - button "USDC USD Coin USDC" [ref=e227] [cursor=pointer]:
+                      - img "USDC" [ref=e228]
+                      - generic [ref=e229]:
+                        - generic [ref=e230]: USD Coin
+                        - generic [ref=e231]: USDC
+                    - button "+ Custom" [ref=e232] [cursor=pointer]
+                - generic [ref=e233]:
+                  - text: CREATOR REWARDS
+                  - generic [ref=e234]:
+                    - button "Creator ⓘ" [ref=e235] [cursor=pointer]:
+                      - generic [ref=e236]: Creator
+                      - generic [ref=e237]: ⓘ
+                    - button "Holders ⓘ" [ref=e238] [cursor=pointer]:
+                      - generic [ref=e239]: Holders
+                      - generic [ref=e240]: ⓘ
+                - generic [ref=e241]:
+                  - text: PUMP.FUN
+                  - generic [ref=e242]:
+                    - generic [ref=e243]:
+                      - generic [ref=e244]:
+                        - generic [ref=e245]:
+                          - generic [ref=e246]: otcdesks
+                          - generic [ref=e247]: NEW
+                        - generic [ref=e248]: Assign the whole creator-fee stream to otcdesks. Holders are paid in a stock you pick — locked once the coin launches.
+                      - checkbox [ref=e249] [cursor=pointer]
+                    - generic [ref=e250]:
+                      - generic [ref=e251]:
+                        - generic [ref=e252]:
+                          - generic [ref=e253]: UsePaid
+                          - generic [ref=e254]: NEW
+                        - generic [ref=e255]: Assign the whole creator-fee stream to UsePaid, which pays 80% of it in dollars to an X account. Permanent once the coin launches.
+                      - checkbox [ref=e256] [cursor=pointer]
+                    - generic [ref=e257]:
+                      - generic [ref=e258]:
+                        - generic [ref=e259]:
+                          - generic [ref=e260]: zaio.fun
+                          - generic [ref=e261]: NEW
+                        - generic [ref=e262]: List the coin on zaio.fun. Its pump.fun creator fees are split 50/50 between your dev wallet and zaio, permanently once the coin launches.
+                      - checkbox [ref=e263] [cursor=pointer]
+                    - generic [ref=e264]:
+                      - generic [ref=e265]:
+                        - generic [ref=e266]:
+                          - generic [ref=e267]: Ansem Launch
+                          - generic [ref=e268]: NEW
+                        - generic [ref=e269]: Launch on pump.fun through Ansem. Extra SOL on the developer wallet buys supply for $ANSEM holders.
+                      - checkbox [ref=e270] [cursor=pointer]
+                    - generic [ref=e271]:
+                      - generic [ref=e272]:
+                        - text: Creator Fee Distribution
+                        - generic [ref=e273]: Split creator rewards before launch.
+                      - checkbox [ref=e274] [cursor=pointer]
+              - generic [ref=e275]:
+                - button "Configure Token" [ref=e277] [cursor=pointer]
+                - generic [ref=e278]: OR
+                - generic [ref=e282]:
+                  - button "Clone a Token" [ref=e283] [cursor=pointer]
+                  - button "Import a Token" [ref=e288] [cursor=pointer]
+    - contentinfo [ref=e293]:
+      - generic [ref=e294]:
+        - generic [ref=e295]: SCRAMJET MAINNET BETA · All Services Live · 396ms
+        - generic [ref=e298] [cursor=pointer]: Help
+      - generic [ref=e299]:
+        - generic [ref=e300]: Market Overview
+        - generic [ref=e301]: $92.31 ↗
+        - generic [ref=e302]: $697 ↗
+        - generic [ref=e303]: $2,266 ↘
+      - generic [ref=e304]:
+        - link "X" [ref=e305] [cursor=pointer]:
+          - /url: https://x.com
+        - generic [ref=e306] [cursor=pointer]: News
+        - link "Documentation" [ref=e307] [cursor=pointer]:
+          - /url: /docs
+        - generic [ref=e308] [cursor=pointer]: Activity
+        - generic [ref=e309] [cursor=pointer]: Settings
+  - alert [ref=e310]

@@ -10,6 +10,36 @@ import { RentReclaimer } from "../wallets/rentReclaim";
 
 export const PROVEN_LAUNCH_TEMPLATES: LaunchTemplate[] = [
   {
+    id: "33rd-tree-singularity-protocol",
+    name: "33RD TREE LABS // THE SINGULARITY PROTOCOL",
+    description:
+      "Official Canonical Launch Template: 33,333,333 exact hard cap, 9 decimals, immutable mint & freeze authority revocation, 100% LP token burn to Solana Incinerator (1nc1nerator...1111).",
+    launchpad: "RAYDIUM_LAUNCHLAB",
+    preset: "THE_SINGULARITY_PROTOCOL",
+    devBuyPercent: 15,
+    holdersBuyPercent: 15,
+    holderCount: 32,
+    backMevTuning: 33,
+    jitoTipSol: 0.033,
+    sniperGuardEnabled: true,
+    sniperTriggerSol: 5.0,
+    buybackBurnPercent: 10,
+    isOfficial: true,
+    tokenName: "33rd Tree Labs",
+    tokenSymbol: "33RD",
+    tokenDescription:
+      "A Byzantine-Resilient Verifiable DePIN Compute Fabric on Solana. Hierarchical Tensor Arbor coordination, zero-knowledge neural evaluations, and cryptographic consensus at scale.",
+    totalSupply: 33_333_333,
+    decimals: 9,
+    website: "https://33rdtreelabs.tech",
+    metadataUri: "https://33rdtreelabs.tech/assets/token_metadata.json",
+    imageUrl: "https://33rdtreelabs.tech/assets/official_logo_mark.png",
+    revokeMintAuthority: true,
+    revokeFreezeAuthority: true,
+    lpBurnTarget: "1nc1nerator11111111111111111111111111111111",
+    lpBurnPercent: 100,
+  },
+  {
     id: "proven-volume-builder",
     name: "Proven Volume & Floor Builder",
     description: "The gold standard used by top graduates. 65% Dev & Front MEV allocation, 25% distributed holder sub-wallets, 10% Jito bribe reserve.",

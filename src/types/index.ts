@@ -38,6 +38,8 @@ export interface MeteoraDbcOptions {
   configurationKey: string; // Dynamic curve configuration public key
   dynamicFeeBps: number; // 15 to 500 bps (0.15% to 5.0%)
   autoReinvestToDlmm: boolean;
+  burnLpToIncinerator?: boolean; // Transfer 100% of LP tokens to 1nc1nerator...
+  lpTokenAmount?: bigint | number;
 }
 
 export interface RaydiumLaunchLabOptions {
@@ -45,6 +47,8 @@ export interface RaydiumLaunchLabOptions {
   customRaiseSol?: number;
   openBookMarketId?: string;
   autoLockLpTokens: boolean;
+  burnLpToIncinerator?: boolean; // Transfer 100% of LP tokens to 1nc1nerator...
+  lpTokenAmount?: bigint | number;
 }
 
 export interface BagsFeeShareRecipient {
@@ -62,7 +66,12 @@ export type LaunchMode =
   | "MANUAL"
   | "SCHEDULED_SNIPE";
 
-export type BuildPreset = "QUICK_BUILD" | "CLEAN_BUILD" | "FULL_BUILD" | "CUSTOM";
+export type BuildPreset =
+  | "QUICK_BUILD"
+  | "CLEAN_BUILD"
+  | "FULL_BUILD"
+  | "THE_SINGULARITY_PROTOCOL"
+  | "CUSTOM";
 
 export interface Block0Config {
   preset: BuildPreset;
@@ -107,6 +116,7 @@ export type SubWalletRole =
 export interface SubWallet {
   id: string;
   publicKey: string;
+  index?: number;
   privateKeyEncrypted?: string;
   folderId?: string; // Grouping into folders e.g. "box1", "mev-front"
   balanceSol: number;
@@ -206,7 +216,18 @@ export interface CreatorFeeStrategy {
     buybackAndBurnPercent: number; // Auto buys on curve and calls spl-token burn
     stablecoinSwapUsdcPercent: number; // Swaps claimed SOL into USDC via Jupiter
     teamSplitWallets?: { address: string; percent: number }[];
+    incineratorBurnPercent?: number; // Direct burn of fees to Solana Incinerator (e.g. 10%)
   };
+}
+
+export interface TokenGenesisConfig {
+  initialSupply: number; // e.g. 33,333,333
+  decimals: number; // default 9
+  distributionVault: string; // Vault to receive the minted supply
+  revokeMintAuthority: boolean; // Irrevocably revoke mint authority
+  revokeFreezeAuthority: boolean; // Irrevocably revoke freeze authority
+  burnLpToIncinerator?: boolean; // Transfer 100% of LP tokens to Solana Incinerator
+  incineratorAddress?: string; // Canonical 1nc1nerator...
 }
 
 // ==========================================
@@ -220,6 +241,17 @@ export interface LaunchConfig {
   twitterUrl?: string;
   telegramUrl?: string;
   websiteUrl?: string;
+
+  // Exact Hard Cap & Token Authority Specification (e.g. 33rd Tree Labs Runbook)
+  totalSupply?: number;
+  decimals?: number;
+  distributionVault?: string;
+  metadataUri?: string;
+  revokeMintAuthority?: boolean;
+  revokeFreezeAuthority?: boolean;
+  lpBurnTarget?: string;
+  lpBurnPercent?: number;
+  tokenGenesis?: TokenGenesisConfig;
 
   network: BlockchainNetwork;
   launchpad: SolanaLaunchpad;
@@ -280,6 +312,20 @@ export interface LaunchTemplate {
   sniperTriggerSol: number;
   buybackBurnPercent: number;
   isOfficial?: boolean;
+
+  // Optional custom protocol constants
+  tokenName?: string;
+  tokenSymbol?: string;
+  tokenDescription?: string;
+  totalSupply?: number;
+  decimals?: number;
+  website?: string;
+  metadataUri?: string;
+  imageUrl?: string;
+  revokeMintAuthority?: boolean;
+  revokeFreezeAuthority?: boolean;
+  lpBurnTarget?: string;
+  lpBurnPercent?: number;
 }
 
 export interface CostBreakdownEstimate {

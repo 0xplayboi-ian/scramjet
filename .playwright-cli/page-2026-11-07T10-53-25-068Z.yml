@@ -1,0 +1,1636 @@
+- generic [ref=e2]:
+  - link "Skip to proposals" [ref=e3] [cursor=pointer]:
+    - /url: "#content"
+  - generic [ref=e4]:
+    - complementary "Prototype controls" [ref=e5]:
+      - paragraph [ref=e6]: SCRAMJET
+      - paragraph [ref=e7]: Review chrome. This column is not one of the proposals.
+      - generic [ref=e8]:
+        - button "Low power off" [ref=e9] [cursor=pointer]
+        - button "Preview reduced motion" [ref=e10] [cursor=pointer]
+      - paragraph [ref=e11]: Low power caps pixel ratio and removes bloom. Narrow screens start in low power.
+      - group
+      - paragraph [ref=e12]:
+        - link "Written brief" [ref=e13] [cursor=pointer]:
+          - /url: /brief
+    - generic [ref=e14]:
+      - banner [ref=e15]:
+        - paragraph [ref=e16]: Design prototype · not the production site
+        - heading "Proposed elements for SCRAMJET" [level=1] [ref=e17]
+        - paragraph [ref=e18]: Thirty-two working sections and interactive animations for a hypersonic Solana launch platform. Switch any of them off, or open one on its own to review and approve animations.
+      - generic "Quick Proposal Selection Matrix" [ref=e19]:
+        - link "#01 Kinetic Wordmark" [ref=e20] [cursor=pointer]:
+          - /url: "#kinetic-wordmark"
+          - generic [ref=e21]:
+            - generic [ref=e22]: "#01"
+            - generic [ref=e23]: Kinetic Wordmark
+          - generic [aria-hidden] [ref=e24]: ↓
+        - link "#02 God Candle Hero" [ref=e25] [cursor=pointer]:
+          - /url: "#intake-hero"
+          - generic [ref=e26]:
+            - generic [ref=e27]: "#02"
+            - generic [ref=e28]: God Candle Hero
+          - generic [aria-hidden] [ref=e29]: ↓
+        - link "#03 God Candle Throttle" [ref=e30] [cursor=pointer]:
+          - /url: "#candle-surge"
+          - generic [ref=e31]:
+            - generic [ref=e32]: "#03"
+            - generic [ref=e33]: God Candle Throttle
+          - generic [aria-hidden] [ref=e34]: ↓
+        - link "#04 Hypersonic Stream" [ref=e35] [cursor=pointer]:
+          - /url: "#hypersonic-stream"
+          - generic [ref=e36]:
+            - generic [ref=e37]: "#04"
+            - generic [ref=e38]: Hypersonic Stream
+          - generic [aria-hidden] [ref=e39]: ↓
+        - link "#05 Mach Sonic Boom Waveform" [ref=e40] [cursor=pointer]:
+          - /url: "#sonic-scrubber"
+          - generic [ref=e41]:
+            - generic [ref=e42]: "#05"
+            - generic [ref=e43]: Mach Sonic Boom Waveform
+          - generic [aria-hidden] [ref=e44]: ↓
+        - link "#06 Collimated Fighter Pilot HUD" [ref=e45] [cursor=pointer]:
+          - /url: "#cockpit-hud"
+          - generic [ref=e46]:
+            - generic [ref=e47]: "#06"
+            - generic [ref=e48]: Collimated Fighter Pilot HUD
+          - generic [aria-hidden] [ref=e49]: ↓
+        - link "#07 Mempool Intercept Radar" [ref=e50] [cursor=pointer]:
+          - /url: "#mempool-intercept"
+          - generic [ref=e51]:
+            - generic [ref=e52]: "#07"
+            - generic [ref=e53]: Mempool Intercept Radar
+          - generic [aria-hidden] [ref=e54]: ↓
+        - link "#08 Kinetic Anti-MEV Deflector" [ref=e55] [cursor=pointer]:
+          - /url: "#anti-mev-shield"
+          - generic [ref=e56]:
+            - generic [ref=e57]: "#08"
+            - generic [ref=e58]: Kinetic Anti-MEV Deflector
+          - generic [aria-hidden] [ref=e59]: ↓
+        - link "#09 Jito Block-0 Atomic Sorter" [ref=e60] [cursor=pointer]:
+          - /url: "#bundle-orchestrator"
+          - generic [ref=e61]:
+            - generic [ref=e62]: "#09"
+            - generic [ref=e63]: Jito Block-0 Atomic Sorter
+          - generic [aria-hidden] [ref=e64]: ↓
+        - link "#10 Ghost Funder Cryptography Vault" [ref=e65] [cursor=pointer]:
+          - /url: "#stealth-payload"
+          - generic [ref=e66]:
+            - generic [ref=e67]: "#10"
+            - generic [ref=e68]: Ghost Funder Cryptography Vault
+          - generic [aria-hidden] [ref=e69]: ↓
+        - link "#11 400ms Solana Slot Microscope" [ref=e70] [cursor=pointer]:
+          - /url: "#atomic-clock"
+          - generic [ref=e71]:
+            - generic [ref=e72]: "#11"
+            - generic [ref=e73]: 400ms Solana Slot Microscope
+          - generic [aria-hidden] [ref=e74]: ↓
+        - link "#12 Telemetry Radar" [ref=e75] [cursor=pointer]:
+          - /url: "#telemetry-radar"
+          - generic [ref=e76]:
+            - generic [ref=e77]: "#12"
+            - generic [ref=e78]: Telemetry Radar
+          - generic [aria-hidden] [ref=e79]: ↓
+        - link "#13 Solana Compute Unit Redline Tachometer" [ref=e80] [cursor=pointer]:
+          - /url: "#compute-tachometer"
+          - generic [ref=e81]:
+            - generic [ref=e82]: "#13"
+            - generic [ref=e83]: Solana Compute Unit Redline Tachometer
+          - generic [aria-hidden] [ref=e84]: ↓
+        - link "#14 Fee Lockup" [ref=e85] [cursor=pointer]:
+          - /url: "#fee-lockup"
+          - generic [ref=e86]:
+            - generic [ref=e87]: "#14"
+            - generic [ref=e88]: Fee Lockup
+          - generic [aria-hidden] [ref=e89]: ↓
+        - link "#15 Savings Simulator" [ref=e90] [cursor=pointer]:
+          - /url: "#savings-simulator"
+          - generic [ref=e91]:
+            - generic [ref=e92]: "#15"
+            - generic [ref=e93]: Savings Simulator
+          - generic [aria-hidden] [ref=e94]: ↓
+        - link "#16 Hyper-Dimensional Bonding Curve" [ref=e95] [cursor=pointer]:
+          - /url: "#liquidity-manifold"
+          - generic [ref=e96]:
+            - generic [ref=e97]: "#16"
+            - generic [ref=e98]: Hyper-Dimensional Bonding Curve
+          - generic [aria-hidden] [ref=e99]: ↓
+        - link "#17 Token Allocation Centrifuge" [ref=e100] [cursor=pointer]:
+          - /url: "#tokenomics-centrifuge"
+          - generic [ref=e101]:
+            - generic [ref=e102]: "#17"
+            - generic [ref=e103]: Token Allocation Centrifuge
+          - generic [aria-hidden] [ref=e104]: ↓
+        - link "#18 Supersonic de Laval Thrust Chamber" [ref=e105] [cursor=pointer]:
+          - /url: "#plasma-nozzle"
+          - generic [ref=e106]:
+            - generic [ref=e107]: "#18"
+            - generic [ref=e108]: Supersonic de Laval Thrust Chamber
+          - generic [aria-hidden] [ref=e109]: ↓
+        - link "#19 Machined Titanium Medallions" [ref=e110] [cursor=pointer]:
+          - /url: "#venue-medallions"
+          - generic [ref=e111]:
+            - generic [ref=e112]: "#19"
+            - generic [ref=e113]: Machined Titanium Medallions
+          - generic [aria-hidden] [ref=e114]: ↓
+        - link "#20 Supersonic Multi-Venue Smart Router" [ref=e115] [cursor=pointer]:
+          - /url: "#venue-router"
+          - generic [ref=e116]:
+            - generic [ref=e117]: "#20"
+            - generic [ref=e118]: Supersonic Multi-Venue Smart Router
+          - generic [aria-hidden] [ref=e119]: ↓
+        - link "#21 Architecture Bento" [ref=e120] [cursor=pointer]:
+          - /url: "#architecture-bento"
+          - generic [ref=e121]:
+            - generic [ref=e122]: "#21"
+            - generic [ref=e123]: Architecture Bento
+          - generic [aria-hidden] [ref=e124]: ↓
+        - link "#22 Protocol Strip" [ref=e125] [cursor=pointer]:
+          - /url: "#protocol-strip"
+          - generic [ref=e126]:
+            - generic [ref=e127]: "#22"
+            - generic [ref=e128]: Protocol Strip
+          - generic [aria-hidden] [ref=e129]: ↓
+        - link "#23 Hypersonic Launch CLI" [ref=e130] [cursor=pointer]:
+          - /url: "#terminal-matrix"
+          - generic [ref=e131]:
+            - generic [ref=e132]: "#23"
+            - generic [ref=e133]: Hypersonic Launch CLI
+          - generic [aria-hidden] [ref=e134]: ↓
+        - link "#24 Thermal Re-entry Friction Tiles" [ref=e135] [cursor=pointer]:
+          - /url: "#ablation-shield"
+          - generic [ref=e136]:
+            - generic [ref=e137]: "#24"
+            - generic [ref=e138]: Thermal Re-entry Friction Tiles
+          - generic [aria-hidden] [ref=e139]: ↓
+        - link "#25 Chapter Rail" [ref=e140] [cursor=pointer]:
+          - /url: "#chapter-rail"
+          - generic [ref=e141]:
+            - generic [ref=e142]: "#25"
+            - generic [ref=e143]: Chapter Rail
+          - generic [aria-hidden] [ref=e144]: ↓
+        - link "#26 Cascade Chamber" [ref=e145] [cursor=pointer]:
+          - /url: "#cascade-chamber"
+          - generic [ref=e146]:
+            - generic [ref=e147]: "#26"
+            - generic [ref=e148]: Cascade Chamber
+          - generic [aria-hidden] [ref=e149]: ↓
+        - link "#27 Mach Ribbon" [ref=e150] [cursor=pointer]:
+          - /url: "#mach-ribbon"
+          - generic [ref=e151]:
+            - generic [ref=e152]: "#27"
+            - generic [ref=e153]: Mach Ribbon
+          - generic [aria-hidden] [ref=e154]: ↓
+        - link "#28 Shock Field" [ref=e155] [cursor=pointer]:
+          - /url: "#shock-field"
+          - generic [ref=e156]:
+            - generic [ref=e157]: "#28"
+            - generic [ref=e158]: Shock Field
+          - generic [aria-hidden] [ref=e159]: ↓
+        - link "#29 Hover Shear" [ref=e160] [cursor=pointer]:
+          - /url: "#hover-shear"
+          - generic [ref=e161]:
+            - generic [ref=e162]: "#29"
+            - generic [ref=e163]: Hover Shear
+          - generic [aria-hidden] [ref=e164]: ↓
+        - link "#30 Magnetic Ignition" [ref=e165] [cursor=pointer]:
+          - /url: "#magnetic-ignition"
+          - generic [ref=e166]:
+            - generic [ref=e167]: "#30"
+            - generic [ref=e168]: Magnetic Ignition
+          - generic [aria-hidden] [ref=e169]: ↓
+        - link "#31 Section Veil" [ref=e170] [cursor=pointer]:
+          - /url: "#section-veil"
+          - generic [ref=e171]:
+            - generic [ref=e172]: "#31"
+            - generic [ref=e173]: Section Veil
+          - generic [aria-hidden] [ref=e174]: ↓
+        - link "#32 Instrument Dial" [ref=e175] [cursor=pointer]:
+          - /url: "#instrument-dial"
+          - generic [ref=e176]:
+            - generic [ref=e177]: "#32"
+            - generic [ref=e178]: Instrument Dial
+          - generic [aria-hidden] [ref=e179]: ↓
+      - region [ref=e180]:
+        - generic [ref=e181]:
+          - paragraph [ref=e182]:
+            - generic [ref=e183]: "PROPOSAL #01"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#01 Kinetic Wordmark" [level=2] [ref=e184]:
+            - generic [ref=e185]: "#01"
+            - text: Kinetic Wordmark
+          - paragraph [ref=e186]: Open the page with the speed claim as moving type, so the idea lands even if every 3D block is switched off.
+          - paragraph [ref=e187]: The audience scans fast. A three-line claim is readable on a phone and still feels machined.
+          - paragraph [ref=e188]:
+            - strong [ref=e189]: Fallback.
+            - text: Lines are visible immediately when reduced motion is on.
+        - generic [ref=e190]:
+          - generic [aria-hidden] [ref=e191]:
+            - paragraph [ref=e192]: Hypersonic
+            - paragraph [ref=e193]: launches.
+            - paragraph [ref=e194]: 3.5% fee.
+          - paragraph [ref=e195]: Hypersonic launches. 3.5% fee.
+        - generic [ref=e196]:
+          - generic [ref=e197]: "#01"
+          - generic [ref=e198]: No 3D
+          - generic [ref=e199]: Cost low
+          - generic [ref=e200]: Technique reference
+          - generic [ref=e201]: Split-line text reveal tied to scroll enter
+          - link "Award page" [ref=e202] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/grids
+      - region [ref=e203]:
+        - generic [ref=e204]:
+          - paragraph [ref=e205]:
+            - generic [ref=e206]: "PROPOSAL #02"
+            - text: ·3D PROPOSAL
+          - heading "#02 God Candle Hero" [level=2] [ref=e207]:
+            - generic [ref=e208]: "#02"
+            - text: God Candle Hero
+          - paragraph [ref=e209]: Towering 3D emerald God Candle erupting 5x higher through resistance tiers with volumetric market spark particles, razor-flat white laser apex, and interactive surge triggers.
+          - paragraph [ref=e210]: Crypto founders and traders measure speed and conviction in God Candles. A surging 3D green monolith embodies hypersonic token velocity far better than a static mechanical inlet.
+          - paragraph [ref=e211]:
+            - strong [ref=e212]: Fallback.
+            - text: Static neon God Candle SVG while scene loads, on low-power devices, and whenever reduced motion is on.
+        - generic [ref=e214]:
+          - paragraph [ref=e216]: God candle hero Decorative graphic. The description is in the heading beside it.
+          - generic: Click / tap the 3D candle to trigger a Mega Pump surge
+        - generic [ref=e217]:
+          - generic [ref=e218]: "#02"
+          - generic [ref=e219]: 3D
+          - generic [ref=e220]: Cost high
+          - generic [ref=e221]: Original
+          - generic [ref=e222]: 3D volumetric candlestick with interactive vertical surge, resistance planes, spark field, and bloom pass
+          - link "Award page" [ref=e223] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/edolus
+      - generic [ref=e224]:
+        - generic [ref=e225]:
+          - paragraph [ref=e226]:
+            - generic [ref=e227]: "PROPOSAL #03"
+            - text: ·
+            - generic [ref=e228]: MEDIUM COST · ORIGINAL
+          - heading "#03 God Candle Throttle" [level=2] [ref=e229]:
+            - generic [ref=e230]: "#03"
+            - text: God Candle Throttle
+          - paragraph [ref=e231]: Aerospace-grade mechanical throttle quadrant. Dragging the lever from Mach 1 to Mach 10 surges the God Candle skyward 5.2x with a razor-flat top, market-cap milestones, and smooth camera zoom out.
+          - paragraph [ref=e232]: Gives founders the visceral physical sensation of throttling their launch token into hypersonic escape velocity.
+          - generic [ref=e233]:
+            - button "Hide God Candle Throttle" [pressed] [ref=e234] [cursor=pointer]: "On"
+            - button "Alone" [ref=e235] [cursor=pointer]
+            - link "Ref" [ref=e236] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/edolus
+        - generic [ref=e238]:
+          - generic [ref=e239]:
+            - paragraph [ref=e240]: AEROSPACE THROTTLE QUADRANT
+            - generic [ref=e241]:
+              - slider "Hypersonic throttle lever" [ref=e242]: "70"
+              - generic [ref=e243]:
+                - generic [ref=e244]: MACH 10.0
+                - generic [ref=e245]: MACH 7.5
+                - generic [ref=e246]: MACH 5.0
+                - generic [ref=e247]: MACH 2.5
+                - generic [ref=e248]: MACH 1.0
+            - generic [ref=e249]:
+              - generic [ref=e250]: MACH 7.3
+              - generic [ref=e251]: 70% POWER
+            - generic [ref=e252]:
+              - button "Mach 1.0 (Base)" [ref=e253] [cursor=pointer]
+              - button "Mach 5.0 (Escape)" [ref=e254] [cursor=pointer]
+              - button "Mach 7.5 (Stratosphere)" [ref=e255] [cursor=pointer]
+              - button "Mach 10.0 (5X Apex)" [ref=e256] [cursor=pointer]
+          - generic [ref=e257]:
+            - img "Surging 5X Flat-Top God Candle" [ref=e258]:
+              - generic [ref=e259]:
+                - generic [ref=e260]: "R1: ACCUMULATION"
+                - generic [ref=e261]: $100K ✓
+              - generic [ref=e262]:
+                - generic [ref=e263]: "R2: MACH 1 BOOM"
+                - generic [ref=e264]: $350K ✓
+              - generic [ref=e265]:
+                - generic [ref=e266]: "R3: TROPOSPHERE"
+                - generic [ref=e267]: $1.2M ✓
+              - generic [ref=e268]:
+                - generic [ref=e269]: "R4: STRATOSPHERE"
+                - generic [ref=e270]: $4.5M ✓
+              - generic [ref=e271]:
+                - generic [ref=e272]: "R5: MESOSPHERE"
+                - generic [ref=e273]: $12.0M ✓
+              - generic [ref=e274]:
+                - generic [ref=e275]: "R6: KARMAN ORBIT"
+                - generic [ref=e276]: $30.0M
+              - generic [ref=e277]:
+                - generic [ref=e278]: "R7: THERMOSPHERE"
+                - generic [ref=e279]: $65.0M
+              - generic [ref=e280]:
+                - generic [ref=e281]: "R8: GOD CANDLE"
+                - generic [ref=e282]: $100M+
+              - generic [ref=e284]: ▲ $12.59M [M7.3]
+            - generic [ref=e286]:
+              - generic [ref=e287]:
+                - generic [ref=e288]: MARKET CAP
+                - generic [ref=e289]: $12.59M
+              - generic [ref=e290]:
+                - generic [ref=e291]: CANDLE HEIGHT
+                - generic [ref=e292]: 770 px (5.2X)
+              - generic [ref=e293]:
+                - generic [ref=e294]: INFLOW VELOCITY
+                - generic [ref=e295]: 994 SOL/s
+              - generic [ref=e296]:
+                - generic [ref=e297]: ESCAPE VELOCITY
+                - generic [ref=e298]: CHARGING
+        - generic [ref=e299]:
+          - generic [ref=e300]: "#03"
+          - generic [ref=e301]: Cost medium
+          - generic [ref=e302]: Original
+          - generic [ref=e303]: Gives founders the visceral physical sensation of throttling their launch token into hypersonic escape velocity.
+      - region [ref=e304]:
+        - generic [ref=e305]:
+          - paragraph [ref=e306]:
+            - generic [ref=e307]: "PROPOSAL #04"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#04 Hypersonic Stream" [level=2] [ref=e308]:
+            - generic [ref=e309]: "#04"
+            - text: Hypersonic Stream
+          - paragraph [ref=e310]: Simulate the airflow of a Mach 3.5+ scramjet engine with particle velocity streaks and a cursor-reactive perspective grid.
+          - paragraph [ref=e311]: Gives the backdrop high-speed aerospace texture without requiring a heavy 3D WebGL context.
+          - paragraph [ref=e312]:
+            - strong [ref=e313]: Fallback.
+            - text: Static vector grid and mach streaks SVG. Loop halts in low-power and reduced motion modes.
+        - generic [ref=e315]:
+          - generic:
+            - generic: MACH HYPERSONIC FLOW
+            - paragraph: Cursor proximity warps grid coordinate lattice; particle velocity throttles to power profile.
+        - generic [ref=e317]:
+          - generic [ref=e318]: "#04"
+          - generic [ref=e319]: No 3D
+          - generic [ref=e320]: Cost low
+          - generic [ref=e321]: Original
+          - generic [ref=e322]: Interactive 2D HTML5 canvas with particle physics and mouse proximity distortion
+          - link "Award page" [ref=e323] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/edolus
+      - generic [ref=e324]:
+        - generic [ref=e325]:
+          - paragraph [ref=e326]:
+            - generic [ref=e327]: "PROPOSAL #05"
+            - text: ·
+            - generic [ref=e328]: LOW COST · ORIGINAL
+          - heading "#05 Mach Sonic Boom Waveform" [level=2] [ref=e329]:
+            - generic [ref=e330]: "#05"
+            - text: Mach Sonic Boom Waveform
+          - paragraph [ref=e331]: Interactive aerodynamic pressure wave scrubber. Dragging horizontally compresses air molecules into a steep shockwave until breaking Mach 1.0 with a vapor cone flash and instant 400ms finality.
+          - paragraph [ref=e332]: Educates users on how SCRAMJET compresses multi-second DEX routing into a sub-second atomic supersonic strike.
+          - generic [ref=e333]:
+            - button "Hide Mach Sonic Boom Waveform" [pressed] [ref=e334] [cursor=pointer]: "On"
+            - button "Alone" [ref=e335] [cursor=pointer]
+            - link "Ref" [ref=e336] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/edolus
+        - generic [ref=e338]:
+          - generic [ref=e339]:
+            - generic [ref=e340]:
+              - generic [ref=e341]: FLIGHT SPEED
+              - generic [ref=e342]: MACH 1.40
+              - generic [ref=e343]: SUPERSONIC (Atomic finality)
+            - generic [ref=e344]:
+              - generic [ref=e345]: "Compress Air Density / Velocity:"
+              - slider "Compress Air Density / Velocity:" [ref=e346]: "1.4"
+          - generic [ref=e347]:
+            - img "Sonic Shockwave Graph" [ref=e348]
+            - generic [ref=e355]:
+              - generic [ref=e356]: "SOUND BARRIER: BREACHED"
+              - generic [ref=e357]: "TRANSACTION CONFIRMATION: 380ms (1 SLOT)"
+        - generic [ref=e358]:
+          - generic [ref=e359]: "#05"
+          - generic [ref=e360]: Cost low
+          - generic [ref=e361]: Original
+          - generic [ref=e362]: Educates users on how SCRAMJET compresses multi-second DEX routing into a sub-second atomic supersonic strike.
+      - generic [ref=e363]:
+        - generic [ref=e364]:
+          - paragraph [ref=e365]:
+            - generic [ref=e366]: "PROPOSAL #06"
+            - text: ·
+            - generic [ref=e367]: MEDIUM COST · ORIGINAL
+          - heading "#06 Collimated Fighter Pilot HUD" [level=2] [ref=e368]:
+            - generic [ref=e369]: "#06"
+            - text: Collimated Fighter Pilot HUD
+          - paragraph [ref=e370]: Authentic supersonic fighter jet Heads-Up Display with pitch ladder, artificial horizon line, flight path vector, Mach speed tape, block height altitude, and cursor targeting box.
+          - paragraph [ref=e371]: Immerses the visitor in the cockpit of a Mach 3.5 aerospace vehicle, delivering on the core 'SCRAMJET' metaphor.
+          - generic [ref=e372]:
+            - button "Hide Collimated Fighter Pilot HUD" [pressed] [ref=e373] [cursor=pointer]: "On"
+            - button "Alone" [ref=e374] [cursor=pointer]
+            - link "Ref" [ref=e375] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/forge-automotive
+        - generic [ref=e377]:
+          - generic [ref=e378]:
+            - generic [ref=e379]: AVIONICS HUD v4.0
+            - generic [ref=e380]:
+              - button "NAV" [ref=e381] [cursor=pointer]
+              - button "COMBAT" [ref=e382] [cursor=pointer]
+              - button "LAUNCH" [ref=e383] [cursor=pointer]
+            - button "ACQUIRE TARGET" [ref=e384] [cursor=pointer]
+          - img "Fighter Pilot HUD" [ref=e386]:
+            - generic [ref=e387]:
+              - generic [ref=e390]: "+10"
+              - generic [ref=e391]: "-10"
+            - generic [ref=e392]:
+              - generic [ref=e394]: M3.8
+              - generic [ref=e395]: M3.5
+              - generic [ref=e396]: M3.2
+            - generic [ref=e397]:
+              - generic [ref=e399]: SLOT 492k
+              - generic [ref=e400]: 318,492
+              - generic [ref=e401]: SLOT 491k
+            - generic [ref=e402]: TRACKING
+        - generic [ref=e405]:
+          - generic [ref=e406]: "#06"
+          - generic [ref=e407]: Cost medium
+          - generic [ref=e408]: Original
+          - generic [ref=e409]: Immerses the visitor in the cockpit of a Mach 3.5 aerospace vehicle, delivering on the core 'SCRAMJET' metaphor.
+      - generic [ref=e410]:
+        - generic [ref=e411]:
+          - paragraph [ref=e412]:
+            - generic [ref=e413]: "PROPOSAL #07"
+            - text: ·
+            - generic [ref=e414]: MEDIUM COST · ORIGINAL
+          - heading "#07 Mempool Intercept Radar" [level=2] [ref=e415]:
+            - generic [ref=e416]: "#07"
+            - text: Mempool Intercept Radar
+          - paragraph [ref=e417]: 360-degree tactical sonar radar intercepting unconfirmed Solana transactions in real time, neutralizing sandwich front-runners and routing safe bundles to Jito Block-0.
+          - paragraph [ref=e418]: Visualizes the invisible dark forest of the Solana mempool. Proves why SCRAMJET's private bundle routing saves creators from malicious snipers.
+          - generic [ref=e419]:
+            - button "Hide Mempool Intercept Radar" [pressed] [ref=e420] [cursor=pointer]: "On"
+            - button "Alone" [ref=e421] [cursor=pointer]
+            - link "Ref" [ref=e422] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/forge-automotive
+        - generic [ref=e424]:
+          - generic [ref=e425]:
+            - img "Mempool Intercept Sonar" [ref=e426]:
+              - generic [ref=e436]: tx_9xJ1..8a
+              - generic [ref=e440]: bot_3mB..2e
+              - generic [ref=e444]: tx_4kJ9..7f
+              - generic [ref=e448]: sniper_91..1c
+              - generic [ref=e452]: tx_2vQ4..9k
+            - generic [ref=e456]:
+              - generic [ref=e457]: "RANGE: 400ms"
+              - generic [ref=e458]: INTERCEPT ACTIVE
+          - generic [ref=e459]:
+            - generic [ref=e460]:
+              - generic [ref=e461]:
+                - button "All Signals" [ref=e462] [cursor=pointer]
+                - button "Shielded" [ref=e463] [cursor=pointer]
+                - button "Snipers Neutralized" [ref=e464] [cursor=pointer]
+              - generic [ref=e465]:
+                - button "Freeze" [ref=e466] [cursor=pointer]
+                - button "Ping Mempool" [ref=e467] [cursor=pointer]
+            - generic [ref=e468]:
+              - generic [ref=e469]:
+                - generic [ref=e470]: SHIELDED
+                - generic [ref=e471]: tx_9xJ1..8a
+                - generic [ref=e472]: 0.015 SOL
+                - generic [ref=e473]: 4ms ago
+              - generic [ref=e474]:
+                - generic [ref=e475]: NEUTRALIZED
+                - generic [ref=e476]: bot_3mB..2e
+                - generic [ref=e477]: 0.080 SOL
+                - generic [ref=e478]: 12ms ago
+              - generic [ref=e479]:
+                - generic [ref=e480]: JITO
+                - generic [ref=e481]: tx_4kJ9..7f
+                - generic [ref=e482]: 0.020 SOL
+                - generic [ref=e483]: 18ms ago
+              - generic [ref=e484]:
+                - generic [ref=e485]: NEUTRALIZED
+                - generic [ref=e486]: sniper_91..1c
+                - generic [ref=e487]: 0.120 SOL
+                - generic [ref=e488]: 22ms ago
+              - generic [ref=e489]:
+                - generic [ref=e490]: SHIELDED
+                - generic [ref=e491]: tx_2vQ4..9k
+                - generic [ref=e492]: 0.010 SOL
+                - generic [ref=e493]: 28ms ago
+            - paragraph [ref=e494]: SCRAMJET Jito-relayed private endpoints bypass public Solana mempools, neutralizing frontrun bots before validator scheduling.
+        - generic [ref=e495]:
+          - generic [ref=e496]: "#07"
+          - generic [ref=e497]: Cost medium
+          - generic [ref=e498]: Original
+          - generic [ref=e499]: Visualizes the invisible dark forest of the Solana mempool. Proves why SCRAMJET's private bundle routing saves creators from malicious snipers.
+      - generic [ref=e500]:
+        - generic [ref=e501]:
+          - paragraph [ref=e502]:
+            - generic [ref=e503]: "PROPOSAL #08"
+            - text: ·
+            - generic [ref=e504]: MEDIUM COST · ORIGINAL
+          - heading "#08 Kinetic Anti-MEV Deflector" [level=2] [ref=e505]:
+            - generic [ref=e506]: "#08"
+            - text: Kinetic Anti-MEV Deflector
+          - paragraph [ref=e507]: Interactive kinetic armor simulation. Hostile sandwich bots and arbitrage snipers fire red laser attacks that bounce off SCRAMJET's magnetic hex-grid deflector armor with kinetic spark bursts.
+          - paragraph [ref=e508]: Directly demonstrates the economic loss of public mempool routing vs SCRAMJET's 100% front-run protection.
+          - generic [ref=e509]:
+            - button "Hide Kinetic Anti-MEV Deflector" [pressed] [ref=e510] [cursor=pointer]: "On"
+            - button "Alone" [ref=e511] [cursor=pointer]
+            - link "Ref" [ref=e512] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/mecha
+        - generic [ref=e514]:
+          - generic [ref=e515]:
+            - button "SCRAMJET Private Bundle (Invulnerable)" [ref=e516] [cursor=pointer]
+            - button "Standard Public Mempool (Vulnerable)" [ref=e517] [cursor=pointer]
+            - button "Simulate Bot Attack Wave" [ref=e518] [cursor=pointer]
+          - generic [ref=e519]:
+            - img "Anti-MEV Kinetic Shield" [ref=e520]:
+              - generic [ref=e522]: LAUNCH TX
+            - generic [ref=e530]:
+              - generic [ref=e531]:
+                - generic [ref=e532]: FRONTRUN STATUS
+                - generic [ref=e533]: DEFLECTED (0% SLIPPAGE)
+              - generic [ref=e534]:
+                - generic [ref=e535]: MEV ATTACKS BLOCKED
+                - generic [ref=e536]: 1,482
+              - generic [ref=e537]:
+                - generic [ref=e538]: SOL RECOVERY VALUE
+                - generic [ref=e539]: +14.2 SOL / Launch
+        - generic [ref=e540]:
+          - generic [ref=e541]: "#08"
+          - generic [ref=e542]: Cost medium
+          - generic [ref=e543]: Original
+          - generic [ref=e544]: Directly demonstrates the economic loss of public mempool routing vs SCRAMJET's 100% front-run protection.
+      - generic [ref=e545]:
+        - generic [ref=e546]:
+          - paragraph [ref=e547]:
+            - generic [ref=e548]: "PROPOSAL #09"
+            - text: ·
+            - generic [ref=e549]: LOW COST · ORIGINAL
+          - heading "#09 Jito Block-0 Atomic Sorter" [level=2] [ref=e550]:
+            - generic [ref=e551]: "#09"
+            - text: Jito Block-0 Atomic Sorter
+          - paragraph [ref=e552]: Interactive 5-slot Solana block pack visualizer. Demonstrates how SCRAMJET tightly binds Mint, LP, Snipe, Lock, and Tip into an indivisible atomic unit that cannot be broken apart.
+          - paragraph [ref=e553]: Demystifies the complex Solana validator packing algorithm in a clean, interactive visual format.
+          - generic [ref=e554]:
+            - button "Hide Jito Block-0 Atomic Sorter" [pressed] [ref=e555] [cursor=pointer]: "On"
+            - button "Alone" [ref=e556] [cursor=pointer]
+            - link "Ref" [ref=e557] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/mecha
+        - generic [ref=e559]:
+          - paragraph [ref=e560]: "Solana blocks are vulnerable to sandwiched re-ordering. SCRAMJET seals five atomic operations into a single unbreakably bonded Jito bundle:"
+          - tablist [ref=e561]:
+            - tab "SLOT 1 SEALED SPL-Token2022 Mint Create immutable supply & metadata 45,000 CU" [selected] [ref=e562] [cursor=pointer]:
+              - generic [ref=e563]:
+                - generic [ref=e564]: SLOT 1
+                - generic [ref=e565]: SEALED
+              - heading "SPL-Token2022 Mint" [level=4] [ref=e566]
+              - paragraph [ref=e567]: Create immutable supply & metadata
+              - generic [ref=e568]: 45,000 CU
+              - generic [aria-hidden] [ref=e569]: ➔
+            - tab "SLOT 2 SEALED Liquidity Injection Deposit SOL + Token pair into pool 85,000 CU" [ref=e570] [cursor=pointer]:
+              - generic [ref=e571]:
+                - generic [ref=e572]: SLOT 2
+                - generic [ref=e573]: SEALED
+              - heading "Liquidity Injection" [level=4] [ref=e574]
+              - paragraph [ref=e575]: Deposit SOL + Token pair into pool
+              - generic [ref=e576]: 85,000 CU
+              - generic [aria-hidden] [ref=e577]: ➔
+            - tab "SLOT 3 SEALED Block-0 Sniper Buy Creator first-purchase in exact same block 65,000 CU" [ref=e578] [cursor=pointer]:
+              - generic [ref=e579]:
+                - generic [ref=e580]: SLOT 3
+                - generic [ref=e581]: SEALED
+              - heading "Block-0 Sniper Buy" [level=4] [ref=e582]
+              - paragraph [ref=e583]: Creator first-purchase in exact same block
+              - generic [ref=e584]: 65,000 CU
+              - generic [aria-hidden] [ref=e585]: ➔
+            - tab "SLOT 4 SEALED Liquidity Auto-Lock Burn LP tokens permanently to incinerator 35,000 CU" [ref=e586] [cursor=pointer]:
+              - generic [ref=e587]:
+                - generic [ref=e588]: SLOT 4
+                - generic [ref=e589]: SEALED
+              - heading "Liquidity Auto-Lock" [level=4] [ref=e590]
+              - paragraph [ref=e591]: Burn LP tokens permanently to incinerator
+              - generic [ref=e592]: 35,000 CU
+              - generic [aria-hidden] [ref=e593]: ➔
+            - tab "SLOT 5 SEALED Jito Validator Tip Guaranteed priority inclusion in Slot 0 15,000 CU" [ref=e594] [cursor=pointer]:
+              - generic [ref=e595]:
+                - generic [ref=e596]: SLOT 5
+                - generic [ref=e597]: SEALED
+              - heading "Jito Validator Tip" [level=4] [ref=e598]
+              - paragraph [ref=e599]: Guaranteed priority inclusion in Slot 0
+              - generic [ref=e600]: 15,000 CU
+          - generic [ref=e601]:
+            - generic [ref=e602]:
+              - generic [ref=e603]: INSTRUCTION DETAILS — SPL-Token2022 Mint
+              - generic [ref=e604]: "STATUS: ATOMIC LOCK VERIFIED"
+            - generic [ref=e605]:
+              - generic [ref=e606]:
+                - generic [ref=e607]: EXECUTION GUARANTEE
+                - generic [ref=e608]: All 5 execute or NONE execute (Zero partial state)
+              - generic [ref=e609]:
+                - generic [ref=e610]: MEV EXPOSURE
+                - generic [ref=e611]: 0.00% (No external transactions can be inserted)
+              - generic [ref=e612]:
+                - generic [ref=e613]: COMPUTE BUDGET
+                - generic [ref=e614]: 45,000 CU
+        - generic [ref=e615]:
+          - generic [ref=e616]: "#09"
+          - generic [ref=e617]: Cost low
+          - generic [ref=e618]: Original
+          - generic [ref=e619]: Demystifies the complex Solana validator packing algorithm in a clean, interactive visual format.
+      - generic [ref=e620]:
+        - generic [ref=e621]:
+          - paragraph [ref=e622]:
+            - generic [ref=e623]: "PROPOSAL #10"
+            - text: ·
+            - generic [ref=e624]: LOW COST · ORIGINAL
+          - heading "#10 Ghost Funder Cryptography Vault" [level=2] [ref=e625]:
+            - generic [ref=e626]: "#10"
+            - text: Ghost Funder Cryptography Vault
+          - paragraph [ref=e627]: Interactive zero-knowledge stealth wallet generator. Demonstrates how ephemeral blinded keypairs shield deployer wallets from being tracked or front-run on public block explorers.
+          - paragraph [ref=e628]: Solana creators dread wallet tracking bots that dump on their launches. This proves SCRAMJET's Ghost Funder breaks the link.
+          - generic [ref=e629]:
+            - button "Hide Ghost Funder Cryptography Vault" [pressed] [ref=e630] [cursor=pointer]: "On"
+            - button "Alone" [ref=e631] [cursor=pointer]
+            - link "Ref" [ref=e632] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/mecha
+        - generic [ref=e634]:
+          - generic [ref=e635]:
+            - heading "Ephemeral Ghost Funder Keypair" [level=3] [ref=e636]
+            - paragraph [ref=e637]: Public deployer wallets are monitored by copy-trading snipers. Ghost Funder generates a single-use blinded address that deposits launch liquidity and instantly destroys its private key.
+          - generic [ref=e638]:
+            - generic [ref=e639]:
+              - generic [ref=e640]: ACTIVE EPHEMERAL ADDRESS
+              - generic [ref=e641]: 8xK2..9aP1
+              - generic [ref=e642]: READY TO DERIVE
+            - button "Generate New Ephemeral Stealth Address" [ref=e643] [cursor=pointer]
+        - generic [ref=e644]:
+          - generic [ref=e645]: "#10"
+          - generic [ref=e646]: Cost low
+          - generic [ref=e647]: Original
+          - generic [ref=e648]: Solana creators dread wallet tracking bots that dump on their launches. This proves SCRAMJET's Ghost Funder breaks the link.
+      - generic [ref=e649]:
+        - generic [ref=e650]:
+          - paragraph [ref=e651]:
+            - generic [ref=e652]: "PROPOSAL #11"
+            - text: ·
+            - generic [ref=e653]: LOW COST · ORIGINAL
+          - heading "#11 400ms Solana Slot Microscope" [level=2] [ref=e654]:
+            - generic [ref=e655]: "#11"
+            - text: 400ms Solana Slot Microscope
+          - paragraph [ref=e656]: "Ultra-high-speed looping microsecond breakdown of a single 400ms Solana slot: Leader lookup (50ms), Bundle compilation (130ms), Jito relay (100ms), and Finality (120ms)."
+          - paragraph [ref=e657]: Dramatically illustrates how fast 400 milliseconds really is, and proves SCRAMJET executes within the first 50ms of slot opening.
+          - generic [ref=e658]:
+            - button "Hide 400ms Solana Slot Microscope" [pressed] [ref=e659] [cursor=pointer]: "On"
+            - button "Alone" [ref=e660] [cursor=pointer]
+            - link "Ref" [ref=e661] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/edolus
+        - generic [ref=e663]:
+          - generic [ref=e664]:
+            - generic [ref=e665]:
+              - generic [ref=e666]: "SOLANA SLOT #318,492,044"
+              - generic [ref=e667]: 400.00 MILLISECONDS TOTAL
+            - tablist [ref=e668]:
+              - tab "0-50ms Leader Schedule Lookup" [selected] [ref=e669] [cursor=pointer]:
+                - generic [ref=e670]: 0-50ms
+                - generic [ref=e671]: Leader Schedule Lookup
+              - tab "50-180ms Atomic Bundle Assembly" [ref=e672] [cursor=pointer]:
+                - generic [ref=e673]: 50-180ms
+                - generic [ref=e674]: Atomic Bundle Assembly
+              - tab "180-280ms Jito Block Engine Relay" [ref=e675] [cursor=pointer]:
+                - generic [ref=e676]: 180-280ms
+                - generic [ref=e677]: Jito Block Engine Relay
+              - tab "280-400ms Consensus Finality" [ref=e678] [cursor=pointer]:
+                - generic [ref=e679]: 280-400ms
+                - generic [ref=e680]: Consensus Finality
+          - generic [ref=e681]:
+            - generic [ref=e682]: PHASE 1 OF 4 · 0ms to 50ms
+            - heading "Leader Schedule Lookup" [level=3] [ref=e683]
+            - paragraph [ref=e684]: Determining upcoming slot leader validator pubkey and geographical routing path
+        - generic [ref=e685]:
+          - generic [ref=e686]: "#11"
+          - generic [ref=e687]: Cost low
+          - generic [ref=e688]: Original
+          - generic [ref=e689]: Dramatically illustrates how fast 400 milliseconds really is, and proves SCRAMJET executes within the first 50ms of slot opening.
+      - region [ref=e690]:
+        - generic [ref=e691]:
+          - paragraph [ref=e692]:
+            - generic [ref=e693]: "PROPOSAL #12"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#12 Telemetry Radar" [level=2] [ref=e694]:
+            - generic [ref=e695]: "#12"
+            - text: Telemetry Radar
+          - paragraph [ref=e696]: Surface live Solana slot telemetry, hypersonic Mach velocity dial, and 5-region Jito Block Engine latency in an aerospace instrument console.
+          - paragraph [ref=e697]: Trading operators and creators demand real-time verification of Block-0 bundling and validator latency.
+          - paragraph [ref=e698]:
+            - strong [ref=e699]: Fallback.
+            - text: Static HUD values with paused ticker when reduced motion is requested.
+        - generic [ref=e701]:
+          - generic [ref=e702]:
+            - generic [ref=e703]: Telemetry Feed // Block-0 Radar
+            - generic [ref=e706]:
+              - text: "SOLANA SLOT:"
+              - strong [ref=e707]: 318,492,810
+          - generic [ref=e708]:
+            - generic [ref=e713]:
+              - generic [ref=e714]: VELOCITY
+              - generic [ref=e715]: "3.52"
+              - generic [ref=e716]: MACH
+            - generic [ref=e717]:
+              - generic [ref=e718]: "HYPERSONIC STATUS: CASCADE ACTIVE"
+              - paragraph [ref=e719]: Atomic Block-0 bundling guarantees sub-wallet placement ahead of public mempool snipers.
+              - group "Mach velocity presets" [ref=e720]:
+                - button "Mach 3.5 (Cruise)" [pressed] [ref=e721] [cursor=pointer]
+                - button "Mach 6.2 (Ramjet)" [ref=e722] [cursor=pointer]
+                - button "Mach 10.4 (Max)" [ref=e723] [cursor=pointer]
+          - generic [ref=e724]:
+            - generic [ref=e725]:
+              - generic [ref=e726]: REGIONAL JITO BLOCK ENGINES
+              - generic [ref=e727]: 5/5 ONLINE
+            - generic [ref=e728]:
+              - button "FRA Frankfurt 12ms OPT" [ref=e729] [cursor=pointer]:
+                - generic [ref=e730]: FRA
+                - generic [ref=e731]: Frankfurt
+                - strong [ref=e732]: 12ms
+                - generic [ref=e733]: OPT
+              - button "AMS Amsterdam 14ms OPT" [ref=e734] [cursor=pointer]:
+                - generic [ref=e735]: AMS
+                - generic [ref=e736]: Amsterdam
+                - strong [ref=e737]: 14ms
+                - generic [ref=e738]: OPT
+              - button "NYC New York 8ms OPT" [ref=e739] [cursor=pointer]:
+                - generic [ref=e740]: NYC
+                - generic [ref=e741]: New York
+                - strong [ref=e742]: 8ms
+                - generic [ref=e743]: OPT
+              - button "TYO Tokyo 22ms OPT" [ref=e744] [cursor=pointer]:
+                - generic [ref=e745]: TYO
+                - generic [ref=e746]: Tokyo
+                - strong [ref=e747]: 22ms
+                - generic [ref=e748]: OPT
+              - button "SLC Salt Lake 6ms OPT" [ref=e749] [cursor=pointer]:
+                - generic [ref=e750]: SLC
+                - generic [ref=e751]: Salt Lake
+                - strong [ref=e752]: 6ms
+                - generic [ref=e753]: OPT
+        - generic [ref=e754]:
+          - generic [ref=e755]: "#12"
+          - generic [ref=e756]: No 3D
+          - generic [ref=e757]: Cost low
+          - generic [ref=e758]: Original
+          - generic [ref=e759]: SVG radial tachometer with live jittering telemetry, slot ticker, and engine matrix
+          - link "Award page" [ref=e760] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/forge-automotive
+      - generic [ref=e761]:
+        - generic [ref=e762]:
+          - paragraph [ref=e763]:
+            - generic [ref=e764]: "PROPOSAL #13"
+            - text: ·
+            - generic [ref=e765]: LOW COST · ORIGINAL
+          - heading "#13 Solana Compute Unit Redline Tachometer" [level=2] [ref=e766]:
+            - generic [ref=e767]: "#13"
+            - text: Solana Compute Unit Redline Tachometer
+          - paragraph [ref=e768]: High-precision dual-needle tachometer tracking Solana Compute Units (0 to 1,400,000 CU) and Micro-Lamport priority tips with a flashing redline shift light and MAX BOOST button.
+          - paragraph [ref=e769]: Shows that SCRAMJET optimizes every single byte of compute budget to guarantee transactions never fail due to out-of-gas errors.
+          - generic [ref=e770]:
+            - button "Hide Solana Compute Unit Redline Tachometer" [pressed] [ref=e771] [cursor=pointer]: "On"
+            - button "Alone" [ref=e772] [cursor=pointer]
+            - link "Ref" [ref=e773] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/forge-automotive
+        - generic [ref=e775]:
+          - generic [ref=e776]:
+            - img "Compute Unit Tachometer" [ref=e777]:
+              - generic [ref=e791]: 420,000
+              - generic [ref=e792]: COMPUTE UNITS / TX
+            - generic [ref=e793]: SHIFT LIGHT
+          - generic [ref=e794]:
+            - generic [ref=e795]:
+              - heading "Solana Compute Budget Optimization" [level=3] [ref=e796]
+              - paragraph [ref=e797]: Unoptimized launches crash against Solana’s 1.4M CU limit or fail due to insufficient priority micro-lamports. SCRAMJET automatically sizes instructions to 420K CU with dynamic tipping.
+            - button "Simulate Network Congestion Spike" [ref=e799] [cursor=pointer]
+        - generic [ref=e800]:
+          - generic [ref=e801]: "#13"
+          - generic [ref=e802]: Cost low
+          - generic [ref=e803]: Original
+          - generic [ref=e804]: Shows that SCRAMJET optimizes every single byte of compute budget to guarantee transactions never fail due to out-of-gas errors.
+      - region [ref=e805]:
+        - generic [ref=e806]:
+          - paragraph [ref=e807]:
+            - generic [ref=e808]: "PROPOSAL #14"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#14 Fee Lockup" [level=2] [ref=e809]:
+            - generic [ref=e810]: "#14"
+            - text: Fee Lockup
+          - paragraph [ref=e811]: Make 3.5% the only number anyone remembers from the visit. Huge numeric type, pinned briefly on scroll.
+          - paragraph [ref=e812]: The conversion hook is the fee. It beats the 5.0% standard and needs to be treated as a headline, not small print.
+          - paragraph [ref=e813]:
+            - strong [ref=e814]: Fallback.
+            - text: Normal document-flow headline without the pin.
+        - generic [ref=e816]:
+          - paragraph [ref=e817]: 5.0%
+          - paragraph [ref=e818]: Protocol fee on this proposal. The comparison figure on the current site is 5.0%.
+        - generic [ref=e819]:
+          - generic [ref=e820]: "#14"
+          - generic [ref=e821]: No 3D
+          - generic [ref=e822]: Cost low
+          - generic [ref=e823]: Technique reference
+          - generic [ref=e824]: Large-scale numeric typography with pinned scroll reveal
+          - link "Award page" [ref=e825] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/grids
+      - region [ref=e826]:
+        - generic [ref=e827]:
+          - paragraph [ref=e828]:
+            - generic [ref=e829]: "PROPOSAL #15"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#15 Savings Simulator" [level=2] [ref=e830]:
+            - generic [ref=e831]: "#15"
+            - text: Savings Simulator
+          - paragraph [ref=e832]: Interactive fee benchmark allowing creators to drag launch commitment volume and see immediate 3.5% vs 5.0% fee savings.
+          - paragraph [ref=e833]: The 3.5% fee is SCRAMJET’s core competitive hook. A live slider proves exact savings in SOL and USD.
+          - paragraph [ref=e834]:
+            - strong [ref=e835]: Fallback.
+            - text: Default 15 SOL benchmark figures rendered in pure semantic HTML.
+        - generic [ref=e837]:
+          - generic [ref=e838]:
+            - generic [ref=e839]:
+              - generic [ref=e840]: INTERACTIVE FEE BENCHMARK
+              - heading "SCRAMJET vs Proxima Savings Simulator" [level=3] [ref=e841]
+            - generic [ref=e842]: 30% LOWER PLATFORM FEES
+          - generic [ref=e843]:
+            - generic [ref=e844]:
+              - generic [ref=e845]:
+                - text: "Launch Commitment:"
+                - strong [ref=e846]: 15 SOL
+              - generic [ref=e847]:
+                - button "5 SOL" [ref=e848] [cursor=pointer]
+                - button "15 SOL" [pressed] [ref=e849] [cursor=pointer]
+                - button "50 SOL" [ref=e850] [cursor=pointer]
+                - button "100 SOL" [ref=e851] [cursor=pointer]
+                - button "10x Cohort Mode" [ref=e852] [cursor=pointer]
+            - slider "Simulated Launch Volume in SOL" [ref=e853] [cursor=pointer]: "15"
+          - generic [ref=e854]:
+            - generic [ref=e855]:
+              - generic [ref=e856]: Proxima Fee (5.0%)
+              - generic [ref=e857]: 0.750 SOL
+              - generic [ref=e858]: ≈ $70.39 USD
+            - generic [ref=e859]:
+              - generic [ref=e860]: SCRAMJET Fee (3.5%)
+              - generic [ref=e861]: 0.525 SOL
+              - generic [ref=e862]: ≈ $49.27 USD
+            - generic [ref=e863]:
+              - generic [ref=e864]: Direct Creator Savings
+              - generic [ref=e865]: +0.225 SOL
+              - generic [ref=e866]: +$21.12 USD Saved
+        - generic [ref=e867]:
+          - generic [ref=e868]: "#15"
+          - generic [ref=e869]: No 3D
+          - generic [ref=e870]: Cost low
+          - generic [ref=e871]: Original
+          - generic [ref=e872]: Interactive slider with real-time fee and USD conversions
+          - link "Award page" [ref=e873] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/grids
+      - generic [ref=e874]:
+        - generic [ref=e875]:
+          - paragraph [ref=e876]:
+            - generic [ref=e877]: "PROPOSAL #16"
+            - text: ·
+            - generic [ref=e878]: LOW COST · ORIGINAL
+          - heading "#16 Hyper-Dimensional Bonding Curve" [level=2] [ref=e879]:
+            - generic [ref=e880]: "#16"
+            - text: Hyper-Dimensional Bonding Curve
+          - paragraph [ref=e881]: Interactive mathematical bonding curve canvas with real-time price formula tracking, virtual reserve sliders, graduation threshold indicators, and gradient depth shading.
+          - paragraph [ref=e882]: Gives creators total transparency into token pricing mechanics, slippage curves, and Raydium/Meteora graduation triggers.
+          - generic [ref=e883]:
+            - button "Hide Hyper-Dimensional Bonding Curve" [pressed] [ref=e884] [cursor=pointer]: "On"
+            - button "Alone" [ref=e885] [cursor=pointer]
+            - link "Ref" [ref=e886] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/grids
+        - generic [ref=e888]:
+          - generic [ref=e889]:
+            - generic [ref=e890]:
+              - button "Exponential (Pump Curve)" [ref=e891] [cursor=pointer]
+              - button "Dynamic Fee (Meteora DBC)" [ref=e892] [cursor=pointer]
+              - button "Linear Escalation" [ref=e893] [cursor=pointer]
+            - generic [ref=e894]:
+              - generic [ref=e895]:
+                - text: "Simulate Purchase Volume:"
+                - strong [ref=e896]: 15 SOL
+              - 'slider "Simulate Purchase Volume: 15 SOL" [ref=e897]': "15"
+          - generic [ref=e898]:
+            - img "Bonding Curve Mathematical Graph" [ref=e899]:
+              - generic [ref=e900]: "GRADUATION: 69 SOL"
+              - generic [ref=e902]: 15 SOL
+            - generic [ref=e906]:
+              - generic [ref=e907]:
+                - generic [ref=e908]: TOKENS RECEIVED
+                - generic [ref=e909]: 21,300,000 MACH
+              - generic [ref=e910]:
+                - generic [ref=e911]: GRADUATION PROGRESS
+                - generic [ref=e912]: 22% of Bonding Target
+              - generic [ref=e913]:
+                - generic [ref=e914]: DEX MIGRATION
+                - generic [ref=e915]: Auto-transfers to Raydium/Meteora at 100%
+        - generic [ref=e916]:
+          - generic [ref=e917]: "#16"
+          - generic [ref=e918]: Cost low
+          - generic [ref=e919]: Original
+          - generic [ref=e920]: Gives creators total transparency into token pricing mechanics, slippage curves, and Raydium/Meteora graduation triggers.
+      - generic [ref=e921]:
+        - generic [ref=e922]:
+          - paragraph [ref=e923]:
+            - generic [ref=e924]: "PROPOSAL #17"
+            - text: ·
+            - generic [ref=e925]: LOW COST · ORIGINAL
+          - heading "#17 Token Allocation Centrifuge" [level=2] [ref=e926]:
+            - generic [ref=e927]: "#17"
+            - text: Token Allocation Centrifuge
+          - paragraph [ref=e928]: Rotating gyroscopic centrifuge displaying token supply split (Bonding curve, LP migration, Dev reserve, Protocol fee) with angular momentum and interactive slice extraction.
+          - paragraph [ref=e929]: "Tokenomics are the #1 thing token buyers inspect. Presenting them as a precision-balanced centrifuge builds instant trust."
+          - generic [ref=e930]:
+            - button "Hide Token Allocation Centrifuge" [pressed] [ref=e931] [cursor=pointer]: "On"
+            - button "Alone" [ref=e932] [cursor=pointer]
+            - link "Ref" [ref=e933] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/mecha
+        - generic [ref=e935]:
+          - img "Token Allocation Centrifuge" [ref=e937]:
+            - generic [ref=e940] [cursor=pointer]
+            - generic [ref=e941] [cursor=pointer]
+            - generic [ref=e942] [cursor=pointer]
+            - generic [ref=e943] [cursor=pointer]
+            - generic [ref=e945]: 1,000,000,000
+            - generic [ref=e946]: TOTAL SUPPLY
+          - generic [ref=e947]:
+            - generic [ref=e948]:
+              - button "80% Public Bonding Curve" [ref=e949] [cursor=pointer]:
+                - generic [ref=e950]: 80%
+                - generic [ref=e951]: Public Bonding Curve
+              - button "10% Creator Allocation" [ref=e952] [cursor=pointer]:
+                - generic [ref=e953]: 10%
+                - generic [ref=e954]: Creator Allocation
+              - button "6.5% AMM Migration Pool" [ref=e955] [cursor=pointer]:
+                - generic [ref=e956]: 6.5%
+                - generic [ref=e957]: AMM Migration Pool
+              - button "3.5% SCRAMJET Protocol Fee" [ref=e958] [cursor=pointer]:
+                - generic [ref=e959]: 3.5%
+                - generic [ref=e960]: SCRAMJET Protocol Fee
+            - generic [ref=e961]:
+              - generic [ref=e962]:
+                - generic [ref=e963]: 80% OF TOTAL
+                - generic [ref=e964]: 800,000,000 TOKENS
+              - heading "Public Bonding Curve" [level=3] [ref=e965]
+              - paragraph [ref=e966]: Fair launch for public liquidity on bonding curve
+        - generic [ref=e967]:
+          - generic [ref=e968]: "#17"
+          - generic [ref=e969]: Cost low
+          - generic [ref=e970]: Original
+          - generic [ref=e971]: "Tokenomics are the #1 thing token buyers inspect. Presenting them as a precision-balanced centrifuge builds instant trust."
+      - generic [ref=e972]:
+        - generic [ref=e973]:
+          - paragraph [ref=e974]:
+            - generic [ref=e975]: "PROPOSAL #18"
+            - text: ·
+            - generic [ref=e976]: MEDIUM COST · ORIGINAL
+          - heading "#18 Supersonic de Laval Thrust Chamber" [level=2] [ref=e977]:
+            - generic [ref=e978]: "#18"
+            - text: Supersonic de Laval Thrust Chamber
+          - paragraph [ref=e979]: Interactive cross-section of a scramjet converging-diverging rocket nozzle. Adjusting fuel-air mix and chamber pressure alters exhaust diamonds from orange subsonic to electric mint Mach shock diamonds.
+          - paragraph [ref=e980]: "Visually explains what a SCRAMJET engine actually is: a supersonic combustion ramjet that breathes hypersonic market momentum."
+          - generic [ref=e981]:
+            - button "Hide Supersonic de Laval Thrust Chamber" [pressed] [ref=e982] [cursor=pointer]: "On"
+            - button "Alone" [ref=e983] [cursor=pointer]
+            - link "Ref" [ref=e984] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/edolus
+        - generic [ref=e986]:
+          - generic [ref=e987]:
+            - generic [ref=e988]: "Chamber Pressure / Expansion Ratio:"
+            - slider "Chamber Pressure / Expansion Ratio:" [ref=e989]: "85"
+            - generic [ref=e990]:
+              - generic [ref=e991]: "THRUST: 153.0 kN"
+              - generic [ref=e992]: "SHOCK STRUCTURE: 5 MACH DIAMONDS"
+          - img "Supersonic Scramjet Rocket Nozzle" [ref=e994]
+        - generic [ref=e1002]:
+          - generic [ref=e1003]: "#18"
+          - generic [ref=e1004]: Cost medium
+          - generic [ref=e1005]: Original
+          - generic [ref=e1006]: "Visually explains what a SCRAMJET engine actually is: a supersonic combustion ramjet that breathes hypersonic market momentum."
+      - region [ref=e1007]:
+        - generic [ref=e1008]:
+          - paragraph [ref=e1009]:
+            - generic [ref=e1010]: "PROPOSAL #19"
+            - text: ·3D PROPOSAL
+          - heading "#19 Machined Titanium Medallions" [level=2] [ref=e1011]:
+            - generic [ref=e1012]: "#19"
+            - text: Machined Titanium Medallions
+          - paragraph [ref=e1013]: 12 identical heavy aerospace tokens in 24k chamfered gold and brushed dark titanium, each bearing the authentic venue brand insignia laser-etched on top. Cohesive, industrial, and serious.
+          - paragraph [ref=e1014]: Replaces cartoon toy shapes with unified, serious Swiss-bank aerospace tokens that build immediate financial conviction.
+          - paragraph [ref=e1015]:
+            - strong [ref=e1016]: Fallback.
+            - text: Clean vector token matrix with laser-etched badges.
+        - generic [ref=e1018]:
+          - paragraph [ref=e1021]: Machined Titanium Medallions Decorative graphic. The description is in the heading beside it.
+          - group "Machined Titanium Medallions" [ref=e1022]:
+            - button "Pump.fun Bonding curve" [pressed] [ref=e1023] [cursor=pointer]:
+              - generic [ref=e1024]: Pump.fun
+              - generic [ref=e1025]: Bonding curve
+            - button "Meteora DBC Dynamic fee" [ref=e1026] [cursor=pointer]:
+              - generic [ref=e1027]: Meteora DBC
+              - generic [ref=e1028]: Dynamic fee
+            - button "Raydium LaunchLab" [ref=e1029] [cursor=pointer]:
+              - generic [ref=e1030]: Raydium
+              - generic [ref=e1031]: LaunchLab
+            - button "Bags Creator share" [ref=e1032] [cursor=pointer]:
+              - generic [ref=e1033]: Bags
+              - generic [ref=e1034]: Creator share
+            - button "LetsBonk Bonk native" [ref=e1035] [cursor=pointer]:
+              - generic [ref=e1036]: LetsBonk
+              - generic [ref=e1037]: Bonk native
+            - button "StonkFun Token-2022" [ref=e1038] [cursor=pointer]:
+              - generic [ref=e1039]: StonkFun
+              - generic [ref=e1040]: Token-2022
+            - button "Printr Supply scaler" [ref=e1041] [cursor=pointer]:
+              - generic [ref=e1042]: Printr
+              - generic [ref=e1043]: Supply scaler
+            - button "Anoncoin Privacy curve" [ref=e1044] [cursor=pointer]:
+              - generic [ref=e1045]: Anoncoin
+              - generic [ref=e1046]: Privacy curve
+            - button "Surge Instant AMM" [ref=e1047] [cursor=pointer]:
+              - generic [ref=e1048]: Surge
+              - generic [ref=e1049]: Instant AMM
+            - button "Clanker AI autonomous" [ref=e1050] [cursor=pointer]:
+              - generic [ref=e1051]: Clanker
+              - generic [ref=e1052]: AI autonomous
+            - button "FourMeme Fast bonding" [ref=e1053] [cursor=pointer]:
+              - generic [ref=e1054]: FourMeme
+              - generic [ref=e1055]: Fast bonding
+            - button "Flap Fair launch" [ref=e1056] [cursor=pointer]:
+              - generic [ref=e1057]: Flap
+              - generic [ref=e1058]: Fair launch
+        - generic [ref=e1059]:
+          - generic [ref=e1060]: "#19"
+          - generic [ref=e1061]: 3D
+          - generic [ref=e1062]: Cost medium
+          - generic [ref=e1063]: Original
+          - generic [ref=e1064]: Interactive 3D turntable with 24k gold chamfered coins, anisotropic PBR reflections, laser-etched relief stamps, and smooth rotation rig
+          - link "Award page" [ref=e1065] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/mecha
+      - generic [ref=e1066]:
+        - generic [ref=e1067]:
+          - paragraph [ref=e1068]:
+            - generic [ref=e1069]: "PROPOSAL #20"
+            - text: ·
+            - generic [ref=e1070]: LOW COST · ORIGINAL
+          - heading "#20 Supersonic Multi-Venue Smart Router" [level=2] [ref=e1071]:
+            - generic [ref=e1072]: "#20"
+            - text: Supersonic Multi-Venue Smart Router
+          - paragraph [ref=e1073]: High-density multi-venue matrix routing liquidity across Pump.fun, Meteora DBC, Raydium, Bags, and Bonk with live latency meters, fee comparison chips, and one-click launch simulation.
+          - paragraph [ref=e1074]: Completely replaces the clumsy 3D toy carousel with a serious, high-velocity trading infrastructure tool.
+          - generic [ref=e1075]:
+            - button "Hide Supersonic Multi-Venue Smart Router" [pressed] [ref=e1076] [cursor=pointer]: "On"
+            - button "Alone" [ref=e1077] [cursor=pointer]
+            - link "Ref" [ref=e1078] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/grids
+        - generic [ref=e1080]:
+          - paragraph [ref=e1082]: "SCRAMJET routes deployment transactions directly into the top Solana launch environments with unified 3.5% protocol fee parity:"
+          - generic [ref=e1083]:
+            - 'button "Pump.fun 12ms Bonding Curve FEE: 3.5% ROUTED" [ref=e1084] [cursor=pointer]':
+              - generic [ref=e1085]:
+                - generic [ref=e1086]: Pump.fun
+                - generic [ref=e1087]: 12ms
+              - generic [ref=e1088]: Bonding Curve
+              - generic [ref=e1089]:
+                - generic [ref=e1090]: "FEE: 3.5%"
+                - generic [ref=e1091]: ROUTED
+            - 'button "Meteora DBC 14ms Dynamic Fee AMM FEE: 3.5% ROUTED" [ref=e1092] [cursor=pointer]':
+              - generic [ref=e1093]:
+                - generic [ref=e1094]: Meteora DBC
+                - generic [ref=e1095]: 14ms
+              - generic [ref=e1096]: Dynamic Fee AMM
+              - generic [ref=e1097]:
+                - generic [ref=e1098]: "FEE: 3.5%"
+                - generic [ref=e1099]: ROUTED
+            - 'button "Raydium 18ms LaunchLab CPMM FEE: 3.5% ROUTED" [ref=e1100] [cursor=pointer]':
+              - generic [ref=e1101]:
+                - generic [ref=e1102]: Raydium
+                - generic [ref=e1103]: 18ms
+              - generic [ref=e1104]: LaunchLab CPMM
+              - generic [ref=e1105]:
+                - generic [ref=e1106]: "FEE: 3.5%"
+                - generic [ref=e1107]: ROUTED
+            - 'button "Bags 16ms Creator Royalty FEE: 3.5% ROUTED" [ref=e1108] [cursor=pointer]':
+              - generic [ref=e1109]:
+                - generic [ref=e1110]: Bags
+                - generic [ref=e1111]: 16ms
+              - generic [ref=e1112]: Creator Royalty
+              - generic [ref=e1113]:
+                - generic [ref=e1114]: "FEE: 3.5%"
+                - generic [ref=e1115]: ROUTED
+            - 'button "LetsBonk 15ms Bonk Native FEE: 3.5% ROUTED" [ref=e1116] [cursor=pointer]':
+              - generic [ref=e1117]:
+                - generic [ref=e1118]: LetsBonk
+                - generic [ref=e1119]: 15ms
+              - generic [ref=e1120]: Bonk Native
+              - generic [ref=e1121]:
+                - generic [ref=e1122]: "FEE: 3.5%"
+                - generic [ref=e1123]: ROUTED
+            - 'button "StonkFun 19ms Token-2022 Tax FEE: 3.5% ROUTED" [ref=e1124] [cursor=pointer]':
+              - generic [ref=e1125]:
+                - generic [ref=e1126]: StonkFun
+                - generic [ref=e1127]: 19ms
+              - generic [ref=e1128]: Token-2022 Tax
+              - generic [ref=e1129]:
+                - generic [ref=e1130]: "FEE: 3.5%"
+                - generic [ref=e1131]: ROUTED
+            - 'button "Printr 22ms Supply Scaler FEE: 3.5% ROUTED" [ref=e1132] [cursor=pointer]':
+              - generic [ref=e1133]:
+                - generic [ref=e1134]: Printr
+                - generic [ref=e1135]: 22ms
+              - generic [ref=e1136]: Supply Scaler
+              - generic [ref=e1137]:
+                - generic [ref=e1138]: "FEE: 3.5%"
+                - generic [ref=e1139]: ROUTED
+            - 'button "Anoncoin 25ms Privacy Curve FEE: 3.5% ROUTED" [ref=e1140] [cursor=pointer]':
+              - generic [ref=e1141]:
+                - generic [ref=e1142]: Anoncoin
+                - generic [ref=e1143]: 25ms
+              - generic [ref=e1144]: Privacy Curve
+              - generic [ref=e1145]:
+                - generic [ref=e1146]: "FEE: 3.5%"
+                - generic [ref=e1147]: ROUTED
+          - generic [ref=e1149]:
+            - text: "OPTIMAL PATH SELECTED:"
+            - strong [ref=e1150]: Pump.fun
+            - text: (12ms Execution Relay)
+        - generic [ref=e1151]:
+          - generic [ref=e1152]: "#20"
+          - generic [ref=e1153]: Cost low
+          - generic [ref=e1154]: Original
+          - generic [ref=e1155]: Completely replaces the clumsy 3D toy carousel with a serious, high-velocity trading infrastructure tool.
+      - region [ref=e1156]:
+        - generic [ref=e1157]:
+          - paragraph [ref=e1158]:
+            - generic [ref=e1159]: "PROPOSAL #21"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#21 Architecture Bento" [level=2] [ref=e1160]:
+            - generic [ref=e1161]: "#21"
+            - text: Architecture Bento
+          - paragraph [ref=e1162]: 4-card structural bento grid breaking down Jito Block-0, Ghost Funder, 0.01 SOL micro-funding, and Auto-Burn, plus 12-venue protocol matrix.
+          - paragraph [ref=e1163]: Translates complex Solana MEV engineering into digestible, high-conviction product pillars.
+          - paragraph [ref=e1164]:
+            - strong [ref=e1165]: Fallback.
+            - text: Accessible responsive card grid stacked in document order.
+        - generic [ref=e1167]:
+          - generic [ref=e1168]:
+            - generic [ref=e1169]:
+              - generic [ref=e1170]:
+                - generic [ref=e1171]: JITO ATOMIC BLOCK-0
+                - generic [ref=e1172]: 5 Global Engines
+              - heading "Sub-Wallet Front-Running Defense" [level=4] [ref=e1173]
+              - paragraph [ref=e1174]: Bundles your token creation, developer buy, and sub-wallet entries into a single atomic Block-0 transaction. Zero public mempool visibility protects launches from predatory sandwich bots.
+              - generic [ref=e1175]:
+                - generic [ref=e1176]:
+                  - generic [ref=e1177]: "1"
+                  - generic [ref=e1178]: Deploy Token & Bonding Curve
+                  - generic [ref=e1179]: Slot +0
+                - generic [ref=e1180]:
+                  - generic [ref=e1181]: "2"
+                  - generic [ref=e1182]: Dev & Sub-Wallet Buys (Zero Slippage)
+                  - generic [ref=e1183]: Confirmed
+                - generic [ref=e1184]:
+                  - generic [ref=e1185]: "3"
+                  - generic [ref=e1186]: Jito Priority Tip Leader Transfer
+                  - generic [ref=e1187]: Leader Tip
+            - generic [ref=e1188]:
+              - generic [ref=e1189]:
+                - generic [ref=e1190]: ANTI-BUBBLEMAP
+                - generic [ref=e1191]: Ghost Funder
+              - heading "Zero-Cluster Wallet Graph" [level=4] [ref=e1192]
+              - paragraph [ref=e1193]: Bypasses BubbleMaps and Photon cluster warnings via multi-hop Merkle relays, randomized funding intervals, and clean unlinked root trees.
+              - generic [ref=e1194]:
+                - generic [ref=e1195]: BUBBLEMAPS DETECTION RISK
+                - strong [ref=e1196]: 0.0% CLUSTER
+                - generic [ref=e1197]: Organic independent wallet graph
+            - generic [ref=e1198]:
+              - generic [ref=e1199]:
+                - generic [ref=e1200]: MICRO-BUNDLING
+                - generic [ref=e1201]: Rent Reclaim
+              - heading "0.01 SOL Entry vs Proxima 0.10" [level=4] [ref=e1202]
+              - paragraph [ref=e1203]: Never lock up 2.0+ SOL across 20 sub-wallets. SCRAMJET lowers the barrier to 0.01 SOL and automatically batch-sweeps ~0.00204 SOL ATA rent back post-sale.
+              - generic [ref=e1204]:
+                - generic [ref=e1205]:
+                  - generic [ref=e1206]: PROXIMA LOCKUP
+                  - generic [ref=e1207]: 0.10 SOL / w
+                - generic [ref=e1208]:
+                  - generic [ref=e1209]: SCRAMJET
+                  - generic [ref=e1210]: 0.01 SOL / w
+            - generic [ref=e1211]:
+              - generic [ref=e1212]:
+                - generic [ref=e1213]: DEFLATIONARY FLYWHEEL
+                - generic [ref=e1214]: Auto-Burn Loop
+              - heading "Creator Fee Buyback & Burn" [level=4] [ref=e1215]
+              - paragraph [ref=e1216]: Automatically route 25%–100% of harvested fees into bonding curve market buys, instantly executing SPL token burns to generate upward momentum.
+              - generic [ref=e1217]:
+                - generic [ref=e1218]: Trading Volume Fees
+                - generic [ref=e1219]: →
+                - generic [ref=e1220]: Curve Market Buy
+                - generic [ref=e1221]: →
+                - generic [ref=e1222]: SPL Supply Burned 🔥
+          - generic [ref=e1223]:
+            - generic [ref=e1224]:
+              - generic [ref=e1225]:
+                - heading "12 Solana Launchpad Protocols Supported" [level=5] [ref=e1226]
+                - paragraph [ref=e1227]: Deploy across any bonding curve, dynamic fee tier, or AMM with native instruction builders.
+              - tablist [ref=e1228]:
+                - button "All (12)" [pressed] [ref=e1229] [cursor=pointer]
+                - button "Bonding Curves" [ref=e1230] [cursor=pointer]
+                - button "AMM / Dynamic" [ref=e1231] [cursor=pointer]
+            - generic [ref=e1232]:
+              - generic [ref=e1233]:
+                - generic [ref=e1234]: Meteora DBC
+                - generic [ref=e1235]: Dynamic Curve
+                - generic [ref=e1236]: 0.15% - 5.0% Dynamic Fee Pool + DLMM LP
+              - generic [ref=e1237]:
+                - generic [ref=e1238]: Pump.fun
+                - generic [ref=e1239]: Bonding Curve
+                - generic [ref=e1240]: Off-Chain Create + 0.5% Creator Fee Claim
+              - generic [ref=e1241]:
+                - generic [ref=e1242]: Raydium LaunchLab
+                - generic [ref=e1243]: CPMM / AMM
+                - generic [ref=e1244]: Platform Configs + Automated LP Lock
+              - generic [ref=e1245]:
+                - generic [ref=e1246]: Bags
+                - generic [ref=e1247]: Meme Ecosystem
+                - generic [ref=e1248]: Multi-Recipient % Creator Fee Share
+              - generic [ref=e1249]:
+                - generic [ref=e1250]: LetsBonk
+                - generic [ref=e1251]: Bonk Native
+                - generic [ref=e1252]: Custom Bonding Curve + Bonk Rewards
+              - generic [ref=e1253]:
+                - generic [ref=e1254]: StonkFun
+                - generic [ref=e1255]: Token-2022
+                - generic [ref=e1256]: Transfer Fee Extensions + Auto Liquidity
+              - generic [ref=e1257]:
+                - generic [ref=e1258]: Printr
+                - generic [ref=e1259]: Supply Scaler
+                - generic [ref=e1260]: 100M / 1B / 10B Curve Supply Models
+              - generic [ref=e1261]:
+                - generic [ref=e1262]: Anoncoin
+                - generic [ref=e1263]: Privacy Curve
+                - generic [ref=e1264]: Anon API key masked deployment
+              - generic [ref=e1265]:
+                - generic [ref=e1266]: Surge
+                - generic [ref=e1267]: Instant AMM
+                - generic [ref=e1268]: Atomic single-slot liquidity routing
+              - generic [ref=e1269]:
+                - generic [ref=e1270]: Clanker
+                - generic [ref=e1271]: Autonomous
+                - generic [ref=e1272]: AI autonomous agent deploy triggers
+              - generic [ref=e1273]:
+                - generic [ref=e1274]: FourMeme
+                - generic [ref=e1275]: Fast Bonding
+                - generic [ref=e1276]: Ultra-fast bonding curve migration
+              - generic [ref=e1277]:
+                - generic [ref=e1278]: Flap
+                - generic [ref=e1279]: Fair Launch
+                - generic [ref=e1280]: Anti-sniper fair launch distribution
+        - generic [ref=e1281]:
+          - generic [ref=e1282]: "#21"
+          - generic [ref=e1283]: No 3D
+          - generic [ref=e1284]: Cost low
+          - generic [ref=e1285]: Original
+          - generic [ref=e1286]: Instrument-panel bento layout with live sequence diagrams and protocol category filters
+          - link "Award page" [ref=e1287] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/mecha
+      - region [ref=e1288]:
+        - generic [ref=e1289]:
+          - paragraph [ref=e1290]:
+            - generic [ref=e1291]: "PROPOSAL #22"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#22 Protocol Strip" [level=2] [ref=e1292]:
+            - generic [ref=e1293]: "#22"
+            - text: Protocol Strip
+          - paragraph [ref=e1294]: Tape of supported protocols (Pump.fun, Meteora DBC, Raydium, Bags, Bonk, etc.) running horizontally across the page.
+          - paragraph [ref=e1295]: Shows broad multi-venue coverage at a glance without cluttering the main flow.
+          - paragraph [ref=e1296]:
+            - strong [ref=e1297]: Fallback.
+            - text: Static horizontal wrapping flex row when reduced motion is on.
+        - generic [ref=e1299]:
+          - generic [ref=e1300]:
+            - button "Scroll venues backward" [ref=e1301] [cursor=pointer]: Back
+            - button "Scroll venues forward" [ref=e1302] [cursor=pointer]: Forward
+          - generic "Venue tape" [ref=e1303]:
+            - article [ref=e1304]:
+              - generic [ref=e1305]: "01"
+              - heading "Pump.fun" [level=3] [ref=e1306]
+            - article [ref=e1307]:
+              - generic [ref=e1308]: "02"
+              - heading "Meteora DBC" [level=3] [ref=e1309]
+            - article [ref=e1310]:
+              - generic [ref=e1311]: "03"
+              - heading "Raydium LaunchLab" [level=3] [ref=e1312]
+            - article [ref=e1313]:
+              - generic [ref=e1314]: "04"
+              - heading "Bags" [level=3] [ref=e1315]
+            - article [ref=e1316]:
+              - generic [ref=e1317]: "05"
+              - heading "LetsBonk" [level=3] [ref=e1318]
+            - article [ref=e1319]:
+              - generic [ref=e1320]: "06"
+              - heading "StonkFun" [level=3] [ref=e1321]
+            - article [ref=e1322]:
+              - generic [ref=e1323]: "07"
+              - heading "Anoncoin" [level=3] [ref=e1324]
+            - article [ref=e1325]:
+              - generic [ref=e1326]: "08"
+              - heading "Surge" [level=3] [ref=e1327]
+        - generic [ref=e1328]:
+          - generic [ref=e1329]: "#22"
+          - generic [ref=e1330]: No 3D
+          - generic [ref=e1331]: Cost low
+          - generic [ref=e1332]: Technique reference
+          - generic [ref=e1333]: Continuous marquee with pause on hover/focus
+          - link "Award page" [ref=e1334] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/grids
+      - generic [ref=e1335]:
+        - generic [ref=e1336]:
+          - paragraph [ref=e1337]:
+            - generic [ref=e1338]: "PROPOSAL #23"
+            - text: ·
+            - generic [ref=e1339]: LOW COST · ORIGINAL
+          - heading "#23 Hypersonic Launch CLI" [level=2] [ref=e1340]:
+            - generic [ref=e1341]: "#23"
+            - text: Hypersonic Launch CLI
+          - paragraph [ref=e1342]: "Pro-trader interactive terminal prompt emulator with live command execution (`deploy`, `simulate`, `audit`, `boost`), syntax-highlighted streaming logs, and ASCII Scramjet engine art."
+          - paragraph [ref=e1343]: Hardcore Solana developers and quant traders prefer keyboard interfaces. Gives power users an authentic CLI launch environment.
+          - generic [ref=e1344]:
+            - button "Hide Hypersonic Launch CLI" [pressed] [ref=e1345] [cursor=pointer]: "On"
+            - button "Alone" [ref=e1346] [cursor=pointer]
+            - link "Ref" [ref=e1347] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/grids
+        - generic [ref=e1349]:
+          - generic [ref=e1350]:
+            - generic [ref=e1355]: "scramjet@solana-core: ~/hypersonic-launch"
+            - generic [ref=e1356]:
+              - button "deploy" [ref=e1357] [cursor=pointer]
+              - button "simulate" [ref=e1358] [cursor=pointer]
+              - button "audit" [ref=e1359] [cursor=pointer]
+          - generic [ref=e1360]:
+            - generic [ref=e1361]: scramjet-cli v2.4.1 (solana-mainnet-beta)
+            - generic [ref=e1362]: connected to jito-relayer-dfw · latency 14ms
+            - generic [ref=e1363]: ready. type 'deploy', 'simulate', or 'audit' to run.
+            - generic [ref=e1364]:
+              - generic [ref=e1365]: ">"
+              - textbox "Terminal command input" [ref=e1366]:
+                - /placeholder: Type 'deploy' and press Enter...
+        - generic [ref=e1367]:
+          - generic [ref=e1368]: "#23"
+          - generic [ref=e1369]: Cost low
+          - generic [ref=e1370]: Original
+          - generic [ref=e1371]: Hardcore Solana developers and quant traders prefer keyboard interfaces. Gives power users an authentic CLI launch environment.
+      - generic [ref=e1372]:
+        - generic [ref=e1373]:
+          - paragraph [ref=e1374]:
+            - generic [ref=e1375]: "PROPOSAL #24"
+            - text: ·
+            - generic [ref=e1376]: LOW COST · ORIGINAL
+          - heading "#24 Thermal Re-entry Friction Tiles" [level=2] [ref=e1377]:
+            - generic [ref=e1378]: "#24"
+            - text: Thermal Re-entry Friction Tiles
+          - paragraph [ref=e1379]: Aerospace heat-shield simulation responding dynamically to user mouse speed and scroll velocity. Silicon-carbide hexagonal tiles heat up from cold slate to incandescent plasma orange as friction rises.
+          - paragraph [ref=e1380]: "Adds visceral aerodynamic physical consequence to high-speed browsing: scroll faster, and the page enters Mach 25 atmospheric re-entry."
+          - generic [ref=e1381]:
+            - button "Hide Thermal Re-entry Friction Tiles" [pressed] [ref=e1382] [cursor=pointer]: "On"
+            - button "Alone" [ref=e1383] [cursor=pointer]
+            - link "Ref" [ref=e1384] [cursor=pointer]:
+              - /url: https://www.awwwards.com/sites/edolus
+        - generic [ref=e1387]:
+          - generic [ref=e1388]: "Simulate Re-entry Aerodynamic Friction:"
+          - slider "Simulate Re-entry Aerodynamic Friction:" [ref=e1389]: "25"
+          - generic [ref=e1390]:
+            - generic [ref=e1391]:
+              - text: "SURFACE TEMPERATURE:"
+              - strong [ref=e1392]: 925 K
+            - generic [ref=e1393]: "HEAT FLUX: NOMINAL"
+        - generic [ref=e1413]:
+          - generic [ref=e1414]: "#24"
+          - generic [ref=e1415]: Cost low
+          - generic [ref=e1416]: Original
+          - generic [ref=e1417]: "Adds visceral aerodynamic physical consequence to high-speed browsing: scroll faster, and the page enters Mach 25 atmospheric re-entry."
+      - region [ref=e1418]:
+        - generic [ref=e1419]:
+          - paragraph [ref=e1420]:
+            - generic [ref=e1421]: "PROPOSAL #25"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#25 Chapter Rail" [level=2] [ref=e1422]:
+            - generic [ref=e1423]: "#25"
+            - text: Chapter Rail
+          - paragraph [ref=e1424]: Tell the four-step launch story with clean type and a progress rail as an ultra-lightweight high-speed sequence.
+          - paragraph [ref=e1425]: "Shows the complete launch pipeline: Name, Venue, Fund, and Confirm with zero cognitive overload."
+          - paragraph [ref=e1426]:
+            - strong [ref=e1427]: Fallback.
+            - text: Standard stacked column with the same four steps. Reduced motion skips the scroll pin.
+        - list [ref=e1432]:
+          - listitem [ref=e1433]:
+            - text: "01"
+            - heading "Name it" [level=3] [ref=e1434]
+            - paragraph [ref=e1435]: A ticker, a supply, and one sentence a stranger can repeat.
+          - listitem [ref=e1436]:
+            - text: "02"
+            - heading "Pick a venue" [level=3] [ref=e1437]
+            - paragraph [ref=e1438]: Twelve Solana venues. The page should make that a choice, not a logo wall.
+          - listitem [ref=e1439]:
+            - text: "03"
+            - heading "Fund the wallet" [level=3] [ref=e1440]
+            - paragraph [ref=e1441]: The launch wallet is funded before the transaction is sent.
+          - listitem [ref=e1442]:
+            - text: "04"
+            - heading "Confirm" [level=3] [ref=e1443]
+            - paragraph [ref=e1444]: Solana finalizes the launch. The page returns to the terminal.
+        - generic [ref=e1445]:
+          - generic [ref=e1446]: "#25"
+          - generic [ref=e1447]: No 3D
+          - generic [ref=e1448]: Cost medium
+          - generic [ref=e1449]: Technique reference
+          - generic [ref=e1450]: Horizontal sticky sequence driven by GSAP ScrollTrigger
+          - link "Award page" [ref=e1451] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/mindmarket
+      - region [ref=e1452]:
+        - generic [ref=e1453]:
+          - paragraph [ref=e1454]:
+            - generic [ref=e1455]: "PROPOSAL #26"
+            - text: ·3D PROPOSAL
+          - heading "#26 Cascade Chamber" [level=2] [ref=e1456]:
+            - generic [ref=e1457]: "#26"
+            - text: Cascade Chamber
+          - paragraph [ref=e1458]: Walk a first launch as four beats — name, venue, fund, confirm — scrubbed by scroll in a 3D isometric chamber.
+          - paragraph [ref=e1459]: New creators need the sequence, not a feature matrix. A chamber keeps the aerospace tone without hiding the steps in canvas text.
+          - paragraph [ref=e1460]:
+            - strong [ref=e1461]: Fallback.
+            - text: The four steps stack as normal HTML. Reduced motion does not pin the section.
+        - generic [ref=e1464]:
+          - paragraph [ref=e1466]: Cascade chamber Decorative graphic. The description is in the heading beside it.
+          - list [ref=e1467]:
+            - listitem [ref=e1468]:
+              - text: "01"
+              - heading "Name it" [level=3] [ref=e1469]
+              - paragraph [ref=e1470]: A ticker, a supply, and one sentence a stranger can repeat.
+            - listitem [ref=e1471]:
+              - text: "02"
+              - heading "Pick a venue" [level=3] [ref=e1472]
+              - paragraph [ref=e1473]: Twelve Solana venues. The page should make that a choice, not a logo wall.
+            - listitem [ref=e1474]:
+              - text: "03"
+              - heading "Fund the wallet" [level=3] [ref=e1475]
+              - paragraph [ref=e1476]: The launch wallet is funded before the transaction is sent.
+            - listitem [ref=e1477]:
+              - text: "04"
+              - heading "Confirm" [level=3] [ref=e1478]
+              - paragraph [ref=e1479]: Solana finalizes the launch. The page returns to the terminal.
+        - generic [ref=e1480]:
+          - generic [ref=e1481]: "#26"
+          - generic [ref=e1482]: 3D
+          - generic [ref=e1483]: Cost high
+          - generic [ref=e1484]: Technique reference
+          - generic [ref=e1485]: Pinned scroll-scrubbed camera path through a simple 3D chamber
+          - link "Award page" [ref=e1486] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/why-zero
+      - region [ref=e1487]:
+        - generic [ref=e1488]:
+          - paragraph [ref=e1489]:
+            - generic [ref=e1490]: "PROPOSAL #27"
+            - text: ·3D PROPOSAL
+          - heading "#27 Mach Ribbon" [level=2] [ref=e1491]:
+            - generic [ref=e1492]: "#27"
+            - text: Mach Ribbon
+          - paragraph [ref=e1493]: Give section breaks a plasma wake so the page feels like supersonic flow, without turning the whole site into a game.
+          - paragraph [ref=e1494]: Plasma orange is already the brand accent. A ribbon uses that color as motion instead of as another gradient button.
+          - paragraph [ref=e1495]:
+            - strong [ref=e1496]: Fallback.
+            - text: Painted SVG gradient. Reduced motion and low-power mode never start the shader loop.
+        - paragraph [ref=e1499]: Mach ribbon Decorative graphic. The description is in the heading beside it.
+        - generic [ref=e1500]:
+          - generic [ref=e1501]: "#27"
+          - generic [ref=e1502]: 3D
+          - generic [ref=e1503]: Cost medium
+          - generic [ref=e1504]: Technique reference
+          - generic [ref=e1505]: Fullscreen fragment shader driven by time and pointer
+          - link "Award page" [ref=e1506] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/edolus
+      - region [ref=e1507]:
+        - generic [ref=e1508]:
+          - paragraph [ref=e1509]:
+            - generic [ref=e1510]: "PROPOSAL #28"
+            - text: ·3D PROPOSAL
+          - heading "#28 Shock Field" [level=2] [ref=e1511]:
+            - generic [ref=e1512]: "#28"
+            - text: Shock Field
+          - paragraph [ref=e1513]: Show the page reacting to the pointer at section scale, as a field of shock diamonds rather than a decorative cursor.
+          - paragraph [ref=e1514]: Hypersonic inlets shed shock diamonds. A sparse field matches the instrument panel better than a fluid sim.
+          - paragraph [ref=e1515]:
+            - strong [ref=e1516]: Fallback.
+            - text: Static dot SVG. The field does not mount for reduced motion, and low-power mode draws fewer points.
+        - paragraph [ref=e1519]: Shock field Decorative graphic. The description is in the heading beside it.
+        - generic [ref=e1520]:
+          - generic [ref=e1521]: "#28"
+          - generic [ref=e1522]: 3D
+          - generic [ref=e1523]: Cost medium
+          - generic [ref=e1524]: Technique reference
+          - generic [ref=e1525]: Pointer-reactive point cloud
+          - link "Award page" [ref=e1526] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/oryzo-ai
+      - region [ref=e1527]:
+        - generic [ref=e1528]:
+          - paragraph [ref=e1529]:
+            - generic [ref=e1530]: "PROPOSAL #29"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#29 Hover Shear" [level=2] [ref=e1531]:
+            - generic [ref=e1532]: "#29"
+            - text: Hover Shear
+          - paragraph [ref=e1533]: Make buttons and key cards shear along the aerodynamic inlet angle when hovered.
+          - paragraph [ref=e1534]: Operators notice state changes. A shear is readable; a liquid image effect would fight the instrument UI.
+          - paragraph [ref=e1535]:
+            - strong [ref=e1536]: Fallback.
+            - text: No crosshair and no shear when reduced motion is on or the pointer is coarse. System cursor stays visible.
+        - list [ref=e1538]:
+          - listitem [ref=e1539]:
+            - link "01 Block-0 send" [ref=e1540] [cursor=pointer]:
+              - /url: "#magnetic-ignition"
+              - generic [ref=e1541]: "01"
+              - strong [ref=e1542]: Block-0 send
+          - listitem [ref=e1543]:
+            - link "02 Fee routed" [ref=e1544] [cursor=pointer]:
+              - /url: "#magnetic-ignition"
+              - generic [ref=e1545]: "02"
+              - strong [ref=e1546]: Fee routed
+          - listitem [ref=e1547]:
+            - link "03 Terminal open" [ref=e1548] [cursor=pointer]:
+              - /url: "#magnetic-ignition"
+              - generic [ref=e1549]: "03"
+              - strong [ref=e1550]: Terminal open
+        - generic [ref=e1551]:
+          - generic [ref=e1552]: "#29"
+          - generic [ref=e1553]: No 3D
+          - generic [ref=e1554]: Cost low
+          - generic [ref=e1555]: Technique reference
+          - generic [ref=e1556]: CSS hover distortion plus a decorative crosshair
+          - link "Award page" [ref=e1557] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/g-colombel-portfolio-2026
+      - region [ref=e1558]:
+        - generic [ref=e1559]:
+          - paragraph [ref=e1560]:
+            - generic [ref=e1561]: "PROPOSAL #30"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#30 Magnetic Ignition" [level=2] [ref=e1562]:
+            - generic [ref=e1563]: "#30"
+            - text: Magnetic Ignition
+          - paragraph [ref=e1564]: Let the primary Launch button pull toward the pointer as the user approaches it, with tactile spring resistance.
+          - paragraph [ref=e1565]: Turns the launch trigger into a tactile physical switch rather than an ordinary flat link.
+          - paragraph [ref=e1566]:
+            - strong [ref=e1567]: Fallback.
+            - text: Standard static button positioning on mobile and when reduced motion is active.
+        - generic [ref=e1569]:
+          - button "Launch a token" [ref=e1570] [cursor=pointer]
+          - paragraph [ref=e1571]: Pointer offset only. Keyboard users get the same button with a focus ring.
+        - generic [ref=e1572]:
+          - generic [ref=e1573]: "#30"
+          - generic [ref=e1574]: No 3D
+          - generic [ref=e1575]: Cost low
+          - generic [ref=e1576]: Technique reference
+          - generic [ref=e1577]: Pointer-position-linked spring translation with GSAP quickTo
+          - link "Award page" [ref=e1578] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/mecha
+      - region [ref=e1579]:
+        - generic [ref=e1580]:
+          - paragraph [ref=e1581]:
+            - generic [ref=e1582]: "PROPOSAL #31"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#31 Section Veil" [level=2] [ref=e1583]:
+            - generic [ref=e1584]: "#31"
+            - text: Section Veil
+          - paragraph [ref=e1585]: Cover route changes between the index and a single element with one wipe, so the review tool feels continuous.
+          - paragraph [ref=e1586]: The production app already has several routes. A short veil is the cheap version of a scene change.
+          - paragraph [ref=e1587]:
+            - strong [ref=e1588]: Fallback.
+            - text: Navigation is instant when reduced motion is on or this element is switched off.
+        - generic [ref=e1590]:
+          - button "Open the wordmark alone" [ref=e1591] [cursor=pointer]
+          - paragraph [ref=e1592]: The wipe runs only when this proposal is on and motion is allowed.
+        - generic [ref=e1593]:
+          - generic [ref=e1594]: "#31"
+          - generic [ref=e1595]: No 3D
+          - generic [ref=e1596]: Cost low
+          - generic [ref=e1597]: Technique reference
+          - generic [ref=e1598]: Clip-path page transition
+          - link "Award page" [ref=e1599] [cursor=pointer]:
+            - /url: https://www.awwwards.com/sites/forge-automotive
+      - region [ref=e1600]:
+        - generic [ref=e1601]:
+          - paragraph [ref=e1602]:
+            - generic [ref=e1603]: "PROPOSAL #32"
+            - text: ·LIGHTWEIGHT PROPOSAL
+          - heading "#32 Instrument Dial" [level=2] [ref=e1604]:
+            - generic [ref=e1605]: "#32"
+            - text: Instrument Dial
+          - paragraph [ref=e1606]: Turn page progress into a mach ring so long pages stay oriented without a second scrollbar.
+          - paragraph [ref=e1607]: The product already talks in mach numbers. A dial is on-brand and costs almost nothing on a phone.
+          - paragraph [ref=e1608]:
+            - strong [ref=e1609]: Fallback.
+            - text: The dial still reports progress to assistive tech. Reduced motion updates it without easing.
+        - progressbar "Page progress" [ref=e1610]:
+          - paragraph [ref=e1614]: Mach 0
+        - generic [ref=e1615]:
+          - generic [ref=e1616]: "#32"
+          - generic [ref=e1617]: No 3D
+          - generic [ref=e1618]: Cost low
+          - generic [ref=e1619]: Original
+          - generic [ref=e1620]: Scroll-linked SVG gauge
+          - generic [ref=e1621]: No award page

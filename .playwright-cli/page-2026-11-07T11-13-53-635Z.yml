@@ -1,0 +1,461 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - link "SCRAMJET BETA" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e11]:
+          - generic [ref=e12]: SCRAMJET
+          - generic [ref=e13]: BETA
+      - navigation [ref=e14]:
+        - link "Product" [ref=e15] [cursor=pointer]:
+          - /url: "#product"
+        - link "Changelog" [ref=e16] [cursor=pointer]:
+          - /url: "#changelog"
+        - link "Read the docs" [ref=e17] [cursor=pointer]:
+          - /url: /docs
+      - generic [ref=e18]:
+        - link "Log In" [ref=e19] [cursor=pointer]:
+          - /url: /login
+        - link "Open SCRAMJET →" [ref=e20] [cursor=pointer]:
+          - /url: /launch
+    - main [ref=e21]:
+      - complementary "Flight Instrument Telemetry Dial":
+        - generic:
+          - generic:
+            - generic: SPEED
+            - generic: M1.0
+          - generic:
+            - generic: ALTITUDE
+            - generic: 0%
+          - generic: "SLOT #312894101"
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - generic [ref=e24]: SOLANA MAINNET BETA // 3.5% PROTOCOL FEE // MACH 3.5
+          - heading "Hypersonic Solana Launches. Zero $45k Retainers." [level=1] [ref=e27]
+          - paragraph [ref=e28]: The first mathematically unclusterable Solana launchpad. 3.5% platform fee (30% less than Proxima), 0.01 SOL sub-wallet micro-funding, and cryptographic Merkle relay trees that bypass BubbleMaps detection without paying off analytics firms.
+          - generic [ref=e29]:
+            - generic [ref=e30]:
+              - generic [ref=e31]: Live on
+              - generic [ref=e32]:
+                - img "Solana" [ref=e33]
+                - generic [ref=e34]: Solana
+            - generic [ref=e35]:
+              - generic [ref=e36]: "Enclave:"
+              - generic [ref=e37]: Turnkey
+            - generic [ref=e38]:
+              - generic [ref=e39]: "Platform Fee:"
+              - generic [ref=e40]: 3.5% (-30% vs Proxima)
+            - generic [ref=e41]:
+              - generic [ref=e42]: "Min Sub-Wallet:"
+              - generic [ref=e43]: 0.01 SOL (10x lower)
+          - generic [ref=e44]:
+            - link "Launch a Token Now →" [ref=e45] [cursor=pointer]:
+              - /url: /launch
+            - link "Live Terminal HUD" [ref=e48] [cursor=pointer]:
+              - /url: /workspace
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - generic [ref=e52]:
+                - generic [ref=e53]: "PROPOSAL #02 • MONUMENTAL 5X GOD CANDLE"
+                - generic [ref=e54]: $SCRAM
+                - generic [ref=e55]: Mach 3.5 • Flat Laser Cap • Supersonic Shockwave
+              - generic [ref=e56]:
+                - generic [ref=e57]:
+                  - text: "BubbleMaps:"
+                  - strong [ref=e58]: 0.0% Risk
+                - generic [ref=e59]:
+                  - text: "Rent Reclaim:"
+                  - strong [ref=e60]: +0.00204 SOL
+                - generic [ref=e61]: ● JITO BLOCK-0 ACTIVE
+            - generic [ref=e63]:
+              - img "Scene"
+        - generic [ref=e65]:
+          - generic:
+            - generic: "PROPOSAL #04 · MACH HYPERSONIC FLOW"
+            - paragraph: Cursor proximity warps grid coordinate lattice; particle velocity throttles to network throughput.
+          - generic:
+            - generic:
+              - text: "THROUGHPUT:"
+              - strong: 65,000 TPS
+            - generic:
+              - text: "SLOT LATENCY:"
+              - strong: 388 MS
+        - generic [ref=e68]:
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - generic [ref=e71]:
+                - generic [ref=e72]: "PROPOSAL #25 & #26"
+                - generic [ref=e74]: Chapter Rail • 3D Cascade Chamber
+              - heading "Hypersonic Launch Stages & Cascade Chamber" [level=3] [ref=e75]
+              - paragraph [ref=e76]: Sticky flight rail tracking the four stages of a supersonic token launch. As you transition through phases, the 3D Cascade Chamber accelerates through supersonic tunnel rings.
+            - generic [ref=e77]:
+              - button "01" [ref=e78] [cursor=pointer]
+              - button "02" [ref=e79] [cursor=pointer]
+              - button "03" [ref=e80] [cursor=pointer]
+              - button "04" [ref=e81] [cursor=pointer]
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - generic [ref=e85]: PHASE 01
+                - generic [ref=e86]: •
+                - generic [ref=e87]: STAGE 1 OF 4
+              - heading "Name It & Configure Curve" [level=4] [ref=e88]
+              - paragraph [ref=e89]: Define ticker, token supply, metadata, and bonding curve configuration. Dynamic DLMM fee curve or classic pump mechanics.
+              - generic [ref=e90]:
+                - generic [ref=e91]:
+                  - generic [ref=e92]: Token Standard
+                  - generic [ref=e93]: SPL Token-2022 / Classic
+                - generic [ref=e94]:
+                  - generic [ref=e95]: Total Supply
+                  - generic [ref=e96]: 1,000,000,000
+                - generic [ref=e97]:
+                  - generic [ref=e98]: Curve Liquidity
+                  - generic [ref=e99]: Dynamic DLMM / Bonding
+              - generic [ref=e100]:
+                - link "Open Launch HUD →" [ref=e101] [cursor=pointer]:
+                  - /url: /launch
+                - button "Next Phase →" [ref=e102] [cursor=pointer]
+            - generic [ref=e103]:
+              - generic [ref=e104]: "WIND TUNNEL CAM: Z-PROGRESS 0%"
+              - generic [ref=e107]:
+                - img "Scene"
+        - generic [ref=e108]:
+          - generic [ref=e109]:
+            - text: TACTICAL DEFENCE SUITE
+            - heading "360° Mempool Sonar • Kinetic Anti-MEV Deflector" [level=2] [ref=e110]
+            - paragraph [ref=e111]: Real-time interception of toxic mempool order flow, sandwich attack deflections, and private validator tip auctions.
+          - generic [ref=e112]:
+            - generic [ref=e113]:
+              - generic [ref=e114]:
+                - generic [ref=e115]:
+                  - generic [ref=e116]: "PROPOSAL #07 · MEMPOOL INTERCEPT RADAR"
+                  - heading "360° Real-Time Mempool Sonar" [level=3] [ref=e119]
+                  - paragraph [ref=e120]: Intercepts unconfirmed Solana transactions, neutralizes sandwich bots, and routes safe bundles straight to Jito Block-0.
+                - generic [ref=e121]:
+                  - button "Freeze" [ref=e122] [cursor=pointer]
+                  - button "Ping Mempool" [ref=e123] [cursor=pointer]
+              - generic [ref=e124]:
+                - generic [ref=e125]:
+                  - img "Mempool Intercept Sonar" [ref=e127]:
+                    - generic [ref=e138]: tx_9xJ1..8a
+                    - generic [ref=e142]: bot_3mB..2e
+                    - generic [ref=e146]: tx_4kJ9..7f
+                    - generic [ref=e150]: sniper_91..1c
+                    - generic [ref=e154]: tx_2vQ4..9k
+                  - generic [ref=e158]:
+                    - generic [ref=e159]: "RANGE: 400MS"
+                    - generic [ref=e160]: ● INTERCEPT ACTIVE
+                - generic [ref=e161]:
+                  - generic [ref=e162]:
+                    - button "All Signals" [ref=e163] [cursor=pointer]
+                    - button "Shielded Bundles" [ref=e164] [cursor=pointer]
+                    - button "Snipers Neutralized" [ref=e165] [cursor=pointer]
+                  - generic [ref=e166]:
+                    - generic [ref=e167]:
+                      - generic [ref=e168]:
+                        - generic [ref=e169]: SHIELDED
+                        - generic [ref=e170]: tx_9xJ1..8a
+                      - generic [ref=e171]:
+                        - generic [ref=e172]: 0.015 SOL
+                        - generic [ref=e173]: 4ms ago
+                    - generic [ref=e174]:
+                      - generic [ref=e175]:
+                        - generic [ref=e176]: NEUTRALIZED
+                        - generic [ref=e177]: bot_3mB..2e
+                      - generic [ref=e178]:
+                        - generic [ref=e179]: 0.080 SOL
+                        - generic [ref=e180]: 12ms ago
+                    - generic [ref=e181]:
+                      - generic [ref=e182]:
+                        - generic [ref=e183]: SHIELDED
+                        - generic [ref=e184]: tx_4kJ9..7f
+                      - generic [ref=e185]:
+                        - generic [ref=e186]: 0.020 SOL
+                        - generic [ref=e187]: 18ms ago
+                    - generic [ref=e188]:
+                      - generic [ref=e189]:
+                        - generic [ref=e190]: NEUTRALIZED
+                        - generic [ref=e191]: sniper_91..1c
+                      - generic [ref=e192]:
+                        - generic [ref=e193]: 0.120 SOL
+                        - generic [ref=e194]: 22ms ago
+                    - generic [ref=e195]:
+                      - generic [ref=e196]:
+                        - generic [ref=e197]: SHIELDED
+                        - generic [ref=e198]: tx_2vQ4..9k
+                      - generic [ref=e199]:
+                        - generic [ref=e200]: 0.010 SOL
+                        - generic [ref=e201]: 28ms ago
+                  - paragraph [ref=e202]: Unlike legacy launchpads that broadcast raw transactions to public validators, SCRAMJET encapsulates trades inside atomic Jito bundles that bypass the public mempool entirely.
+            - generic [ref=e203]:
+              - generic [ref=e204]:
+                - generic [ref=e205]:
+                  - generic [ref=e206]: "PROPOSAL #08 · KINETIC ANTI-MEV DEFLECTOR"
+                  - heading "Kinetic Anti-MEV Force Field" [level=3] [ref=e208]
+                  - paragraph [ref=e209]: Simulates dynamic deflection physics repelling sandwich bots, toxic arbitrageurs, and mempool front-runners.
+                - generic [ref=e210]:
+                  - button "SCRAMJET Private Bundle (Invulnerable)" [ref=e211] [cursor=pointer]
+                  - button "Public Mempool (Vulnerable)" [ref=e212] [cursor=pointer]
+                  - button "Simulate Attack" [ref=e213] [cursor=pointer]
+              - generic [ref=e214]:
+                - img "Anti-MEV Kinetic Shield" [ref=e217]:
+                  - generic [ref=e219]: LAUNCH TX
+                - generic [ref=e229]:
+                  - generic [ref=e230]:
+                    - text: TOTAL MEV SANDWICH ATTACKS BLOCKED
+                    - generic [ref=e231]: 1,482
+                  - generic [ref=e232]:
+                    - text: SLIPPAGE CORRIDOR INTEGRITY
+                    - generic [ref=e233]: 100% Locked (Zero Leakage)
+                  - generic [ref=e234]:
+                    - text: VALIDATOR SCHEDULING GUARANTEE
+                    - generic [ref=e235]: Jito Block-0 Atomic Bundle
+        - generic [ref=e237]:
+          - generic [ref=e238]:
+            - generic [ref=e239]:
+              - generic [ref=e240]:
+                - generic [ref=e241]: "PROPOSAL #10 • FUNCTIONING VAULT"
+                - generic [ref=e243]: Merkle Tree Cryptographic Dispersal
+              - heading "Ghost Funder Cryptography Vault" [level=3] [ref=e244]
+              - paragraph [ref=e245]: Solana on-chain single-parent clustering breaks BubbleMaps profiling. Intercepts parent-to-child lineage using ephemeral intermediate relay keypairs and non-round randomized jitter lamports.
+            - generic [ref=e247]:
+              - generic [ref=e248]: BubbleMaps Risk
+              - generic [ref=e249]: READY TO DERIVE
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - generic [ref=e255]:
+                - generic [ref=e256]: Master Payer Wallet (Base58)
+                - button "Master Payer Wallet (Base58)" [ref=e257] [cursor=pointer]: Generate Ephemeral
+              - textbox [ref=e259]: 7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU
+            - generic [ref=e260]:
+              - text: Sub-Wallets
+              - combobox [ref=e261]:
+                - option "4 Wallets"
+                - option "8 Wallets"
+                - option "12 Wallets" [selected]
+                - option "16 Wallets"
+                - option "24 Wallets (Max)"
+            - generic [ref=e262]:
+              - text: Base SOL / Sub
+              - spinbutton [ref=e263]: "0.25"
+            - generic [ref=e264]:
+              - text: Jitter (±%)
+              - spinbutton [ref=e265]: "7.5"
+          - generic [ref=e266]:
+            - button "Derive Stealth Relay Tree" [ref=e267] [cursor=pointer]
+            - generic [ref=e270]:
+              - text: Executes
+              - code [ref=e271]: GhostFunder.planGhostDispersal()
+              - text: live with real Solana keypairs
+        - generic [ref=e272]:
+          - generic [ref=e273]:
+            - text: "COMMAND MATRIX • PROPOSAL #23"
+            - heading "Hypersonic Launch CLI Terminal" [level=2] [ref=e274]
+            - paragraph [ref=e275]: Direct terminal access to telemetry, DEX protocols, BubbleMaps audit scans, stealth derivation, and Block-0 synthesis.
+          - generic [ref=e276]:
+            - generic [ref=e277]:
+              - generic [ref=e278]: hypersonic-terminal@scramjet-core
+              - generic [ref=e284]:
+                - generic [ref=e285]: MAINNET-BETA
+                - generic [ref=e287]: "PROPOSAL #23"
+            - generic [ref=e288]:
+              - generic [ref=e289]: "Quick Actions:"
+              - button "[telemetry]" [ref=e290] [cursor=pointer]
+              - button "[venues]" [ref=e291] [cursor=pointer]
+              - button "[audit SCRAMJET]" [ref=e292] [cursor=pointer]
+              - button "[ghost-vault]" [ref=e293] [cursor=pointer]
+              - button "[snipe-shield]" [ref=e294] [cursor=pointer]
+              - button "[launch JET]" [ref=e295] [cursor=pointer]
+              - button "[clear]" [ref=e296] [cursor=pointer]
+            - generic [ref=e299]:
+              - generic [ref=e300]: SCRAMJET HYPERSONIC COMMAND ENGINE v2.4.0 [Solana Mainnet-Beta]
+              - generic [ref=e301]: Type help for command list or click quick-action pills below.
+              - generic [ref=e302]: "Turnkey Enclave: ONLINE • Jito Block-0 Relay: ACTIVE (4.2ms)"
+            - generic [ref=e303]:
+              - generic [ref=e304]: scramjet@solana:~$
+              - textbox "type command (e.g. status, venues, audit, launch JET)..." [ref=e305]
+              - button "RUN" [ref=e306] [cursor=pointer]
+        - generic [ref=e308]:
+          - generic [ref=e309]:
+            - generic [ref=e310]:
+              - generic [ref=e311]:
+                - generic [ref=e312]: "PROPOSALS #27 • #28"
+                - generic [ref=e313]: WebGL Supersonic Aerodynamics
+              - heading "Mach Ribbon • Supersonic Shock Vector Lattice" [level=3] [ref=e314]
+            - generic [ref=e315]: Mach 3.5 Boundary Wake Active
+          - generic [ref=e316]:
+            - generic [ref=e317]:
+              - generic [ref=e318]: "PROPOSAL #27: MACH RIBBON (GLSL SHOCK)"
+              - generic [ref=e319]:
+                - img "Scene"
+            - generic [ref=e320]:
+              - generic [ref=e321]: "PROPOSAL #28: SHOCK FIELD (VECTOR LATTICE)"
+              - generic [ref=e322]:
+                - img "Scene"
+        - generic [ref=e323]:
+          - generic [ref=e324]:
+            - generic [ref=e325]: THE RECEIPTS // BUBBLEMAPS ENTERPRISE SOW
+            - heading "Proxima Pays BubbleMaps $45,000 / Month. We Built Real Cryptographic Independence." [level=2] [ref=e327]
+            - paragraph [ref=e328]: Since April 2025, Proxima Tools has been on a recurring $45,000/month retainer with BubbleMaps SAS for "automated clustering parameters" and "block-level bundle processing visibility" (Exhibit A Statement of Work). When detection algorithms shift, their entire platform goes into emergency maintenance. SCRAMJET doesn't pay off analytics firms—we engineer mathematically unclusterable Merkle relay trees.
+          - generic [ref=e329]:
+            - generic [ref=e330]:
+              - generic [ref=e331]:
+                - generic [ref=e332]: "SIGNED: APRIL 11, 2025"
+                - generic [ref=e333]: EXHIBIT A
+              - generic [ref=e334]: $45,000 / Month Retainer
+              - paragraph [ref=e335]: "Section 3.1: Proxima pays BubbleMaps $45,000 USD monthly for 25 hours of advisory ($1,800/hr excess) covering bi-weekly audits of \"automated clustering parameters\" and liquidity distribution telemetry."
+              - generic [ref=e336]: "Signers: Théo Martin (Proxima CEO) & Nicolas Vaiman (Bubblemaps CEO)"
+            - generic [ref=e337]:
+              - generic [ref=e338]:
+                - generic [ref=e339]: "TELEGRAM: MAY 19, 2025"
+                - generic [ref=e340]: THE LEAK
+              - generic [ref=e341]: "\"InsightX Patched Us\""
+              - blockquote [ref=e342]: "\"InsightX (Bubblemaps) has fixed the technique that most bundlers were using to stay undetected. We've put Proxima into maintenance while we find a new solution...\""
+              - generic [ref=e343]: Public announcement from !Theo to Proxima users
+            - generic [ref=e344]:
+              - generic [ref=e345]:
+                - generic [ref=e346]: SCRAMJET ENGINE
+                - generic [ref=e347]: ZERO BRIBES
+              - generic [ref=e348]: Cryptographic Relay Trees
+              - paragraph [ref=e349]: We don't rely on backroom whitelists. Our Ghost Funder breaks wallet graphs via multi-hop Merkle relays, randomized timestamp spacing (30m–12h), and 0.01 SOL micro-funding that leaves zero single-parent links.
+              - generic [ref=e350]: 100% On-Chain Mathematical Independence
+        - generic [ref=e352]:
+          - generic [ref=e353]:
+            - generic [ref=e354]:
+              - text: Interactive Fee Benchmark
+              - heading "SCRAMJET vs Proxima Savings Simulator" [level=3] [ref=e355]
+            - generic [ref=e356]: 30% LOWER PLATFORM FEES
+          - generic [ref=e357]:
+            - generic [ref=e358]:
+              - generic [ref=e359]: "Simulated Launch Commitment:"
+              - generic [ref=e360]: 15 SOL
+            - slider [ref=e361] [cursor=pointer]: "15"
+            - generic [ref=e362]:
+              - generic [ref=e363]: 1 SOL
+              - generic [ref=e364]: 25 SOL
+              - generic [ref=e365]: 50 SOL
+          - generic [ref=e366]:
+            - generic [ref=e367]:
+              - generic [ref=e368]: Proxima Fee (5.0%)
+              - generic [ref=e369]: 0.750 SOL
+              - generic [ref=e370]: ≈ $70.39
+            - generic [ref=e371]:
+              - generic [ref=e372]: SCRAMJET Fee (3.5%)
+              - generic [ref=e373]: 0.525 SOL
+              - generic [ref=e374]: ≈ $49.27
+            - generic [ref=e375]:
+              - generic [ref=e376]: Direct Developer Savings
+              - generic [ref=e377]: +0.225 SOL
+              - generic [ref=e378]: +$21.12 USD Pocketed
+        - generic [ref=e379]:
+          - generic [ref=e380]:
+            - heading "Deploy Across 12 Solana Protocols" [level=3] [ref=e381]
+            - paragraph [ref=e382]: Full native instruction builders for bonding curves, dynamic fee tiers, and AMMs.
+          - generic [ref=e383]:
+            - link "Pump.fun Pump.fun Bonding Curve" [ref=e384] [cursor=pointer]:
+              - /url: /launch
+              - img "Pump.fun" [ref=e385]
+              - generic [ref=e386]: Pump.fun
+              - generic [ref=e387]: Bonding Curve
+            - link "Meteora DBC Meteora DBC Dynamic DLMM" [ref=e388] [cursor=pointer]:
+              - /url: /launch
+              - img "Meteora DBC" [ref=e389]
+              - generic [ref=e390]: Meteora DBC
+              - generic [ref=e391]: Dynamic DLMM
+            - link "Raydium LaunchLab Raydium LaunchLab OpenBook v2" [ref=e392] [cursor=pointer]:
+              - /url: /launch
+              - img "Raydium LaunchLab" [ref=e393]
+              - generic [ref=e394]: Raydium LaunchLab
+              - generic [ref=e395]: OpenBook v2
+            - link "Bags Bags Creator Rewards" [ref=e396] [cursor=pointer]:
+              - /url: /launch
+              - img "Bags" [ref=e397]
+              - generic [ref=e398]: Bags
+              - generic [ref=e399]: Creator Rewards
+            - link "LetsBonk LetsBonk Bonk Liquidity" [ref=e400] [cursor=pointer]:
+              - /url: /launch
+              - img "LetsBonk" [ref=e401]
+              - generic [ref=e402]: LetsBonk
+              - generic [ref=e403]: Bonk Liquidity
+            - link "StonkFun StonkFun Velocity Bonding" [ref=e404] [cursor=pointer]:
+              - /url: /launch
+              - img "StonkFun" [ref=e405]
+              - generic [ref=e406]: StonkFun
+              - generic [ref=e407]: Velocity Bonding
+            - link "Printr Printr Instant Rails" [ref=e408] [cursor=pointer]:
+              - /url: /launch
+              - img "Printr" [ref=e409]
+              - generic [ref=e410]: Printr
+              - generic [ref=e411]: Instant Rails
+            - link "Anoncoin Anoncoin Privacy Mint" [ref=e412] [cursor=pointer]:
+              - /url: /launch
+              - img "Anoncoin" [ref=e413]
+              - generic [ref=e414]: Anoncoin
+              - generic [ref=e415]: Privacy Mint
+            - link "Surge Surge Multi-Route" [ref=e416] [cursor=pointer]:
+              - /url: /launch
+              - img "Surge" [ref=e417]
+              - generic [ref=e418]: Surge
+              - generic [ref=e419]: Multi-Route
+            - link "Stoxes Stoxes AMM Pool" [ref=e420] [cursor=pointer]:
+              - /url: /launch
+              - img "Stoxes" [ref=e421]
+              - generic [ref=e422]: Stoxes
+              - generic [ref=e423]: AMM Pool
+            - link "Lesgo Lesgo Fair Launch" [ref=e424] [cursor=pointer]:
+              - /url: /launch
+              - img "Lesgo" [ref=e425]
+              - generic [ref=e426]: Lesgo
+              - generic [ref=e427]: Fair Launch
+            - link "MemeFun MemeFun Ecosystem Pool" [ref=e428] [cursor=pointer]:
+              - /url: /launch
+              - img "MemeFun" [ref=e429]
+              - generic [ref=e430]: MemeFun
+              - generic [ref=e431]: Ecosystem Pool
+        - generic [ref=e432]:
+          - heading "Ready to Outrun the Cartel?" [level=2] [ref=e433]
+          - paragraph [ref=e434]: Launch with Jito Block-0 atomic guarantee, 0.01 SOL micro-subwallets, and zero backroom analytics deals.
+          - link "Launch on Solana Now →" [ref=e436] [cursor=pointer]:
+            - /url: /launch
+    - contentinfo [ref=e439]:
+      - generic [ref=e440]:
+        - generic [ref=e441]:
+          - generic [ref=e442]: SCRAMJET
+          - paragraph [ref=e450]: Hypersonic Solana token launchpad, Block-0 MEV orchestrator & automated creator fee engine.
+        - generic [ref=e451]:
+          - generic [ref=e452]:
+            - text: Product
+            - list [ref=e453]:
+              - listitem [ref=e454]:
+                - link "Platform" [ref=e455] [cursor=pointer]:
+                  - /url: /workspace
+              - listitem [ref=e456]:
+                - link "Launchpads" [ref=e457] [cursor=pointer]:
+                  - /url: /launch
+              - listitem [ref=e458]:
+                - link "Coverage" [ref=e459] [cursor=pointer]:
+                  - /url: /workspace
+              - listitem [ref=e460]:
+                - link "Activity" [ref=e461] [cursor=pointer]:
+                  - /url: /workspace
+              - listitem [ref=e462]:
+                - link "Changelog" [ref=e463] [cursor=pointer]:
+                  - /url: "#changelog"
+          - generic [ref=e464]:
+            - text: Learn
+            - list [ref=e465]:
+              - listitem [ref=e466]:
+                - link "Documentation" [ref=e467] [cursor=pointer]:
+                  - /url: /docs
+              - listitem [ref=e468]:
+                - link "X / Twitter" [ref=e469] [cursor=pointer]:
+                  - /url: https://x.com
+              - listitem [ref=e470]:
+                - link "Telegram" [ref=e471] [cursor=pointer]:
+                  - /url: https://t.me
+          - generic [ref=e472]:
+            - text: Legal
+            - list [ref=e473]:
+              - listitem [ref=e474]: Terms of Service
+              - listitem [ref=e475]: Privacy Policy
+  - alert [ref=e476]

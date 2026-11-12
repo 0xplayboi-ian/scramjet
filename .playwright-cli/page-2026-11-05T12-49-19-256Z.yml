@@ -1,0 +1,77 @@
+- main [ref=f12e3]:
+  - paragraph [ref=f12e4]:
+    - link "All proposals" [ref=f12e5] [cursor=pointer]:
+      - /url: /#candle-surge
+  - paragraph [ref=f12e6]: Single element
+  - heading "God Candle Throttle" [level=1] [ref=f12e7]
+  - paragraph [ref=f12e8]: Aerospace-grade mechanical throttle quadrant. Dragging the lever from Mach 1 to Mach 10 surges the God Candle skyward with market-cap milestones, sonic rings, and telemetry readouts.
+  - generic [ref=f12e9]:
+    - generic [ref=f12e10]:
+      - generic [ref=f12e11]:
+        - paragraph [ref=f12e12]: medium cost · original
+        - heading "God Candle Throttle" [level=2] [ref=f12e13]
+        - paragraph [ref=f12e14]: Aerospace-grade mechanical throttle quadrant. Dragging the lever from Mach 1 to Mach 10 surges the God Candle skyward with market-cap milestones, sonic rings, and telemetry readouts.
+      - generic [ref=f12e15]:
+        - button "Hide God Candle Throttle" [pressed] [ref=f12e16] [cursor=pointer]: "On"
+        - button "Alone" [ref=f12e17] [cursor=pointer]
+        - link "Ref" [ref=f12e18] [cursor=pointer]:
+          - /url: https://www.awwwards.com/sites/edolus
+    - generic [ref=f12e20]:
+      - generic [ref=f12e21]:
+        - paragraph [ref=f12e22]: AEROSPACE THROTTLE QUADRANT
+        - generic [ref=f12e23]:
+          - slider "Hypersonic throttle lever" [ref=f12e24]: "100"
+          - generic [ref=f12e25]:
+            - generic [ref=f12e26]: MACH 10.0
+            - generic [ref=f12e27]: MACH 7.5
+            - generic [ref=f12e28]: MACH 5.0
+            - generic [ref=f12e29]: MACH 2.5
+            - generic [ref=f12e30]: MACH 1.0
+        - generic [ref=f12e31]:
+          - generic [ref=f12e32]: MACH 9.8
+          - generic [ref=f12e33]: 97% POWER
+        - generic [ref=f12e34]:
+          - button "Mach 1.0 (Base)" [ref=f12e35] [cursor=pointer]
+          - button "Mach 5.0 (Escape)" [ref=f12e36] [cursor=pointer]
+          - button "Mach 7.5 (Stratosphere)" [ref=f12e37] [cursor=pointer]
+          - button "Mach 10.0 (5X Apex)" [active] [ref=f12e38] [cursor=pointer]
+      - generic [ref=f12e39]:
+        - img "Surging 5X Flat-Top God Candle" [ref=f12e40]:
+          - generic [ref=f12e41]:
+            - generic [ref=f12e42]: "R1: ACCUMULATION"
+            - generic [ref=f12e43]: $100K ✓
+          - generic [ref=f12e44]:
+            - generic [ref=f12e45]: "R2: MACH 1 BOOM"
+            - generic [ref=f12e46]: $350K ✓
+          - generic [ref=f12e47]:
+            - generic [ref=f12e48]: "R3: TROPOSPHERE"
+            - generic [ref=f12e49]: $1.2M ✓
+          - generic [ref=f12e50]:
+            - generic [ref=f12e51]: "R4: STRATOSPHERE"
+            - generic [ref=f12e52]: $4.5M ✓
+          - generic [ref=f12e53]:
+            - generic [ref=f12e54]: "R5: MESOSPHERE"
+            - generic [ref=f12e55]: $12.0M ✓
+          - generic [ref=f12e56]:
+            - generic [ref=f12e57]: "R6: KARMAN ORBIT"
+            - generic [ref=f12e58]: $30.0M ✓
+          - generic [ref=f12e59]:
+            - generic [ref=f12e60]: "R7: THERMOSPHERE"
+            - generic [ref=f12e61]: $65.0M ✓
+          - generic [ref=f12e62]:
+            - generic [ref=f12e63]: "R8: GOD CANDLE"
+            - generic [ref=f12e64]: $100M+
+          - generic [ref=f12e66]: ▲ $83.07M [M9.8]
+        - generic [ref=f12e68]:
+          - generic [ref=f12e69]:
+            - generic [ref=f12e70]: MARKET CAP
+            - generic [ref=f12e71]: $83.07M
+          - generic [ref=f12e72]:
+            - generic [ref=f12e73]: CANDLE HEIGHT
+            - generic [ref=f12e74]: 1057 px (5.2X)
+          - generic [ref=f12e75]:
+            - generic [ref=f12e76]: INFLOW VELOCITY
+            - generic [ref=f12e77]: 1382 SOL/s
+          - generic [ref=f12e78]:
+            - generic [ref=f12e79]: ESCAPE VELOCITY
+            - generic [ref=f12e80]: CONFIRMED (HYPERSONIC)

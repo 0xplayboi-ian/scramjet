@@ -45,3 +45,37 @@ export const PROXIMA_FEE_BPS = 500;  // 5.0% = 500 basis points (competitor benc
 export const DEFAULT_PLATFORM_FEE_VAULT = new PublicKey(
   "CcwpTCpWMtKGo1fqnZuH4Psdj6yugbmSrAPaeTdEy6Qq"
 );
+
+// Canonical Solana Incinerator Burn Address (Hard Proof of Locked Liquidity)
+export const SOLANA_INCINERATOR_ADDRESS = new PublicKey(
+  "1nc1nerator11111111111111111111111111111111"
+);
+export const SOLANA_INCINERATOR_SOLSCAN =
+  "https://solscan.io/account/1nc1nerator11111111111111111111111111111111";
+
+// Protocol Revenue Fee Distribution Architecture (75% Nodes / 15% Treasury / 10% Incinerator)
+export const FEE_SPLIT_NODES_PERCENT = 75;
+export const FEE_SPLIT_TREASURY_PERCENT = 15;
+export const FEE_SPLIT_INCINERATOR_PERCENT = 10;
+export const CANONICAL_HARD_CAP_33RD = 33_333_333;
+export const CANONICAL_DECIMALS_33RD = 9;
+
+// 33rd Tree Labs Canonical Tokenomics & Singularity Protocol Constants
+export const THIRTY_THIRD_TREE_LABS_CONFIG = {
+  name: "33rd Tree Labs",
+  symbol: "33RD",
+  hardCapSupply: 33_333_333,
+  decimals: 9,
+  website: "https://33rdtreelabs.tech",
+  description:
+    "A Byzantine-Resilient Verifiable DePIN Compute Fabric on Solana. Hierarchical Tensor Arbor coordination, zero-knowledge neural evaluations, and cryptographic consensus at scale.",
+  metadataUri: "https://33rdtreelabs.tech/assets/token_metadata.json",
+  imageUrl: "https://33rdtreelabs.tech/assets/official_logo_mark.png",
+  incineratorAddress: "1nc1nerator11111111111111111111111111111111",
+  incineratorSolscan: "https://solscan.io/account/1nc1nerator11111111111111111111111111111111",
+  revokeMintAuthority: true,
+  revokeFreezeAuthority: true,
+  lpBurnPercent: 100,
+  byzantineQuorumNodes: 64,
+  unbondingWindowDays: 7,
+};

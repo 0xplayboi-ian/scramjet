@@ -1,0 +1,5 @@
+[     339ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5174/node_modules/.vite/deps/react-dom_client.js?v=b3212cad:21896
+[  682377ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5174/src/three/VenueScene.jsx?t=1793878106474:0
+[  682384ms] [ERROR] [vite] Failed to reload /src/three/VenueScene.jsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5174/@vite/client:808
+[  988256ms] [ERROR] [vite] SyntaxError: The requested module '/src/sections/Elements.jsx?t=1793878412447' does not provide an export named 'VenueViewer' @ http://localhost:5174/@vite/client:808
+[  988264ms] [ERROR] [vite] Failed to reload /src/App.jsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5174/@vite/client:808

@@ -1,0 +1,48 @@
+- main [ref=f6e3]:
+  - paragraph [ref=f6e4]:
+    - link "All proposals" [ref=f6e5] [cursor=pointer]:
+      - /url: /#candle-surge
+  - paragraph [ref=f6e6]: Single element
+  - heading "God Candle Throttle" [level=1] [ref=f6e7]
+  - paragraph [ref=f6e8]: Aerospace-grade mechanical throttle quadrant. Dragging the lever from Mach 1 to Mach 10 surges the God Candle skyward with market-cap milestones, sonic rings, and telemetry readouts.
+  - generic [ref=f6e9]:
+    - generic [ref=f6e10]:
+      - generic [ref=f6e11]:
+        - paragraph [ref=f6e12]: medium cost · original
+        - heading "God Candle Throttle" [level=2] [ref=f6e13]
+        - paragraph [ref=f6e14]: Aerospace-grade mechanical throttle quadrant. Dragging the lever from Mach 1 to Mach 10 surges the God Candle skyward with market-cap milestones, sonic rings, and telemetry readouts.
+      - generic [ref=f6e15]:
+        - button "Hide God Candle Throttle" [pressed] [ref=f6e16] [cursor=pointer]: "On"
+        - button "Alone" [ref=f6e17] [cursor=pointer]
+        - link "Ref" [ref=f6e18] [cursor=pointer]:
+          - /url: https://www.awwwards.com/sites/edolus
+    - generic [ref=f6e20]:
+      - generic [ref=f6e21]:
+        - paragraph [ref=f6e22]: AEROSPACE THROTTLE QUADRANT
+        - generic [ref=f6e23]:
+          - slider "Hypersonic throttle lever" [ref=f6e24]: "65"
+          - generic [ref=f6e25]:
+            - generic [ref=f6e26]: MACH 10.0
+            - generic [ref=f6e27]: MACH 7.5
+            - generic [ref=f6e28]: MACH 5.0
+            - generic [ref=f6e29]: MACH 2.5
+            - generic [ref=f6e30]: MACH 1.0
+        - generic [ref=f6e31]:
+          - generic [ref=f6e32]: MACH 6.9
+          - generic [ref=f6e33]: 65% POWER
+      - generic [ref=f6e34]:
+        - img "Surging God Candle" [ref=f6e35]:
+          - generic [ref=f6e36]: "RESISTANCE #3"
+          - generic [ref=f6e38]: "RESISTANCE #2"
+          - generic [ref=f6e40]: "RESISTANCE #1"
+          - generic [ref=f6e42]: "RESISTANCE #0"
+        - generic [ref=f6e49]:
+          - generic [ref=f6e50]:
+            - generic [ref=f6e51]: MARKET CAP
+            - generic [ref=f6e52]: $8.91M
+          - generic [ref=f6e53]:
+            - generic [ref=f6e54]: INFLOW VELOCITY
+            - generic [ref=f6e55]: 923 SOL/sec
+          - generic [ref=f6e56]:
+            - generic [ref=f6e57]: ESCAPE VELOCITY
+            - generic [ref=f6e58]: CHARGING

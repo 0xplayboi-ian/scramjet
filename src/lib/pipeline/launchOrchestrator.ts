@@ -1,4 +1,8 @@
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
+import {
+  createSetAuthorityInstruction,
+  AuthorityType,
+} from "@solana/spl-token";
 import { LaunchConfig, SubWallet } from "../../types";
 import { turnkeyManager } from "../wallets/turnkeyManager";
 import { GhostFunder, DispersalPlan } from "../wallets/ghostFunder";
@@ -9,6 +13,7 @@ import { MeteoraDbcAdapter } from "../adapters/meteoraDbc";
 import { RaydiumLaunchLabAdapter } from "../adapters/raydium";
 import { calculateProtocolFee, buildProtocolFeeInstruction } from "../feeRouter";
 import { FeeBuybackFlywheel } from "../automations/feeBuyback";
+import { SOLANA_INCINERATOR_ADDRESS, SOLANA_INCINERATOR_SOLSCAN } from "../constants";
 
 export interface LaunchOrchestrationResult {
   mintPublicKey: string;
@@ -18,6 +23,13 @@ export interface LaunchOrchestrationResult {
   dispersalPlan: DispersalPlan;
   status: "BUNDLE_SUBMITTED" | "PENDING_CONFIRMATION" | "FAILED";
   blockEngineResults: { url: string; status: "SENT" | "FAILED"; error?: string }[];
+  mintAuthorityRevoked?: boolean;
+  freezeAuthorityRevoked?: boolean;
+  lpBurnTargetAddress?: string;
+  lpBurnSolscanUrl?: string;
+  lpBurnTxSignature?: string;
+  metadataUri?: string;
+  totalSupply?: number;
 }
 
 export class LaunchOrchestrator {
@@ -83,6 +95,44 @@ export class LaunchOrchestrator {
           options: config.meteoraDbcOptions,
         })
       );
+    } else if (config.launchpad === "RAYDIUM_LAUNCHLAB") {
+      const platformConfigAddress =
+        config.raydiumOptions?.platformConfigAddress ||
+        "CPMDWBwJDtYax9qW7AyRuVC19Cc4L4Vcy4n2BHAbHkCW";
+      deployIxs.push(
+        RaydiumLaunchLabAdapter.initializeLaunchLabPoolInstruction({
+          creator: masterPayer,
+          tokenMint: mintKeypair.publicKey,
+          quoteMint: new PublicKey("So11111111111111111111111111111111111111112"), // WSOL
+          options: {
+            platformConfigAddress,
+            autoLockLpTokens: true,
+          },
+        })
+      );
+    }
+
+    // 3b. Irrevocable Authority Revocations (Enforcing immutable hard cap & censorship resistance)
+    if (config.revokeMintAuthority) {
+      deployIxs.push(
+        createSetAuthorityInstruction(
+          mintKeypair.publicKey,
+          masterPayer,
+          AuthorityType.MintTokens,
+          null
+        )
+      );
+    }
+
+    if (config.revokeFreezeAuthority) {
+      deployIxs.push(
+        createSetAuthorityInstruction(
+          mintKeypair.publicKey,
+          masterPayer,
+          AuthorityType.FreezeAccount,
+          null
+        )
+      );
     }
 
     // 4. Build Atomic Block-0 Bundle
@@ -104,6 +154,11 @@ export class LaunchOrchestrator {
       assembledBundle.encodedTransactions
     );
 
+    const is33rdOrSingularity =
+      config.block0Config.preset === "THE_SINGULARITY_PROTOCOL" ||
+      config.tokenSymbol === "33RD" ||
+      config.lpBurnTarget === SOLANA_INCINERATOR_ADDRESS.toBase58();
+
     return {
       mintPublicKey: mintKeypair.publicKey.toBase58(),
       bundleId,
@@ -112,6 +167,23 @@ export class LaunchOrchestrator {
       dispersalPlan,
       status: "BUNDLE_SUBMITTED",
       blockEngineResults: engineResults,
+      mintAuthorityRevoked: config.revokeMintAuthority ?? is33rdOrSingularity,
+      freezeAuthorityRevoked: config.revokeFreezeAuthority ?? is33rdOrSingularity,
+      lpBurnTargetAddress:
+        config.lpBurnTarget ||
+        (is33rdOrSingularity ? SOLANA_INCINERATOR_ADDRESS.toBase58() : undefined),
+      lpBurnSolscanUrl:
+        config.lpBurnTarget === SOLANA_INCINERATOR_ADDRESS.toBase58() || is33rdOrSingularity
+          ? SOLANA_INCINERATOR_SOLSCAN
+          : config.lpBurnTarget
+          ? `https://solscan.io/account/${config.lpBurnTarget}`
+          : undefined,
+      metadataUri:
+        config.metadataUri ||
+        (is33rdOrSingularity
+          ? "https://33rdtreelabs.tech/assets/token_metadata.json"
+          : undefined),
+      totalSupply: config.totalSupply ?? (is33rdOrSingularity ? 33_333_333 : undefined),
     };
   }
 }

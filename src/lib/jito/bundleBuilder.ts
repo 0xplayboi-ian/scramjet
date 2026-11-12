@@ -1,4 +1,5 @@
 import {
+  Keypair,
   PublicKey,
   TransactionInstruction,
   TransactionMessage,
@@ -28,6 +29,7 @@ export class BundleBuilder {
     subWallets: SubWallet[];
     block0Config: Block0Config;
     tipLamports: bigint;
+    additionalDeploySigners?: Keypair[];
   }): Promise<AssembledBundle> {
     const {
       payer,
@@ -37,6 +39,7 @@ export class BundleBuilder {
       subWallets,
       block0Config,
       tipLamports,
+      additionalDeploySigners,
     } = params;
 
     const txList: VersionedTransaction[] = [];
@@ -47,7 +50,11 @@ export class BundleBuilder {
       recentBlockhash,
       instructions: deployInstructions,
     }).compileToV0Message();
-    txList.push(new VersionedTransaction(deployMsg));
+    const deployTx = new VersionedTransaction(deployMsg);
+    if (additionalDeploySigners && additionalDeploySigners.length > 0) {
+      deployTx.sign(additionalDeploySigners);
+    }
+    txList.push(deployTx);
 
     // 2. Transaction 2: Developer Buy (if configured)
     if (devBuyInstructions.length > 0) {

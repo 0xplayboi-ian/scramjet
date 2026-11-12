@@ -8,6 +8,10 @@ import {
   PROTOCOL_FEE_BPS,
   PROXIMA_FEE_BPS,
   DEFAULT_PLATFORM_FEE_VAULT,
+  SOLANA_INCINERATOR_ADDRESS,
+  FEE_SPLIT_NODES_PERCENT,
+  FEE_SPLIT_TREASURY_PERCENT,
+  FEE_SPLIT_INCINERATOR_PERCENT,
 } from "./constants";
 
 export interface FeeCalculation {
@@ -166,4 +170,116 @@ export function buildLaunchFeeInstruction(
     lamports: feeLamports,
   });
 }
+
+// ===============================================
+// 75 / 15 / 10 PROTOCOL FEE SPLIT ARCHITECTURE
+// 75% Compute Node Operators (K=64 Quorum)
+// 15% Protocol Treasury (Squads Multisig R&D)
+// 10% Permanent Solana Incinerator Burn
+// ===============================================
+
+export interface ProtocolFeeSplitResult {
+  totalLamports: bigint;
+  nodeOperatorsLamports: bigint;
+  treasuryLamports: bigint;
+  incineratorLamports: bigint;
+  nodeOperatorsSol: number;
+  treasurySol: number;
+  incineratorSol: number;
+}
+
+/**
+ * Calculates the exact 75% / 15% / 10% fee distribution.
+ * All computations use BigInt lamports to guarantee zero dust loss.
+ * The 10% incinerator allocation captures any remainder lamports.
+ */
+export function calculate75_15_10FeeSplit(
+  totalFeeLamports: bigint
+): ProtocolFeeSplitResult {
+  if (totalFeeLamports <= BigInt(0)) {
+    return {
+      totalLamports: BigInt(0),
+      nodeOperatorsLamports: BigInt(0),
+      treasuryLamports: BigInt(0),
+      incineratorLamports: BigInt(0),
+      nodeOperatorsSol: 0,
+      treasurySol: 0,
+      incineratorSol: 0,
+    };
+  }
+
+  const nodeOperatorsLamports =
+    (totalFeeLamports * BigInt(FEE_SPLIT_NODES_PERCENT)) / BigInt(100);
+  const treasuryLamports =
+    (totalFeeLamports * BigInt(FEE_SPLIT_TREASURY_PERCENT)) / BigInt(100);
+  // Allocate the exact remainder to the Solana Incinerator to prevent dust loss
+  const incineratorLamports =
+    totalFeeLamports - nodeOperatorsLamports - treasuryLamports;
+
+  return {
+    totalLamports: totalFeeLamports,
+    nodeOperatorsLamports,
+    treasuryLamports,
+    incineratorLamports,
+    nodeOperatorsSol: Number(nodeOperatorsLamports) / LAMPORTS_PER_SOL,
+    treasurySol: Number(treasuryLamports) / LAMPORTS_PER_SOL,
+    incineratorSol: Number(incineratorLamports) / LAMPORTS_PER_SOL,
+  };
+}
+
+/**
+ * Builds atomic native SOL transfer instructions for the 75/15/10 fee split.
+ * Routes 75% to Node Operators, 15% to Treasury, and 10% directly to the Incinerator.
+ */
+export function build75_15_10FeeSplitInstructions(params: {
+  payer: PublicKey;
+  totalFeeLamports: bigint;
+  nodeOperatorsVault: PublicKey;
+  treasuryVault: PublicKey;
+  incineratorAddress?: PublicKey;
+}): TransactionInstruction[] {
+  const {
+    payer,
+    totalFeeLamports,
+    nodeOperatorsVault,
+    treasuryVault,
+    incineratorAddress = SOLANA_INCINERATOR_ADDRESS,
+  } = params;
+
+  const split = calculate75_15_10FeeSplit(totalFeeLamports);
+  const instructions: TransactionInstruction[] = [];
+
+  if (split.nodeOperatorsLamports > BigInt(0)) {
+    instructions.push(
+      SystemProgram.transfer({
+        fromPubkey: payer,
+        toPubkey: nodeOperatorsVault,
+        lamports: split.nodeOperatorsLamports,
+      })
+    );
+  }
+
+  if (split.treasuryLamports > BigInt(0)) {
+    instructions.push(
+      SystemProgram.transfer({
+        fromPubkey: payer,
+        toPubkey: treasuryVault,
+        lamports: split.treasuryLamports,
+      })
+    );
+  }
+
+  if (split.incineratorLamports > BigInt(0)) {
+    instructions.push(
+      SystemProgram.transfer({
+        fromPubkey: payer,
+        toPubkey: incineratorAddress,
+        lamports: split.incineratorLamports,
+      })
+    );
+  }
+
+  return instructions;
+}
+
 
